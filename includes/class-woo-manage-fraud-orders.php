@@ -9,8 +9,8 @@ if (!defined('ABSPATH')) {
     exit();
 }
 
-if (!class_exists('Woo_Manage_Blacklisted_Customers')) {
-    class Woo_Manage_Blacklisted_Customers {
+if (!class_exists('Woo_Manage_Fraud_Orders')) {
+    class Woo_Manage_Fraud_Orders {
         public $version = '1.0.0';
         public static $_instance;
 
@@ -30,10 +30,10 @@ if (!class_exists('Woo_Manage_Blacklisted_Customers')) {
         private function define_constants() {
             $upload_dir = wp_upload_dir(null, false);
 
-            $this->define('WMBC_ABSPATH', dirname(WMBC_PLUGIN_FILE) . '/');
-            $this->define('WMBC_PLUGIN_BASENAME', plugin_basename(WMBC_PLUGIN_FILE));
-            $this->define('WMBC_VERSION', $this->version);
-            $this->define('WMBC_LOG_DIR', $upload_dir['basedir'] . '/wmbc-logs/');
+            $this->define('WMFO_ABSPATH', dirname(WMFO_PLUGIN_FILE) . '/');
+            $this->define('WMFO_PLUGIN_BASENAME', plugin_basename(WMFO_PLUGIN_FILE));
+            $this->define('WMFO_VERSION', $this->version);
+            $this->define('WMFO_LOG_DIR', $upload_dir['basedir'] . '/wmfo-logs/');
         }
         private function define($name, $value) {
             if (!defined($name)) {
@@ -42,7 +42,8 @@ if (!class_exists('Woo_Manage_Blacklisted_Customers')) {
         }
 
         private function init_hooks() {
-            register_activation_hook(WMBC_PLUGIN_FILE, array($this, 'install'));
+            register_activation_hook(WMFO_PLUGIN_FILE, array($this, 'install'));
+            add_action('plugins_loaded', array($this, 'load_text_domain'));
         }
         public static function install() {
             if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
@@ -51,19 +52,22 @@ if (!class_exists('Woo_Manage_Blacklisted_Customers')) {
                 deactivate_plugins(__FILE__);
 
                 // Throw an error in the wordpress admin console
-                $error_message = __('This plugin requires <a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> plugins to be active!', 'woocommerce');
+                $error_message = esc_html__(sprintf('This plugin requires <a href="%s">WooCommerce plugins to be active!</a>', 'http://wordpress.org/extend/plugins/woocommerce/'), 'woo-manage-fraud-orders');
                 die($error_message);
 
             }
         }
 
+        public function load_text_domain() {
+            load_plugin_textdomain('woo-preview-emails', WMFO_PLUGIN_FILE, plugin_basename(dirname(__FILE__)) . '/languages/');
+        }
         public function includes() {
-            include_once WMBC_ABSPATH . 'includes/wmbc-functions.php';
-            include_once WMBC_ABSPATH . 'includes/class-wmbc-blacklist-handler.php';
-            include_once WMBC_ABSPATH . 'includes/class-wmbc-track-fraud-attempts.php';
+            include_once WMFO_ABSPATH . 'includes/wmfo-functions.php';
+            include_once WMFO_ABSPATH . 'includes/class-wmfo-blacklist-handler.php';
+            include_once WMFO_ABSPATH . 'includes/class-wmfo-track-fraud-attempts.php';
             if (is_admin()) {
-                include_once WMBC_ABSPATH . 'includes/admin/class-wmbc-settings.php';
-                include_once WMBC_ABSPATH . 'includes/admin/class-wmbc-blacklist-action.php';
+                include_once WMFO_ABSPATH . 'includes/admin/class-wmfo-settings.php';
+                include_once WMFO_ABSPATH . 'includes/admin/class-wmfo-blacklist-action.php';
             }
         }
     }

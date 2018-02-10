@@ -6,14 +6,14 @@
  * Called also from checkotu page
  */
 
-// function wmbc_update_blacklist_customers($customer = array()) {
+// function WMFO_update_blacklist_customers($customer = array()) {
 //     if (empty($customer) || !$customer) {
 //         return false;
 //     }
 
-//     $prev_black_list_ips    = get_option('wmbc_black_list_ips', true);
-//     $prev_black_list_phones = get_option('wmbc_black_list_phones', true);
-//     $prev_black_list_emails = get_option('wmbc_black_list_emails', true);
+//     $prev_black_list_ips    = get_option('WMFO_black_list_ips', true);
+//     $prev_black_list_phones = get_option('WMFO_black_list_phones', true);
+//     $prev_black_list_emails = get_option('WMFO_black_list_emails', true);
 //     if ($prev_black_list_ips === false || $prev_black_list_ips == '') {
 //         $new_black_list_ips = $customer['ip_address'];
 //     } else {
@@ -41,9 +41,9 @@
 //         $prev_black_list_emails;
 //     }
 
-//     update_option('wmbc_black_list_ips', $new_black_list_ips);
-//     update_option('wmbc_black_list_phones', $new_black_list_phones);
-//     update_option('wmbc_black_list_emails', $new_black_list_emails);
+//     update_option('WMFO_black_list_ips', $new_black_list_ips);
+//     update_option('WMFO_black_list_phones', $new_black_list_phones);
+//     update_option('WMFO_black_list_emails', $new_black_list_emails);
 
 //     return true;
 // }
@@ -53,18 +53,18 @@
 //  *
 //  */
 
-// function wmbc_show_blocked_message() {
-//     $default_notice          = __('Sorry, You are blocked from checking out.', 'wmbc');
-//     $wmbc_black_list_message = get_option('wmbc_black_list_message') != '' ?
-//     get_option('wmbc_black_list_message') :
+// function WMFO_show_blocked_message() {
+//     $default_notice          = __('Sorry, You are blocked from checking out.', 'WMFO');
+//     $WMFO_black_list_message = get_option('WMFO_black_list_message') != '' ?
+//     get_option('WMFO_black_list_message') :
 //     $default_notice;
 //     //with some reason, get_option with default value not working
-//     if ($wmbc_black_list_message == '') {
-//         $wmbc_black_list_message = $default_notice;
+//     if ($WMFO_black_list_message == '') {
+//         $WMFO_black_list_message = $default_notice;
 //     }
 
-//     if (!wc_has_notice($wmbc_black_list_message)) {
-//         wc_add_notice($wmbc_black_list_message, 'error');
+//     if (!wc_has_notice($WMFO_black_list_message)) {
+//         wc_add_notice($WMFO_black_list_message, 'error');
 //     }
 // }
 
@@ -72,7 +72,7 @@
  * Function to get the customer details
  * Billing Phone, Email and IP address
  */
-function wmbc_get_customer_details_of_order($order) {
+function wmfo_get_customer_details_of_order($order) {
     if (!$order) {
         return false;
     }
@@ -82,7 +82,7 @@ function wmbc_get_customer_details_of_order($order) {
         'billing_email' => $order->get_billing_email(),
     );
 }
-function wmbc_get_ip_address() {
+function wmfo_get_ip_address() {
     if (isset($_SERVER['HTTP_X_REAL_IP'])) { // WPCS: input var ok, CSRF ok.
         return sanitize_text_field(wp_unslash($_SERVER['HTTP_X_REAL_IP'])); // WPCS: input var ok, CSRF ok.
     } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) { // WPCS: input var ok, CSRF ok.

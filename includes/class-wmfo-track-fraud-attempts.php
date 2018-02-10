@@ -6,15 +6,16 @@ if (!defined('ABSPATH')) {
     exit();
 }
 
-if (!class_exists('WMBC_Track_Customers')) {
-    class WMBC_Track_Customers {
+if (!class_exists('WMFO_Track_Customers')) {
+
+    class WMFO_Track_Customers {
         public static $_instance;
 
         public function __construct() {
             global $woocommerce;
             // var_dump($woocommerce);
-            add_action('woocommerce_after_checkout_validation', array($this, 'wmbc_manage_multiple_failed_attempt'), 10, 2);
-            add_action('woocommerce_checkout_order_processed', array($this, 'wmbc_set_fraud_attempts_cookie'), 100, 3);
+            add_action('woocommerce_after_checkout_validation', array($this, 'manage_blacklisted_customers'), 10, 2);
+            add_action('woocommerce_checkout_order_processed', array($this, 'manage_multiple_failed_attempts'), 100, 3);
         }
 
         public static function instance() {
@@ -24,14 +25,13 @@ if (!class_exists('WMBC_Track_Customers')) {
             return self::$_instance;
         }
 
-        public static function wmbc_manage_multiple_failed_attempt($data, $erros) {
-            //Check if there are any other erroes first
+        public static function manage_blacklisted_customers($data, $erros) {
+            //Check if there are any other errors first
             //If there are, return
             if (!empty($errors->errors)) {
                 return;
             }
 
-            //check if there are error messages saved in session
             //Woo/Payment method saves the payment method validation errors in session
             //If there such errors, skip
             if (!isset(WC()->session->reload_checkout)) {
@@ -42,30 +42,35 @@ if (!class_exists('WMBC_Track_Customers')) {
                 return;
             }
 
-            $prev_black_list_ips    = get_option('wmbc_black_list_ips', true);
-            $prev_black_list_phones = get_option('wmbc_black_list_phones', true);
-            $prev_black_list_emails = get_option('wmbc_black_list_emails', true);
+            $prev_black_list_ips    = get_option('WMFO_black_list_ips', true);
+            $prev_black_list_phones = get_option('WMFO_black_list_phones', true);
+            $prev_black_list_emails = get_option('WMFO_black_list_emails', true);
 
             $billing_email = isset($_POST['billing_email']) ? wc_clean($_POST['billing_email']) : '';
             $billing_phone = isset($_POST['billing_phone']) ? wc_clean($_POST['billing_phone']) : '';
 
-            $ip_address = method_exists('WC_Geolocation', 'get_ip_address') ? WC_Geolocation::get_ip_address() : wmbc_get_ip_address();
+            $ip_address = method_exists('WC_Geolocation', 'get_ip_address') ? WC_Geolocation::get_ip_address() : wmfo_get_ip_address();
 
             //Block this checkout if this customers details are already blacklisted
             if (substr_count($prev_black_list_ips, $ip_address) > 0 ||
                 substr_count($prev_black_list_phones, $billing_phone) > 0 ||
                 substr_count($prev_black_list_emails, $billing_email) > 0) {
 
-                if (method_exists('WMBC_Blacklist_Handler', 'show_blocked_message')) {
-                    WMBC_Blacklist_Handler::show_blocked_message();
+                if (method_exists('WMFO_Blacklist_Handler', 'show_blocked_message')) {
+                    WMFO_Blacklist_Handler::show_blocked_message();
                 }
 
                 return;
             }
-            // die('here');
         }
 
-        public static function wmbc_set_fraud_attempts_cookie($order_id, $posted_data, $order) {
+        /**
+         *
+         * 'manage_multiple_failed_attempts' will only track the multiple failed attempts after the creating of failed
+         * order by customer, This is helpful when customer enter the correct format of the data but payment gateway
+         * couldn't authorize the payment. Typical example willl be Electronic check, CC processing
+         */
+        public static function manage_multiple_failed_attempts($order_id, $posted_data, $order) {
             if ($order->get_status() === 'failed') {
                 //md5 the name of the cookie for fraud_attempts
                 $fraud_attempts_md5 = md5('fraud_attempts');
@@ -74,22 +79,22 @@ if (!class_exists('WMBC_Track_Customers')) {
 
                 $cookie_value = (int) $fraud_attempts + 1;
                 setcookie($fraud_attempts_md5, $cookie_value, time() + (60 * 60), "/"); // 86400 = 1 day
-
-                $fraud_limit = get_option('wmbc_black_list_allowed_fraud_attemps') != '' ?
-                get_option('wmbc_black_list_allowed_fraud_attemps') :
+                //Get the allowed failed order limit, default to 3
+                $fraud_limit = get_option('wmfo_black_list_allowed_fraud_attemps') != '' ?
+                get_option('wmfo_black_list_allowed_fraud_attemps') :
                 3;
 
                 if ((int) $fraud_attempts >= $fraud_limit) {
-                    //Show the blocking message in the front end.
-                    if (method_exists('WMBC_Blacklist_Handler', 'show_blocked_message')) {
-                        WMBC_Blacklist_Handler::show_blocked_message();
+                    //Show the blocking message in the checkout page.
+                    if (method_exists('WMFO_Blacklist_Handler', 'show_blocked_message')) {
+                        WMFO_Blacklist_Handler::show_blocked_message();
                     }
 
                     //Block this customer for future sessions as well
                     //And cancel the order
-                    $customer = wmbc_get_customer_details_of_order($order);
-                    if (method_exists('WMBC_Blacklist_Handler', 'init')) {
-                        WMBC_Blacklist_Handler::init($customer, $order);
+                    $customer = wmfo_get_customer_details_of_order($order);
+                    if (method_exists('WMFO_Blacklist_Handler', 'init')) {
+                        WMFO_Blacklist_Handler::init($customer, $order);
                     }
                 }
             }
@@ -97,4 +102,4 @@ if (!class_exists('WMBC_Track_Customers')) {
     }
 }
 
-WMBC_Track_Customers::instance();
+WMFO_Track_Customers::instance();

@@ -1,7 +1,7 @@
 <?php
 /*----------  Black List Settings  ----------*/
-if (!class_exists('WMBC_Settings_Tab')) {
-    class WMBC_Settings_Tab {
+if (!class_exists('WMFO_Settings_Tab')) {
+    class WMFO_Settings_Tab {
         /**
          * Bootstraps the class and hooks required actions & filters.
          *
@@ -19,7 +19,7 @@ if (!class_exists('WMBC_Settings_Tab')) {
          * @return array $settings_tabs Array of WooCommerce setting tabs & their labels, including the Subscription tab.
          */
         public static function add_settings_tab($settings_tabs) {
-            $settings_tabs['settings_tab_blacklists'] = __('Blacklisted Customers', 'wmbc-settings');
+            $settings_tabs['settings_tab_blacklists'] = esc_html__('Blacklisted Customers', 'woo-manage-fraud-orders');
             return $settings_tabs;
         }
         /**
@@ -48,60 +48,61 @@ if (!class_exists('WMBC_Settings_Tab')) {
         public static function get_settings() {
             $settings = array(
                 'section_title'                     => array(
-                    'name' => __('Blacklisted Customers', 'wmbc-settings'),
+                    'name' => esc_html__('Blacklisted Customers', 'woo-manage-fraud-orders'),
                     'type' => 'title',
                     'desc' => '',
-                    'id'   => 'wmbc_settings_title',
+                    'id'   => 'wmfo_settings_title',
                 ),
                 'blacklists_message'                => array(
-                    'name' => __('Blacklists Notice Message:', 'wmbc-settings'),
+                    'name' => esc_html__('Blacklists Notice Message:', 'woo-manage-fraud-orders'),
                     'css'  => 'width:600px;height:50px',
                     'type' => 'textarea',
-                    'desc' => __('Enter the message tp be shown for blocked customers', 'wmbc-settings'),
-                    'id'   => 'wmbc_black_list_message',
+                    'desc' => esc_html__('Enter the message tp be shown for blocked customers', 'woo-manage-fraud-orders'),
+                    'id'   => 'wmfo_black_list_message',
                 ),
                 'blacklists_allowed_fraud_attempts' => array(
-                    'name'              => __('Number of allowed Fraud Attempts:', 'wmbc-settings'),
+                    'name'              => esc_html__('Number of allowed Fraud Attempts:', 'woo-manage-fraud-orders'),
                     'type'              => 'number',
                     'css'               => 'width:50px',
-                    'desc'              => __('Enter the number of allowed fraud attempts before blocking automatically', 'wmbc-settings'),
-                    'id'                => 'wmbc_black_list_allowed_fraud_attemps',
+                    'desc'              => esc_html__('Enter the number of allowed fraud attempts before blocking automatically', 'woo-manage-fraud-orders'),
+                    'id'                => 'wmfo_black_list_allowed_fraud_attemps',
                     'custom_attributes' => array(
                         'min'  => 0,
                         'step' => 1,
                     ),
                 ),
                 'blacklists_phones'                 => array(
-                    'name' => __('Blacklisted Phones:', 'wmbc-settings'),
+                    'name' => esc_html__('Blacklisted Phones:', 'woo-manage-fraud-orders'),
                     'css'  => 'width:600px;height:200px',
 
                     'type' => 'textarea',
-                    'desc' => __('Enter Phones with comma seperation', 'wmbc-settings'),
-                    'id'   => 'wmbc_black_list_phones',
+                    'desc' => esc_html__('Enter Phones with comma seperation', 'woo-manage-fraud-orders'),
+                    'id'   => 'wmfo_black_list_phones',
                 ),
                 'blacklists_emails'                 => array(
-                    'name' => __('Blacklisted Emails:', 'wmbc-settings'),
+                    'name' => esc_html__('Blacklisted Emails:', 'woo-manage-fraud-orders'),
                     'css'  => 'width:600px;height:200px',
 
                     'type' => 'textarea',
-                    'desc' => __('Enter Emails with comma seperation', 'wmbc-settings'),
-                    'id'   => 'wmbc_black_list_emails',
+                    'desc' => esc_html__('Enter Emails with comma seperation', 'woo-manage-fraud-orders'),
+                    'id'   => 'wmfo_black_list_emails',
                 ),
                 'blacklists_ips'                    => array(
-                    'name' => __('Blacklisted IP Addresses:', 'wmbc-settings'),
+                    'name' => esc_html__('Blacklisted IP Addresses:', 'woo-manage-fraud-orders'),
                     'css'  => 'width:600px;height:200px',
 
                     'type' => 'textarea',
-                    'desc' => __('Enter IPs with comma seperation', 'wmbc-settings'),
-                    'id'   => 'wmbc_black_list_ips',
+                    'desc' => esc_html__('Enter IPs with comma seperation', 'woo-manage-fraud-orders'),
+                    'id'   => 'wmfo_black_list_ips',
                 ),
                 'section_end'                       => array(
                     'type' => 'sectionend',
-                    'id'   => 'wmbc_settings_section_end',
+                    'id'   => 'wmfo_settings_section_end',
                 ),
             );
-            return apply_filters('wmbc_settings', $settings);
+            return apply_filters('wmfo_settings', $settings);
         }
     }
-    WMBC_Settings_Tab::init();
 }
+//init the Setting
+WMFO_Settings_Tab::init();

@@ -1,10 +1,16 @@
 <?php
+/**
+ *
+ *Handler class to update the blacklisted settings
+ *Show the message in checkout page
+ */
+
 if (!defined('ABSPATH')) {
     exit();
 }
 
-if (!class_exists('WMBC_Blacklist_Handler')) {
-    class WMBC_Blacklist_Handler {
+if (!class_exists('WMFO_Blacklist_Handler')) {
+    class WMFO_Blacklist_Handler {
 
         private function get_setting($key, $default = '') {
             return get_option($key) ? get_option($key) : $default;
@@ -12,9 +18,9 @@ if (!class_exists('WMBC_Blacklist_Handler')) {
 
         private function get_blacklists() {
             return array(
-                'prev_black_list_ips'    => self::get_setting('wmbc_black_list_ips'),
-                'prev_black_list_phones' => self::get_setting('wmbc_black_list_phones'),
-                'prev_black_list_emails' => self::get_setting('wmbc_black_list_emails'),
+                'prev_black_list_ips'    => self::get_setting('wmfo_black_list_ips'),
+                'prev_black_list_phones' => self::get_setting('wmfo_black_list_phones'),
+                'prev_black_list_emails' => self::get_setting('wmfo_black_list_emails'),
             );
 
         }
@@ -33,9 +39,9 @@ if (!class_exists('WMBC_Blacklist_Handler')) {
                 return false;
             }
 
-            self::update_blacklist('wmbc_black_list_ips', $prev_blacklisted_data['prev_black_list_ips'], $customer['ip_address']);
-            self::update_blacklist('wmbc_black_list_phones', $prev_blacklisted_data['prev_black_list_phones'], $customer['billing_phone']);
-            self::update_blacklist('wmbc_black_list_emails', $prev_blacklisted_data['prev_black_list_emails'], $customer['billing_email']);
+            self::update_blacklist('wmfo_black_list_ips', $prev_blacklisted_data['prev_black_list_ips'], $customer['ip_address']);
+            self::update_blacklist('wmfo_black_list_phones', $prev_blacklisted_data['prev_black_list_phones'], $customer['billing_phone']);
+            self::update_blacklist('wmfo_black_list_emails', $prev_blacklisted_data['prev_black_list_emails'], $customer['billing_email']);
 
             //handle the cancelation of order
             if (null !== $order) {
@@ -46,7 +52,7 @@ if (!class_exists('WMBC_Blacklist_Handler')) {
         }
 
         private function cancel_order($order) {
-            $order_note = apply_filters('wmbc_cancel_order_note', __('Order details blacklisted for future checkout.', 'wmbc'), $order);
+            $order_note = apply_filters('wmfo_cancel_order_note', esc_html__('Order details blacklisted for future checkout.', 'woo-manage-fraud-orders'), $order);
 
             //Set the order status to Canceled
             if (!$order->has_status('cancelled')) {
@@ -55,13 +61,13 @@ if (!class_exists('WMBC_Blacklist_Handler')) {
         }
 
         public static function show_blocked_message() {
-            $default_notice          = __('Sorry, You are blocked from checking out.', 'wmbc');
-            $wmbc_black_list_message = self::get_setting('wmbc_black_list_message', $default_notice);
+            $default_notice          = esc_html__('Sorry, You are blocked from checking out.', 'woo-manage-fraud-orders');
+            $wmfo_black_list_message = self::get_setting('wmfo_black_list_message', $default_notice);
 
             //with some reason, get_option with default value not working
 
-            if (!wc_has_notice($wmbc_black_list_message)) {
-                wc_add_notice($wmbc_black_list_message, 'error');
+            if (!wc_has_notice($wmfo_black_list_message)) {
+                wc_add_notice($wmfo_black_list_message, 'error');
             }
         }
     }

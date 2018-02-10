@@ -15,13 +15,13 @@ Domain Path:  /languages
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
-if (!defined('WMBC_PLUGIN_FILE')) {
-    define('WMBC_PLUGIN_FILE', __FILE__);
+if (!defined('WMFO_PLUGIN_FILE')) {
+    define('WMFO_PLUGIN_FILE', __FILE__);
 }
 
-if (!class_exists('Woo_Manage_Blacklisted_Customers')) {
-    include_once dirname(__FILE__) . '/includes/cls-woo-manage-blacklisted-customers.php';
+if (!class_exists('Woo_Manage_Fraud_Orders')) {
+    include_once dirname(__FILE__) . '/includes/class-woo-manage-fraud-orders.php';
 }
 
 //Initialize the plugin
-Woo_Manage_Blacklisted_Customers::instance();
+Woo_Manage_Fraud_Orders::instance();
