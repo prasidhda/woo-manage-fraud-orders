@@ -17,6 +17,7 @@ if (!class_exists('Woo_Manage_Blacklisted_Customers')) {
         public function __construct() {
             $this->define_constants();
             $this->includes();
+            $this->init_hooks();
         }
 
         public static function instance() {
@@ -37,6 +38,22 @@ if (!class_exists('Woo_Manage_Blacklisted_Customers')) {
         private function define($name, $value) {
             if (!defined($name)) {
                 define($name, $value);
+            }
+        }
+
+        private function init_hooks() {
+            register_activation_hook(WMBC_PLUGIN_FILE, array($this, 'install'));
+        }
+        public static function install() {
+            if (!in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
+
+                // Deactivate the plugin
+                deactivate_plugins(__FILE__);
+
+                // Throw an error in the wordpress admin console
+                $error_message = __('This plugin requires <a href="http://wordpress.org/extend/plugins/woocommerce/">WooCommerce</a> plugins to be active!', 'woocommerce');
+                die($error_message);
+
             }
         }
 
