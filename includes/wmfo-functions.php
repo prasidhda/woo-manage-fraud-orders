@@ -2,71 +2,7 @@
 /**
  *Global functions related fraud management
  * Function to update the block list details
- * Called from backend , through order Action
- * Called also from checkotu page
  */
-
-// function WMFO_update_blacklist_customers($customer = array()) {
-//     if (empty($customer) || !$customer) {
-//         return false;
-//     }
-
-//     $prev_black_list_ips    = get_option('WMFO_black_list_ips', true);
-//     $prev_black_list_phones = get_option('WMFO_black_list_phones', true);
-//     $prev_black_list_emails = get_option('WMFO_black_list_emails', true);
-//     if ($prev_black_list_ips === false || $prev_black_list_ips == '') {
-//         $new_black_list_ips = $customer['ip_address'];
-//     } else {
-
-//         $new_black_list_ips = !substr_count($prev_black_list_ips, $customer['ip_address']) ?
-//         $prev_black_list_ips . ', ' . $customer['ip_address'] :
-//         $prev_black_list_ips;
-//     }
-
-//     /*----------  Update Blackilists for Phones ----------*/
-//     if ($prev_black_list_phones === false || $prev_black_list_phones == '') {
-//         $new_black_list_phones = $customer['billing_phone'];
-//     } else {
-//         $new_black_list_phones = !substr_count($prev_black_list_phones, $customer['billing_phone']) ?
-//         $prev_black_list_phones . ', ' . $customer['billing_phone'] :
-//         $prev_black_list_phones;
-//     }
-
-//     /*---------- Update Blacklists for Emails  ----------*/
-//     if ($prev_black_list_emails === false || $prev_black_list_emails == '') {
-//         $new_black_list_emails = $customer['billing_email'];
-//     } else {
-//         $new_black_list_emails = !substr_count($prev_black_list_emails, $customer['billing_email']) ?
-//         $prev_black_list_emails . ', ' . $customer['billing_email'] :
-//         $prev_black_list_emails;
-//     }
-
-//     update_option('WMFO_black_list_ips', $new_black_list_ips);
-//     update_option('WMFO_black_list_phones', $new_black_list_phones);
-//     update_option('WMFO_black_list_emails', $new_black_list_emails);
-
-//     return true;
-// }
-// /**
-//  *
-//  * Function to Show the Blacklist message to customers
-//  *
-//  */
-
-// function WMFO_show_blocked_message() {
-//     $default_notice          = __('Sorry, You are blocked from checking out.', 'WMFO');
-//     $WMFO_black_list_message = get_option('WMFO_black_list_message') != '' ?
-//     get_option('WMFO_black_list_message') :
-//     $default_notice;
-//     //with some reason, get_option with default value not working
-//     if ($WMFO_black_list_message == '') {
-//         $WMFO_black_list_message = $default_notice;
-//     }
-
-//     if (!wc_has_notice($WMFO_black_list_message)) {
-//         wc_add_notice($WMFO_black_list_message, 'error');
-//     }
-// }
 
 /**
  * Function to get the customer details
@@ -82,6 +18,13 @@ function wmfo_get_customer_details_of_order($order) {
         'billing_email' => $order->get_billing_email(),
     );
 }
+
+/**
+ *
+ * In case woo commerce changes the function name to get IP address,
+ *
+ */
+
 function wmfo_get_ip_address() {
     if (isset($_SERVER['HTTP_X_REAL_IP'])) { // WPCS: input var ok, CSRF ok.
         return sanitize_text_field(wp_unslash($_SERVER['HTTP_X_REAL_IP'])); // WPCS: input var ok, CSRF ok.
