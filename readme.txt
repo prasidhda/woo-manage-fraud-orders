@@ -3,7 +3,7 @@ Contributors: prasidhda
 Tags: WooCommerce, Blacklist customers, Anti Fraud orders, Tracking fraud attempts
 Requires at least: 4.6
 Tested up to: 4.9
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -45,6 +45,9 @@ Let us take an example of Electronic check payment gateway. When customer succes
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+
+= 1.0.3 =
+* Duplication of the blacklisted emais, phones and IPs removed. 
 
 = 1.0.2 =
 * Minor bug fixed.
