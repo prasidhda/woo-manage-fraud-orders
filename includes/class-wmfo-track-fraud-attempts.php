@@ -25,7 +25,7 @@ if (!class_exists('WMFO_Track_Customers')) {
             return self::$_instance;
         }
 
-        public static function manage_blacklisted_customers($data, $erros) {
+        public static function manage_blacklisted_customers($data, $errors) {
             //Check if there are any other errors first
             //If there are, return
             if (!empty($errors->errors)) {

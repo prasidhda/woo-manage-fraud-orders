@@ -43,6 +43,8 @@ if (!class_exists('Woo_Manage_Fraud_Orders')) {
 
         private function init_hooks() {
             register_activation_hook(WMFO_PLUGIN_FILE, array($this, 'install'));
+            
+            add_filter( 'plugin_action_links_' . plugin_basename(WMFO_PLUGIN_FILE), array( $this, 'action_links') );
             add_action('plugins_loaded', array($this, 'load_text_domain'));
         }
         public static function install() {
@@ -52,10 +54,15 @@ if (!class_exists('Woo_Manage_Fraud_Orders')) {
                 deactivate_plugins(__FILE__);
 
                 // Throw an error in the wordpress admin console
-                $error_message = esc_html__(sprintf('This plugin requires <a href="%s">WooCommerce plugins to be active!</a>', 'http://wordpress.org/extend/plugins/woocommerce/'), 'woo-manage-fraud-orders');
+                $error_message = __(sprintf('This plugin requires <a href="%s">WooCommerce plugins to be active!</a>', 'http://wordpress.org/extend/plugins/woocommerce/'), 'woo-manage-fraud-orders');
                 die($error_message);
 
             }
+        }
+
+        public static function action_links($links){
+            $links[] = '<a href="'. esc_url( get_admin_url(null, 'admin.php?page=wc-settings&tab=settings_tab_blacklists') ) .'">Settings</a>';
+            return $links;
         }
 
         public function load_text_domain() {

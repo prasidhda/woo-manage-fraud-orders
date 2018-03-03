@@ -1,15 +1,17 @@
 <?php
 /*
-Plugin Name:  Woo Manage Blacklisted Customers
-Plugin URI:   https://github.com/prasidhda/woo-block-fraud-orders
-Description:  WooCommerce plugin to block the fraud orders.
-Version:      0.3
+Plugin Name:  Woo Manage Fraud Orders
+Plugin URI:   https://github.com/prasidhda/woo-manage-fraud-orders
+Description:  WooCommerce plugin to manage the fraud orders by blackilisting the customer's details.
+Version:      1.0.2
 Author:       Prasidhda Malla
 Author URI:   https://profiles.wordpress.org/prasidhda
 License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain:  woo-manage-blacklisted-customers
+Text Domain:  woo-manage-fraud-orders
 Domain Path:  /languages
+WC requires at least: 2.6
+WC tested up to: 3.3.1
  */
 
 if (!defined('ABSPATH')) {
