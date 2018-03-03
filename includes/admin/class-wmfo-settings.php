@@ -10,6 +10,7 @@ if (!class_exists('WMFO_Settings_Tab')) {
             add_filter('woocommerce_settings_tabs_array', __CLASS__ . '::add_settings_tab', 50);
             add_action('woocommerce_settings_tabs_settings_tab_blacklists', __CLASS__ . '::settings_tab');
             add_action('woocommerce_update_options_settings_tab_blacklists', __CLASS__ . '::update_settings');
+            add_filter( 'woocommerce_admin_settings_sanitize_option', __CLASS__ . '::update_setting_filter', 100, 3 );
         }
 
         /**
@@ -39,6 +40,15 @@ if (!class_exists('WMFO_Settings_Tab')) {
          */
         public static function update_settings() {
             woocommerce_update_options(self::get_settings());
+        }
+
+        public static function update_setting_filter( $value, $option, $raw_value  ){
+            if( in_array($option['id'], array('wmfo_black_list_phones', 'wmfo_black_list_emails', 'wmfo_black_list_ips')) ){
+                //check if there are  duplication of blacklisted values 
+                $value = implode(',', array_unique(array_map('trim',explode(',', $value)))); 
+            }
+
+            return apply_filters( $option['id']. '_option', $value, $option, $raw_value  ); 
         }
         /**
          * Get all the settings for this plugin for @see woocommerce_admin_fields() function.
