@@ -3,7 +3,7 @@ Contributors: prasidhda
 Tags: WooCommerce, Blacklist customers, Anti Fraud orders, Tracking fraud attempts
 Requires at least: 4.6
 Tested up to: 4.9.6
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -45,6 +45,9 @@ Let us take an example of Electronic check payment gateway. When customer succes
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+= 1.2.2 =
+* Translation text domain added.
+
 = 1.2 =
 * Bulk Blacklisting options added in orders listing page.
 

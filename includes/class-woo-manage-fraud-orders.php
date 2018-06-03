@@ -74,7 +74,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		}
 
 		public function load_text_domain() {
-			load_plugin_textdomain( 'woo-preview-emails', WMFO_PLUGIN_FILE, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
+			load_plugin_textdomain( 'woo-manage-fraud-orders', WMFO_PLUGIN_FILE, plugin_basename( dirname( __FILE__ ) ) . '/languages/' );
 		}
 
 		public function includes() {
