@@ -61,7 +61,7 @@ if ( ! class_exists( 'WMFO_Track_Customers' ) ) {
 			$ip_address = method_exists( 'WC_Geolocation', 'get_ip_address' ) ? WC_Geolocation::get_ip_address() : wmfo_get_ip_address();
 
 			//Block this checkout if this customers details are already blacklisted
-			if ( substr_count( $prev_black_list_ips, $ip_address ) > 0 || substr_count( $prev_black_list_phones, $billing_phone ) > 0 || substr_count( $prev_black_list_emails, $billing_email ) > 0 ) {
+			if ( in_array( $ip_address, explode( PHP_EOL, $prev_black_list_ips ) ) || in_array( $billing_phone, explode( PHP_EOL, $prev_black_list_phones ) ) || in_array( $billing_email, explode( PHP_EOL, $prev_black_list_emails ) ) ) {
 
 				if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
 					WMFO_Blacklist_Handler::show_blocked_message();

@@ -52,8 +52,8 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 				'action_links',
 			] );
 			add_action( 'plugins_loaded', [ $this, 'load_text_domain' ] );
-			add_action( 'init', array( $this, 'db_update_handler'));
-			add_action('admin_notices', array( $this, 'force_db_update_notice' )); 
+			add_action( 'init', array( $this, 'db_update_handler') );
+			add_action('admin_notices', array( $this, 'admin_notices' )); 
 		}
 
 		public static function install() {
@@ -90,12 +90,18 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 			}
 		}
 
-		public function force_db_update_notice(){
-			if( get_option('wmfo_fb_update' != 'updated') && ! isset( $_GET['wmfo_action'] ) ){
+		public function admin_notices(){
+			if( get_option('wmfo_db_version', null ) != $this->version && ! isset( $_GET['wmfo_action'] ) ){
 				$class = 'notice notice-error';
 			    $message = __( 'Please update the database to be compabtible with latest version of Woo Manage Fraud Order plugin.<a href="'.add_query_arg('wmfo_action', 'update_db', admin_url()).'">Update</a>', 'woo-manage-fraud-orders' );
 			 
 			    printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message  ); 
+			}
+			elseif( get_option('wmfo_db_version', null ) == $this->version && get_user_meta(get_current_user_id(), 'wmfo_db_update_complete_notice_hide', true) != 'yes' ){
+				$class = 'notice notice-success updated woocommerce-message wc-connect woocommerce-message--success';
+			 	$dismiss_link = '<a class="" style="float:right;" href="'.add_query_arg('wmfo_action', 'hide-update-notice', admin_url()).'">'. __( 'Dismiss', 'woo-manage-fraud-orders' ).'</a>';
+			    $message = __( '<p>Woo Manage Fraud Orders data update complete. Thank you for updating to the latest version!'. $dismiss_link .'</p>', 'woo-manage-fraud-orders' );
+			    printf( '<div class="%1$s">%2$s</div>', esc_attr( $class ), $message  ); 
 			}
 			
 		}
@@ -109,7 +115,6 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 					'wmfo_black_list_emails',
 				);
 				foreach ($wmfo_settings as $key => $setting_key ) {
-
 					$setting_value = WMFO_Blacklist_Handler::get_setting( $setting_key );
 					$setting_value_array = explode(',', $setting_value ); 
 					if( count( $setting_value_array ) > 1 ){
@@ -118,6 +123,16 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 						update_option( $setting_key, $new_setting_value ); 
 					}
 				}
+
+				update_option( 'wmfo_db_update', 'updated'); 
+				update_option('wmfo_db_version', $this->version ); 
+
+				//Delete user meta so that we can show the DB update message
+				update_user_meta( get_current_user_id(), 'wmfo_db_update_complete_notice_hide', 'no' );
+			}
+			//Hide Update completeo notice 
+			if( isset( $_GET['wmfo_action'] ) && $_GET['wmfo_action'] == 'hide-update-notice' ){
+				update_user_meta( get_current_user_id(), 'wmfo_db_update_complete_notice_hide', 'yes' );
 			}
 		}
 	}
