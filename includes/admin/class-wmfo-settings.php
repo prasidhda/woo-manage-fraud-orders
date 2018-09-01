@@ -54,7 +54,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 				'wmfo_black_list_ips',
 			] ) ) {
 				//check if there are  duplication of blacklisted values
-				$value = implode( ',', array_unique( array_map( 'trim', explode( ',', $value ) ) ) );
+				$value = implode( PHP_EOL, array_unique( array_map( 'trim', explode( PHP_EOL, $value ) ) ) );
 			}
 
 			return apply_filters( $option['id'] . '_option', $value, $option, $raw_value );
@@ -96,7 +96,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'css'  => 'width:600px;height:200px',
 
 					'type' => 'textarea',
-					'desc' => esc_html__( 'Enter Phones with comma seperation', 'woo-manage-fraud-orders' ),
+					'desc' => esc_html__( 'Enter Phones in new line', 'woo-manage-fraud-orders' ),
 					'id'   => 'wmfo_black_list_phones',
 				],
 				'blacklists_emails'                 => [
@@ -104,7 +104,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'css'  => 'width:600px;height:200px',
 
 					'type' => 'textarea',
-					'desc' => esc_html__( 'Enter Emails with comma seperation', 'woo-manage-fraud-orders' ),
+					'desc' => esc_html__( 'Enter Emails in new line', 'woo-manage-fraud-orders' ),
 					'id'   => 'wmfo_black_list_emails',
 				],
 				'blacklists_ips'                    => [
@@ -112,7 +112,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'css'  => 'width:600px;height:200px',
 
 					'type' => 'textarea',
-					'desc' => esc_html__( 'Enter IPs with comma seperation', 'woo-manage-fraud-orders' ),
+					'desc' => esc_html__( 'Enter IPs in new line', 'woo-manage-fraud-orders' ),
 					'id'   => 'wmfo_black_list_ips',
 				],
 				'section_end'                       => [

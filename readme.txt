@@ -2,8 +2,8 @@
 Contributors: prasidhda
 Tags: WooCommerce, Blacklist customers, Anti Fraud orders, Tracking fraud attempts
 Requires at least: 4.6
-Tested up to: 4.9.6
-Stable tag: 1.2.2
+Tested up to: 4.9.8
+Stable tag: 1.3.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -37,12 +37,21 @@ Yes, there is. But this auto system will be in action only for those payment gat
 = What is the process for automatic blacklisting system ? =
 Let us take an example of Electronic check payment gateway. When customer successfully validates the payment fields like "Route Number", "Account Number" & "Check Number" fields, those values will be sent for authorizing. If Bank couldn't authorize those customer details, the woo commerce will mark the order as "Failed". Then, same customer may try to create the multiple number of "Failed" orders. This plugin will track that behavior and black list the customer from future checkout. 
 
+= Can i remove the customer details from blacklist ? =
+Yes, absolutely. You can either edit the setting option in "Woocommerce > Setting > Blacklisted Customers" or you can do it from the order edit page under "Order Actions" option.  
+
 
 == Screenshots ==
 
 1. Blacklisted Customers Setting & Listing
 2. Blocking message in checkout page
 3. Blacklisting customer details via order edit page
+
+== Changelog ==
+= 1.3.0 =
+* Feature of removing customer details from blacklists added. 
+* Format of saving the blacklist option changed from comma separated to new line values
+* DB update option added. 
 
 == Changelog ==
 = 1.2.2 =
