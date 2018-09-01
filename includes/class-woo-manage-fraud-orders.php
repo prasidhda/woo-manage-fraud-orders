@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 	class Woo_Manage_Fraud_Orders {
 
-		public $version = '1.0.0';
+		public $version = '1.3.0';
 		public static $_instance;
 
 		public function __construct() {
@@ -52,6 +52,8 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 				'action_links',
 			] );
 			add_action( 'plugins_loaded', [ $this, 'load_text_domain' ] );
+			add_action( 'init', array( $this, 'db_update_handler'));
+			add_action('admin_notices', array( $this, 'force_db_update_notice' )); 
 		}
 
 		public static function install() {
@@ -85,6 +87,37 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 				include_once WMFO_ABSPATH . 'includes/admin/class-wmfo-settings.php';
 				include_once WMFO_ABSPATH . 'includes/admin/class-wmfo-blacklist-action.php';
 				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-bulk-blacklist.php';
+			}
+		}
+
+		public function force_db_update_notice(){
+			if( get_option('wmfo_fb_update' != 'updated') && ! isset( $_GET['wmfo_action'] ) ){
+				$class = 'notice notice-error';
+			    $message = __( 'Please update the database to be compabtible with latest version of Woo Manage Fraud Order plugin.<a href="'.add_query_arg('wmfo_action', 'update_db', admin_url()).'">Update</a>', 'woo-manage-fraud-orders' );
+			 
+			    printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), $message  ); 
+			}
+			
+		}
+
+		public static function db_update_handler(){
+			//check for $_GET values 
+			if( isset( $_GET['wmfo_action'] ) && $_GET['wmfo_action'] == 'update_db' ){
+				$wmfo_settings = array(
+					'wmfo_black_list_ips', 
+					'wmfo_black_list_phones',
+					'wmfo_black_list_emails',
+				);
+				foreach ($wmfo_settings as $key => $setting_key ) {
+
+					$setting_value = WMFO_Blacklist_Handler::get_setting( $setting_key );
+					$setting_value_array = explode(',', $setting_value ); 
+					if( count( $setting_value_array ) > 1 ){
+						$new_setting_value = implode( PHP_EOL, array_map('trim', $setting_value_array ) ); 
+
+						update_option( $setting_key, $new_setting_value ); 
+					}
+				}
 			}
 		}
 	}
