@@ -3,107 +3,162 @@
  * Class to track the behavior of customer and block the customer from future
  * checkout process
  */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit();
+if ( !defined( 'ABSPATH' ) ) {
+    exit();
 }
 
-if ( ! class_exists( 'WMFO_Track_Customers' ) ) {
+if ( !class_exists( 'WMFO_Track_Customers' ) ) {
 
-	class WMFO_Track_Customers {
+    class WMFO_Track_Customers {
 
-		public static $_instance;
+        public static $_instance;
 
-		public function __construct() {
-			global $woocommerce;
-			// var_dump($woocommerce);
-			add_action( 'woocommerce_after_checkout_validation', [
-				$this,
-				'manage_blacklisted_customers',
-			], 10, 2 );
-			add_action( 'woocommerce_checkout_order_processed', [
-				$this,
-				'manage_multiple_failed_attempts',
-			], 100, 3 );
-		}
+        public function __construct() {
+            add_action( 'woocommerce_after_checkout_validation', [
+                $this,
+                'manage_blacklisted_customers',
+            ], 10, 2 );
+            add_action( 'woocommerce_checkout_order_processed', [
+                $this,
+                'manage_multiple_failed_attempts',
+            ], 100, 3 );
+        }
 
-		public static function instance() {
-			if ( is_null( self::$_instance ) ) {
-				self::$_instance = new self();
-			}
+        public static function instance() {
+            if ( is_null( self::$_instance ) ) {
+                self::$_instance = new self();
+            }
 
-			return self::$_instance;
-		}
+            return self::$_instance;
+        }
 
-		public static function manage_blacklisted_customers( $data, $errors ) {
-			//Check if there are any other errors first
-			//If there are, return
-			if ( ! empty( $errors->errors ) ) {
-				return;
-			}
+        public static function manage_blacklisted_customers( $data, $errors ) {
 
-			//Woo/Payment method saves the payment method validation errors in session
-			//If there such errors, skip
-			if ( ! isset( WC()->session->reload_checkout ) ) {
-				$error_notices = wc_get_notices( 'error' );
-			}
+            //Check if there are any other errors first
+            //If there are, return
+            if ( !empty( $errors->errors ) ) {
+                return;
+            }
 
-			if ( ! empty( $error_notices ) ) {
-				return;
-			}
+            //Woo/Payment method saves the payment method validation errors in session
+            //If there such errors, skip
+            if ( !isset( WC()->session->reload_checkout ) ) {
+                $error_notices = wc_get_notices( 'error' );
+            }
 
-			$prev_black_list_ips = get_option( 'WMFO_black_list_ips', TRUE );
-			$prev_black_list_phones = get_option( 'WMFO_black_list_phones', TRUE );
-			$prev_black_list_emails = get_option( 'WMFO_black_list_emails', TRUE );
+            if ( !empty( $error_notices ) ) {
+                return;
+            }
 
-			$billing_email = isset( $_POST['billing_email'] ) ? wc_clean( $_POST['billing_email'] ) : '';
-			$billing_phone = isset( $_POST['billing_phone'] ) ? wc_clean( $_POST['billing_phone'] ) : '';
+            $allow_blacklist_by_name = get_option( 'wmfo_allow_blacklist_by_name', 'no' );
+            $prev_black_list_names = get_option( 'wmfo_black_list_names', TRUE );
 
-			$ip_address = method_exists( 'WC_Geolocation', 'get_ip_address' ) ? WC_Geolocation::get_ip_address() : wmfo_get_ip_address();
+            $prev_black_list_ips = get_option( 'wmfo_black_list_ips', TRUE );
+            $prev_black_list_phones = get_option( 'wmfo_black_list_phones', TRUE );
+            $prev_black_list_emails = get_option( 'wmfo_black_list_emails', TRUE );
 
-			//Block this checkout if this customers details are already blacklisted
-			if ( in_array( $ip_address, explode( PHP_EOL, $prev_black_list_ips ) ) || in_array( $billing_phone, explode( PHP_EOL, $prev_black_list_phones ) ) || in_array( $billing_email, explode( PHP_EOL, $prev_black_list_emails ) ) ) {
+            $first_name = isset( $_POST['billing_first_name'] ) ? wc_clean( $_POST['billing_first_name'] ) : '';
+            $last_name = isset( $_POST['billing_last_name'] ) ? wc_clean( $_POST['billing_last_name'] ) : '';
+            $full_name = $first_name . ' ' . $last_name;
 
-				if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
-					WMFO_Blacklist_Handler::show_blocked_message();
-				}
+            $billing_email = isset( $_POST['billing_email'] ) ? wc_clean( $_POST['billing_email'] ) : '';
+            $billing_phone = isset( $_POST['billing_phone'] ) ? wc_clean( $_POST['billing_phone'] ) : '';
 
-				return;
-			}
-		}
+            $ip_address = method_exists( 'WC_Geolocation', 'get_ip_address' ) ? WC_Geolocation::get_ip_address() : wmfo_get_ip_address();
 
-		/**
-		 *
-		 * 'manage_multiple_failed_attempts' will only track the multiple failed attempts after the creating of failed
-		 * order by customer, This is helpful when customer enter the correct format of the data but payment gateway
-		 * couldn't authorize the payment. Typical example willl be Electronic check, CC processing
-		 */
-		public static function manage_multiple_failed_attempts( $order_id, $posted_data, $order ) {
-			if ( $order->get_status() === 'failed' ) {
-				//md5 the name of the cookie for fraud_attempts
-				$fraud_attempts_md5 = md5( 'fraud_attempts' );
-				$fraud_attempts     = ( ! isset( $_COOKIE[ $fraud_attempts_md5 ] ) || NULL === $_COOKIE[ $fraud_attempts_md5 ] ) ? 0 : $_COOKIE[ $fraud_attempts_md5 ];
+            //Block this checkout if this customers details are already blacklisted
+            if ( $full_name && $allow_blacklist_by_name == 'yes' && $prev_black_list_names && in_array( $full_name, explode( PHP_EOL, $prev_black_list_names ) ) ||
+                $ip_address && $prev_black_list_ips && in_array( $ip_address, explode( PHP_EOL, $prev_black_list_ips ) ) ||
+                $prev_black_list_phones && $billing_phone && in_array( $billing_phone, explode( PHP_EOL, $prev_black_list_phones ) ) ||
+                $billing_email && $prev_black_list_emails && in_array( $billing_email, explode( PHP_EOL, $prev_black_list_emails ) ) ) {
+                if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
+                    WMFO_Blacklist_Handler::show_blocked_message();
+                }
 
-				$cookie_value = (int) $fraud_attempts + 1;
-				setcookie( $fraud_attempts_md5, $cookie_value, time() + ( 60 * 60 ), "/" ); // 86400 = 1 day
-				//Get the allowed failed order limit, default to 3
-				$fraud_limit = get_option( 'wmfo_black_list_allowed_fraud_attemps' ) != '' ? get_option( 'wmfo_black_list_allowed_fraud_attemps' ) : 3;
+                return;
+            }
 
-				if ( (int) $fraud_attempts >= $fraud_limit ) {
-					//Show the blocking message in the checkout page.
-					if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
-						WMFO_Blacklist_Handler::show_blocked_message();
-					}
+            /**
+             * Block the customer if there is setting for order_status blocking
+             * If the customer previously has blocked order status in setting, He/She will be blocked from placing
+             * order
+             */
+            $blacklists_order_status = get_option( 'wmfo_black_list_order_status', TRUE );
 
-					//Block this customer for future sessions as well
-					//And cancel the order
-					$customer = wmfo_get_customer_details_of_order( $order );
-					if ( method_exists( 'WMFO_Blacklist_Handler', 'init' ) ) {
-						WMFO_Blacklist_Handler::init( $customer, $order );
-					}
-				}
-			}
-		}
-	}
+            //Get all previous orders of current customer
+            $args = array(
+                'post_type' => 'shop_order',
+                'posts_per_page' => -1,
+                'post_status' => 'any',
+                'meta_query' => array(
+                    'relation' => 'OR',
+                    array(
+                        'key' => '_customer_user',
+                        'value' => is_user_logged_in() ? get_current_user_id() : null, // For logged in
+                        'compare' => '=',
+                    ),
+                    array(
+                        'key' => '_billing_email',
+                        'value' => $_POST['billing_email'], // For guest customer
+                        'compare' => '=',
+                    ),
+                    array(
+                        'key' => '_billing_phone',
+                        'value' => $_POST['billing_phone'], // For guest customer
+                        'compare' => '=',
+                    ),
+                ),
+            );
+
+            $prev_orders_customers = get_posts( $args );
+
+            if ( !empty( $prev_orders_customers ) ) {
+                foreach ( $prev_orders_customers as $prev_order ) {
+
+                    if ( in_array( $prev_order->post_status, $blacklists_order_status ) ) {
+                        if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
+                            WMFO_Blacklist_Handler::show_blocked_message();
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        /**
+         *
+         * 'manage_multiple_failed_attempts' will only track the multiple failed attempts after the creating of failed
+         * order by customer, This is helpful when customer enter the correct format of the data but payment gateway
+         * couldn't authorize the payment. Typical example willl be Electronic check, CC processing
+         */
+        public static function manage_multiple_failed_attempts( $order_id, $posted_data, $order ) {
+            if ( $order->get_status() === 'failed' ) {
+                //md5 the name of the cookie for fraud_attempts
+                $fraud_attempts_md5 = md5( 'fraud_attempts' );
+                $fraud_attempts = ( !isset( $_COOKIE[$fraud_attempts_md5] ) || NULL === $_COOKIE[$fraud_attempts_md5] ) ? 0 : $_COOKIE[$fraud_attempts_md5];
+
+                $cookie_value = (int) $fraud_attempts + 1;
+                setcookie( $fraud_attempts_md5, $cookie_value, time() + ( 60 * 60 ), "/" ); // 86400 = 1 day
+                //Get the allowed failed order limit, default to 3
+                $fraud_limit = get_option( 'wmfo_black_list_allowed_fraud_attempts' ) != '' ? get_option( 'wmfo_black_list_allowed_fraud_attempts' ) : 5;
+
+                if ( (int) $fraud_attempts >= $fraud_limit ) {
+                    //Show the blocking message in the checkout page.
+                    if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
+                        WMFO_Blacklist_Handler::show_blocked_message();
+                    }
+
+                    //Block this customer for future sessions as well
+                    //And cancel the order
+                    $customer = wmfo_get_customer_details_of_order( $order );
+                    if ( method_exists( 'WMFO_Blacklist_Handler', 'init' ) ) {
+                        WMFO_Blacklist_Handler::init( $customer, $order );
+                    }
+                }
+            }
+        }
+
+    }
 }
 
 WMFO_Track_Customers::instance();
