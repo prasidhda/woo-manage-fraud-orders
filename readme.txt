@@ -1,9 +1,9 @@
 === Woo Manage Fraud Orders ===
 Contributors: prasidhda
-Tags: WooCommerce, Blacklist customers, Anti Fraud orders, Tracking fraud attempts
+Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers, Blacklister for WooCommerce, Blacklisting, blacklisting, ecommerce, fraud control, blacklist, fraud, woocommerce,woo blocker, woo blacklisting, block the order automatically, woo anti-fraud,WooCommerce User Blacklist, WooCommerce Blacklist Customers
 Requires at least: 4.6
 Tested up to: 5.4
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -53,6 +53,9 @@ Yes, absolutely. You can choose the multiple orders statuses in setting and this
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+= 1.5.3 =
+* Compatibility check with WC 4.2.2
+
 = 1.5.2 =
 * Order statuses multiselect setting UI change.
 * Blacklist by order status bug fixes.
