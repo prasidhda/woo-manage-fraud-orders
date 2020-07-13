@@ -6,7 +6,7 @@ Description:  WooCommerce plugin to manage the fraud orders by blackilisting the
 Version:      1.5.4
 Author:       Prasidhda Malla
 Author URI:   https://prasidhda.com.np/
-License:      GPL2
+License:      GPLv2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  woo-manage-fraud-orders
 Domain Path:  /languages
