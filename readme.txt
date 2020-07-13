@@ -1,6 +1,6 @@
 === Woo Manage Fraud Orders ===
 Contributors: prasidhda
-Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers, Blacklister for WooCommerce, Blacklisting, blacklisting, ecommerce, fraud control, blacklist, fraud, woocommerce,woo blocker, woo blacklisting, block the order automatically, woo anti-fraud,WooCommerce User Blacklist, WooCommerce Blacklist Customers
+Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers
 Requires at least: 4.6
 Tested up to: 5.4
 Stable tag: 1.5.4
@@ -95,9 +95,9 @@ Yes, absolutely. You can choose the multiple orders statuses in setting and this
 * Order placement prevention based on order status added.
 
 = 1.3.0 =
-* Feature of removing customer details from blacklists added. 
+* Feature of removing customer details from blacklists added.
 * Format of saving the blacklist option changed from comma separated to new line values
-* DB update option added. 
+* DB update option added.
 
 = 1.2.2 =
 * Translation text domain added.
@@ -112,11 +112,11 @@ Yes, absolutely. You can choose the multiple orders statuses in setting and this
 * Minor bug fixed.
 
 = 1.0.1 =
-* Dependency check added.  
+* Dependency check added.
 
 = 1.0.0 =
 * First Version
 
 == Upgrade Notice ==
-= 1.4.0 =
-Version 1.4.0 supports the order placement prevention based on order statuses.
+= 1.5.0 =
+Version 1.5.0 supports blocking by customer name
