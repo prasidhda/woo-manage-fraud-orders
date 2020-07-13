@@ -9,7 +9,6 @@ Author URI:   https://prasidhda.com.np/
 License:      GPLv2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  woo-manage-fraud-orders
-Domain Path:  /languages
 WC requires at least: 2.6
 WC tested up to: 4.3.0
  */
