@@ -1,6 +1,6 @@
 <?php
 /*----------  Black List Settings  ----------*/
-if (!class_exists('WMFO_Settings_Tab')) {
+if ( !class_exists('WMFO_Settings_Tab') ) {
     class WMFO_Settings_Tab {
 
         /**
@@ -21,7 +21,7 @@ if (!class_exists('WMFO_Settings_Tab')) {
          *
          * @return array $settings_tabs Array of WooCommerce setting tabs & their labels, including the Subscription tab.
          */
-        public static function add_settings_tab($settings_tabs) {
+        public static function add_settings_tab( $settings_tabs ) {
             $settings_tabs['settings_tab_blacklists'] = esc_html__('Blacklisted Customers', 'woo-manage-fraud-orders');
 
             return $settings_tabs;
@@ -47,13 +47,13 @@ if (!class_exists('WMFO_Settings_Tab')) {
             woocommerce_update_options(self::get_settings());
         }
 
-        public static function update_setting_filter($value, $option, $raw_value) {
-            if (in_array($option['id'], [
+        public static function update_setting_filter( $value, $option, $raw_value ) {
+            if ( in_array($option['id'], [
                 'wmfo_black_list_names',
                 'wmfo_black_list_phones',
                 'wmfo_black_list_emails',
                 'wmfo_black_list_ips',
-            ])) {
+            ]) ) {
                 //check if there are  duplication of blacklisted values
                 $value = implode(PHP_EOL, array_unique(array_map('trim', explode(PHP_EOL, $value))));
             }
@@ -99,7 +99,7 @@ if (!class_exists('WMFO_Settings_Tab')) {
                     'css' => 'width:600px;height:auto',
                     'type' => 'multiselect',
                     'class' => 'wc-enhanced-select',
-                    'desc' => esc_html__('Select multiple order statuses. If customer has previous order in one of above selected order items, He/She will not be able to place order.', 'woo-manage-fraud-orders'),
+                    'desc' => esc_html__('You can select multiple order statuses. If customer has previous order in one of above selected order items, He/She will not be able to place order.', 'woo-manage-fraud-orders'),
                     'options' => wc_get_order_statuses(),
                     'id' => 'wmfo_black_list_order_status',
                 ],
@@ -156,7 +156,7 @@ WMFO_Settings_Tab::init();
  * Admin Styling
  */
 add_action('admin_head', function () {
-    if (isset($_GET['tab']) && $_GET['tab'] == 'settings_tab_blacklists') : ?>
+    if ( isset($_GET['tab']) && $_GET['tab'] == 'settings_tab_blacklists' ) : ?>
         <style>
             .wrap.woocommerce .forminp.forminp-multiselect span.description {
                 display: block;
