@@ -16,7 +16,7 @@ if (!class_exists('WMFO_Order_Actions')) {
              */
             add_filter('woocommerce_order_actions', [
                 $this,
-                'WMFO_add_new_order_action',
+                'add_new_order_action',
             ], 99, 1);
             /**
              *
@@ -25,7 +25,7 @@ if (!class_exists('WMFO_Order_Actions')) {
              */
             add_action('woocommerce_process_shop_order_meta', [
                 $this,
-                'wpmbc_update_blacklists',
+                'update_blacklists',
             ], 60, 2);
         }
 
@@ -44,7 +44,7 @@ if (!class_exists('WMFO_Order_Actions')) {
          * @param $order_actions
          * @return mixed
          */
-        public static function WMFO_add_new_order_action($order_actions) {
+        public static function add_new_order_action($order_actions) {
             $order_actions['black_list_order'] = __('Blacklist order', 'woo-manage-fraud-orders');
 
             //Show this only if customer details of this order is in blacklist
@@ -64,7 +64,7 @@ if (!class_exists('WMFO_Order_Actions')) {
          * @param $post_id
          * @param $post
          */
-        public static function wpmbc_update_blacklists($post_id, $post) {
+        public static function update_blacklists($post_id, $post) {
             $order = wc_get_order($post_id);
 
             // Handle button actions

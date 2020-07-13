@@ -3,9 +3,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woo Manage Fraud Orders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-24 04:55+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2020-07-13 09:46+0000\n"
+"PO-Revision-Date: 2020-07-13 09:46+0000\n"
+"Last-Translator: PRASIDHDA MALLA <pranuk.prwnsi@gmail.com>\n"
 "Language-Team: \n"
 "Language: \n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
@@ -28,11 +28,11 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:96
+#: includes/class-wmfo-blacklist-handler.php:97
 msgid "Order details blacklisted for future checkout."
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:108
+#: includes/class-wmfo-blacklist-handler.php:109
 msgid "Sorry, You are blocked from checking out."
 msgstr ""
 
@@ -64,8 +64,8 @@ msgstr ""
 
 #: includes/admin/class-wmfo-settings.php:102
 msgid ""
-"Select multiple order statuses. If customer has previous order in one of "
-"above selected order items, He/She will not be able to place order."
+"You can select multiple order statuses. If customer has previous order in "
+"one of above selected order items, He/She will not be able to place order."
 msgstr ""
 
 #: includes/admin/class-wmfo-settings.php:107
@@ -119,4 +119,3 @@ msgstr ""
 #: includes/admin/class-wmfo-bulk-blacklist.php:22
 msgid "Blacklist Customer"
 msgstr ""
-

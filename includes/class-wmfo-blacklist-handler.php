@@ -81,7 +81,7 @@ if (!class_exists('WMFO_Blacklist_Handler')) {
             self::update_blacklist('wmfo_black_list_phones', $prev_blacklisted_data['prev_black_list_phones'], $customer['billing_phone'], $action);
             self::update_blacklist('wmfo_black_list_emails', $prev_blacklisted_data['prev_black_list_emails'], $customer['billing_email'], $action);
 
-            //handle the cancelation of order
+            //handle the cancellation of order
             if (NULL !== $order) {
                 self::cancel_order($order);
             }
@@ -93,9 +93,10 @@ if (!class_exists('WMFO_Blacklist_Handler')) {
          * @param $order
          */
         public static function cancel_order($order) {
+
             $order_note = apply_filters('wmfo_cancel_order_note', esc_html__('Order details blacklisted for future checkout.', 'woo-manage-fraud-orders'), $order);
 
-            //Set the order status to Canceled
+            //Set the order status to Cancelled
             if (!$order->has_status('cancelled')) {
                 $order->update_status('cancelled', $order_note);
             }
