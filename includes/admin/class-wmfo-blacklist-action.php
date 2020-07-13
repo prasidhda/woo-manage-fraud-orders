@@ -25,7 +25,7 @@ if (!class_exists('WMFO_Order_Actions')) {
              */
             add_action('woocommerce_process_shop_order_meta', [
                 $this,
-                'update_blacklists',
+                'update_blacklist',
             ], 60, 2);
         }
 
@@ -64,7 +64,7 @@ if (!class_exists('WMFO_Order_Actions')) {
          * @param $post_id
          * @param $post
          */
-        public static function update_blacklists($post_id, $post) {
+        public static function update_blacklist($post_id, $post) {
             $order = wc_get_order($post_id);
 
             // Handle button actions
