@@ -57,12 +57,12 @@ if ( !class_exists('WMFO_Track_Customers') ) {
             $prev_black_list_phones = get_option('wmfo_black_list_phones', TRUE);
             $prev_black_list_emails = get_option('wmfo_black_list_emails', TRUE);
 
-            $first_name = isset($_POST['billing_first_name']) ? wc_clean($_POST['billing_first_name']) : '';
-            $last_name = isset($_POST['billing_last_name']) ? wc_clean($_POST['billing_last_name']) : '';
+            $first_name = isset($_POST['billing_first_name']) ? sanitize_text_field($_POST['billing_first_name']) : '';
+            $last_name = isset($_POST['billing_last_name']) ? sanitize_text_field($_POST['billing_last_name']) : '';
             $full_name = $first_name . ' ' . $last_name;
 
-            $billing_email = isset($_POST['billing_email']) ? wc_clean($_POST['billing_email']) : '';
-            $billing_phone = isset($_POST['billing_phone']) ? wc_clean($_POST['billing_phone']) : '';
+            $billing_email = isset($_POST['billing_email']) ? sanitize_email($_POST['billing_email']) : '';
+            $billing_phone = isset($_POST['billing_phone']) ? sanitize_text_field($_POST['billing_phone']) : '';
 
             $ip_address = method_exists('WC_Geolocation', 'get_ip_address') ? WC_Geolocation::get_ip_address() : wmfo_get_ip_address();
 
@@ -99,12 +99,12 @@ if ( !class_exists('WMFO_Track_Customers') ) {
                     ),
                     array(
                         'key' => '_billing_email',
-                        'value' => $_POST['billing_email'], // For guest customer
+                        'value' => sanitize_email( $_POST['billing_email'] ), // For guest customer
                         'compare' => '=',
                     ),
                     array(
                         'key' => '_billing_phone',
-                        'value' => $_POST['billing_phone'], // For guest customer
+                        'value' => sanitize_text_field( $_POST['billing_phone'] ), // For guest customer
                         'compare' => '=',
                     ),
                 ),
@@ -135,7 +135,7 @@ if ( !class_exists('WMFO_Track_Customers') ) {
             if ( $order->get_status() === 'failed' ) {
                 //md5 the name of the cookie for fraud_attempts
                 $fraud_attempts_md5 = md5('fraud_attempts');
-                $fraud_attempts = (!isset($_COOKIE[$fraud_attempts_md5]) || NULL === $_COOKIE[$fraud_attempts_md5]) ? 0 : $_COOKIE[$fraud_attempts_md5];
+                $fraud_attempts = (!isset($_COOKIE[$fraud_attempts_md5]) || NULL === $_COOKIE[$fraud_attempts_md5]) ? 0 : sanitize_text_field( $_COOKIE[$fraud_attempts_md5] );
 
                 $cookie_value = (int)$fraud_attempts + 1;
                 setcookie($fraud_attempts_md5, $cookie_value, time() + (60 * 60), "/"); // 86400 = 1 day

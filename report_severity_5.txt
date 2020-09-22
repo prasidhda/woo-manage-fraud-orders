@@ -1,0 +1,1620 @@
+
+FILE: /Users/ricardo/devWork/manageFraudOrders/woo-manage-fraud-orders/woo-manage-fraud-orders.php
+------------------------------------------------------------------------------------------------------------------------------
+FOUND 28 ERRORS AFFECTING 8 LINES
+------------------------------------------------------------------------------------------------------------------------------
+  2 | ERROR | [ ] You must use "/**" style comments for a file comment
+ 16 | ERROR | [x] No space after opening parenthesis is prohibited
+ 16 | ERROR | [x] Expected 1 space before "!"; 0 found
+ 16 | ERROR | [x] Expected 1 space after "!"; 0 found
+ 16 | ERROR | [x] Expected 1 spaces after opening bracket; 0 found
+ 16 | ERROR | [x] Expected 1 spaces before closing bracket; 0 found
+ 16 | ERROR | [x] No space before closing parenthesis is prohibited
+ 17 | ERROR | [x] Tabs must be used to indent lines; spaces are not allowed
+ 19 | ERROR | [x] No space after opening parenthesis is prohibited
+ 19 | ERROR | [x] Expected 1 space before "!"; 0 found
+ 19 | ERROR | [x] Expected 1 space after "!"; 0 found
+ 19 | ERROR | [x] Expected 1 spaces after opening bracket; 0 found
+ 19 | ERROR | [x] Expected 1 spaces before closing bracket; 0 found
+ 19 | ERROR | [x] No space before closing parenthesis is prohibited
+ 20 | ERROR | [x] Tabs must be used to indent lines; spaces are not allowed
+ 20 | ERROR | [x] Expected 1 spaces after opening bracket; 0 found
+ 20 | ERROR | [x] Expected 1 spaces before closing bracket; 0 found
+ 23 | ERROR | [x] No space after opening parenthesis is prohibited
+ 23 | ERROR | [x] Expected 1 space before "!"; 0 found
+ 23 | ERROR | [x] Expected 1 space after "!"; 0 found
+ 23 | ERROR | [x] Expected 1 spaces after opening bracket; 0 found
+ 23 | ERROR | [x] Expected 1 spaces before closing bracket; 0 found
+ 23 | ERROR | [x] No space before closing parenthesis is prohibited
+ 24 | ERROR | [x] Tabs must be used to indent lines; spaces are not allowed
+ 24 | ERROR | [x] Expected 1 spaces after opening bracket; 0 found
+ 24 | ERROR | [x] Expected 1 spaces before closing bracket; 0 found
+ 27 | ERROR | [x] No space found before comment text; expected "// Initialize the plugin" but found "//Initialize the plugin"
+ 27 | ERROR | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 26 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /Users/ricardo/devWork/manageFraudOrders/woo-manage-fraud-orders/includes/class-wmfo-track-fraud-attempts.php
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 296 ERRORS AND 23 WARNINGS AFFECTING 130 LINES
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   1 | ERROR   | [ ] Class file names should be based on the class name with "class-" prepended. Expected class-wmfo-track-customers.php, but found class-wmfo-track-fraud-attempts.php.
+   5 | ERROR   | [ ] There must be exactly one blank line after the file comment
+   5 | ERROR   | [ ] Missing @package tag in file comment
+   6 | ERROR   | [x] Expected 1 space after "!"; 0 found
+   6 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+   6 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+   7 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  10 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  10 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  10 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  12 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  12 | ERROR   | [ ] Missing doc comment for class WMFO_Track_Customers
+  14 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  14 | WARNING | [ ] Property name "$_instance" should not be prefixed with an underscore to indicate visibility
+  14 | ERROR   | [ ] Missing member variable doc comment
+  16 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  16 | ERROR   | [ ] Missing doc comment for function __construct()
+  17 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  17 | ERROR   | [x] Opening parenthesis of a multi-line function call must be the last content on the line
+  17 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  17 | ERROR   | [x] Short array syntax is not allowed
+  18 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  19 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  20 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  20 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  20 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  20 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+  21 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  21 | ERROR   | [x] Opening parenthesis of a multi-line function call must be the last content on the line
+  21 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  21 | ERROR   | [x] Short array syntax is not allowed
+  22 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  23 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  24 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  24 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  24 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  24 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+  25 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  27 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  27 | ERROR   | [ ] Missing doc comment for function instance()
+  28 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  28 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  28 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  29 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  30 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  32 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  33 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  35 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  35 | ERROR   | [ ] Missing doc comment for function manage_blacklisted_customers()
+  37 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  37 | ERROR   | [x] No space found before comment text; expected "// Check if there are any other errors first" but found "//Check if there are any other errors first"
+  38 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  38 | ERROR   | [x] No space found before comment text; expected "// If there are, return" but found "//If there are, return"
+  38 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+  39 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  39 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  39 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  39 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  40 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  41 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  43 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  43 | ERROR   | [x] No space found before comment text; expected "// Woo/Payment method saves the payment method validation errors in session" but found "//Woo/Payment method saves the
+     |         |     payment method validation errors in session"
+  44 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  44 | ERROR   | [x] No space found before comment text; expected "// If there such errors, skip" but found "//If there such errors, skip"
+  44 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+  45 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  45 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  45 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  45 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  46 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  46 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  46 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  47 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  49 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  49 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  49 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  49 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  50 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  51 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  53 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  53 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  53 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  54 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  54 | WARNING | [x] Equals sign not aligned with surrounding assignments; expected 3 spaces but found 1 space
+  54 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  54 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  54 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "true" but found "TRUE"
+  56 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  56 | WARNING | [x] Equals sign not aligned with surrounding assignments; expected 4 spaces but found 1 space
+  56 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  56 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  56 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "true" but found "TRUE"
+  57 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  57 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  57 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  57 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "true" but found "TRUE"
+  58 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  58 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  58 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  58 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "true" but found "TRUE"
+  60 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  60 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  60 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  60 | ERROR   | [ ] Processing form data without nonce verification.
+  60 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  60 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  60 | WARNING | [ ] Detected usage of a non-sanitized input variable: $_POST['billing_first_name']
+  60 | ERROR   | [ ] Processing form data without nonce verification.
+  61 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  61 | WARNING | [x] Equals sign not aligned with surrounding assignments; expected 2 spaces but found 1 space
+  61 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  61 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  61 | ERROR   | [ ] Processing form data without nonce verification.
+  61 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  61 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  61 | WARNING | [ ] Detected usage of a non-sanitized input variable: $_POST['billing_last_name']
+  61 | ERROR   | [ ] Processing form data without nonce verification.
+  62 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  62 | WARNING | [x] Equals sign not aligned with surrounding assignments; expected 2 spaces but found 1 space
+  64 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  64 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  64 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  64 | ERROR   | [ ] Processing form data without nonce verification.
+  64 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  64 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  64 | WARNING | [ ] Detected usage of a non-sanitized input variable: $_POST['billing_email']
+  64 | ERROR   | [ ] Processing form data without nonce verification.
+  65 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  65 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  65 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  65 | ERROR   | [ ] Processing form data without nonce verification.
+  65 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  65 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  65 | WARNING | [ ] Detected usage of a non-sanitized input variable: $_POST['billing_phone']
+  65 | ERROR   | [ ] Processing form data without nonce verification.
+  67 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  67 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  67 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  69 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  69 | ERROR   | [x] No space found before comment text; expected "// Block this checkout if this customers details are already blacklisted" but found "//Block this checkout if this
+     |         |     customers details are already blacklisted"
+  69 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+  70 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  70 | ERROR   | [ ] Use Yoda Condition checks, you must.
+  70 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  70 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  70 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  70 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  71 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  71 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  71 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  71 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  71 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  72 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  72 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  72 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  72 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  72 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  73 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  73 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  73 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  73 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  73 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  74 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  74 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  74 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  75 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  76 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  78 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  79 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  81 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  82 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  83 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  84 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  85 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  86 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  86 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  86 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  86 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "true" but found "TRUE"
+  88 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  88 | ERROR   | [x] No space found before comment text; expected "// Get all previous orders of current customer" but found "//Get all previous orders of current customer"
+  88 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+  89 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  90 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  90 | WARNING | [x] Array double arrow not aligned correctly; expected 6 space(s) between "'post_type'" and double arrow, but found 1.
+  91 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  92 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  92 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'post_status'" and double arrow, but found 1.
+  93 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  93 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'meta_query'" and double arrow, but found 1.
+  93 | WARNING | [ ] Detected usage of meta_query, possible slow query.
+  94 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  95 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  96 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  96 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'key'" and double arrow, but found 1.
+  97 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  97 | WARNING | [x] Array double arrow not aligned correctly; expected 3 space(s) between "'value'" and double arrow, but found 1.
+  97 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+  98 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  99 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 100 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 101 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 101 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'key'" and double arrow, but found 1.
+ 102 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 102 | WARNING | [x] Array double arrow not aligned correctly; expected 3 space(s) between "'value'" and double arrow, but found 1.
+ 102 | WARNING | [ ] Detected usage of a non-sanitized input variable: $_POST['billing_email']
+ 102 | ERROR   | [ ] Processing form data without nonce verification.
+ 102 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 103 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 104 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 105 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 106 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 106 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'key'" and double arrow, but found 1.
+ 107 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 107 | WARNING | [x] Array double arrow not aligned correctly; expected 3 space(s) between "'value'" and double arrow, but found 1.
+ 107 | WARNING | [ ] Detected usage of a non-sanitized input variable: $_POST['billing_phone']
+ 107 | ERROR   | [ ] Processing form data without nonce verification.
+ 107 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 108 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 109 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 110 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 111 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 113 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 113 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 113 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 115 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 115 | ERROR   | [x] Expected 1 space after "!"; 0 found
+ 115 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 115 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 116 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 118 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 118 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 118 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 119 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 119 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 119 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 120 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 121 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 122 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 123 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 124 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 125 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 126 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 128 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 128 | ERROR   | [ ] Doc comment for parameter "$order_id" missing
+ 128 | ERROR   | [ ] Doc comment for parameter "$posted_data" missing
+ 128 | ERROR   | [ ] Doc comment for parameter "$order" missing
+ 129 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 130 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 131 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 132 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 133 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 134 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 135 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 136 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 136 | ERROR   | [x] No space found before comment text; expected "// md5 the name of the cookie for fraud_attempts" but found "//md5 the name of the cookie for fraud_attempts"
+ 136 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 137 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 137 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 137 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 138 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 138 | WARNING | [x] Equals sign not aligned with surrounding assignments; expected 5 spaces but found 1 space
+ 138 | ERROR   | [x] Expected 1 space after open parenthesis; 0 found
+ 138 | ERROR   | [x] Expected 1 space before "!"; 0 found
+ 138 | ERROR   | [x] Expected 1 space after "!"; 0 found
+ 138 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 138 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 138 | ERROR   | [ ] Due to server-side caching, server-side based client related logic might not work. We recommend implementing client side logic in JavaScript instead.
+ 138 | ERROR   | [x] Array keys must be surrounded by spaces unless they contain a string or an integer.
+ 138 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "null" but found "NULL"
+ 138 | ERROR   | [ ] Due to server-side caching, server-side based client related logic might not work. We recommend implementing client side logic in JavaScript instead.
+ 138 | ERROR   | [x] Array keys must be surrounded by spaces unless they contain a string or an integer.
+ 138 | ERROR   | [x] Expected 1 space before close parenthesis; 0 found
+ 138 | WARNING | [ ] Detected usage of a non-sanitized input variable: $_COOKIE[$fraud_attempts_md5]
+ 138 | ERROR   | [ ] Due to server-side caching, server-side based client related logic might not work. We recommend implementing client side logic in JavaScript instead.
+ 138 | ERROR   | [x] Array keys must be surrounded by spaces unless they contain a string or an integer.
+ 140 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 140 | ERROR   | [x] Expected 1 space(s) after cast statement; 0 found
+ 141 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 141 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 141 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 141 | ERROR   | [ ] Due to server-side caching, server-side based client related logic might not work. We recommend implementing client side logic in JavaScript instead.
+ 141 | ERROR   | [x] Expected 1 space after open parenthesis; 0 found
+ 141 | ERROR   | [x] Expected 1 space before close parenthesis; 0 found
+ 141 | ERROR   | [x] String "/" does not require double quotes; use single quotes instead
+ 142 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 142 | ERROR   | [x] No space found before comment text; expected "// Get the allowed failed order limit, default to 3" but found "//Get the allowed failed order limit, default to 3"
+ 143 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 143 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 143 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 143 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 143 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 145 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 145 | ERROR   | [x] Expected 1 space(s) after cast statement; 0 found
+ 146 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 146 | ERROR   | [x] No space found before comment text; expected "// Show the blocking message in the checkout page." but found "//Show the blocking message in the checkout page."
+ 147 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 147 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 147 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 148 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 149 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 151 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 151 | ERROR   | [x] No space found before comment text; expected "// Block this customer for future sessions as well" but found "//Block this customer for future sessions as well"
+ 152 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 152 | ERROR   | [x] No space found before comment text; expected "// And cancel the order" but found "//And cancel the order"
+ 152 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 153 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 153 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 153 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 154 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 154 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 154 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 155 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 155 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 155 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 156 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 157 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 158 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 159 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 161 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 275 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /Users/ricardo/devWork/manageFraudOrders/woo-manage-fraud-orders/includes/admin/class-wmfo-settings.php
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 244 ERRORS AND 44 WARNINGS AFFECTING 153 LINES
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   1 | ERROR   | [ ] Class file names should be based on the class name with "class-" prepended. Expected class-wmfo-settings-tab.php, but found class-wmfo-settings.php.
+   2 | ERROR   | [ ] You must use "/**" style comments for a file comment
+   3 | ERROR   | [x] Expected 1 space after "!"; 0 found
+   3 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+   3 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+   4 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+   4 | ERROR   | [ ] Missing doc comment for class WMFO_Settings_Tab
+   6 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+   7 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+   8 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+   9 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+   9 | ERROR   | [x] Additional blank lines found at end of doc comment
+  10 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  11 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  11 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  11 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  12 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  12 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  12 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  13 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  13 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  13 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  14 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  14 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  14 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  15 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  17 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  18 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  19 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  20 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  21 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  22 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  23 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  24 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  25 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  25 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  25 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  27 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  28 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  30 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  31 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  32 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  33 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  34 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  35 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  36 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  37 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  37 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  37 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  38 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  40 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  41 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  42 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  43 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  44 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  45 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  46 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  47 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  47 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  47 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  48 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  50 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  50 | ERROR   | [ ] Missing doc comment for function update_setting_filter()
+  51 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  51 | ERROR   | [x] Opening parenthesis of a multi-line function call must be the last content on the line
+  51 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  51 | ERROR   | [x] Short array syntax is not allowed
+  52 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  53 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  54 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  55 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  56 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  56 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+  57 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  57 | ERROR   | [x] No space found before comment text; expected "// check if there are  duplication of blacklisted values" but found "//check if there are  duplication of blacklisted
+     |         |     values"
+  57 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+  58 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  58 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  58 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  58 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  58 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  58 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  58 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  58 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  58 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  59 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  61 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  61 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  61 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  62 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  64 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  65 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  66 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  66 | ERROR   | [x] There must be exactly one blank line before the tags in a doc comment
+  67 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  68 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  68 | ERROR   | [x] Additional blank lines found at end of doc comment
+  69 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  70 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  70 | ERROR   | [x] Short array syntax is not allowed
+  71 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  71 | WARNING | [x] Array double arrow not aligned correctly; expected 21 space(s) between "'section_title'" and double arrow, but found 1.
+  71 | ERROR   | [x] Short array syntax is not allowed
+  72 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  72 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  72 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  73 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  74 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  75 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  75 | WARNING | [x] Array double arrow not aligned correctly; expected 3 space(s) between "'id'" and double arrow, but found 1.
+  76 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  77 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  77 | WARNING | [x] Array double arrow not aligned correctly; expected 16 space(s) between "'blacklists_message'" and double arrow, but found 1.
+  77 | ERROR   | [x] Short array syntax is not allowed
+  78 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  78 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'name'" and double arrow, but found 1.
+  78 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  78 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  79 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  79 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'css'" and double arrow, but found 1.
+  80 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  80 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'type'" and double arrow, but found 1.
+  81 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  82 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  82 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'desc'" and double arrow, but found 1.
+  82 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  82 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  83 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  83 | WARNING | [x] Array double arrow not aligned correctly; expected 6 space(s) between "'id'" and double arrow, but found 1.
+  84 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  85 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  85 | ERROR   | [x] Short array syntax is not allowed
+  86 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  86 | WARNING | [x] Array double arrow not aligned correctly; expected 14 space(s) between "'name'" and double arrow, but found 1.
+  86 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  86 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  87 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  87 | WARNING | [x] Array double arrow not aligned correctly; expected 14 space(s) between "'type'" and double arrow, but found 1.
+  88 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  88 | WARNING | [x] Array double arrow not aligned correctly; expected 15 space(s) between "'css'" and double arrow, but found 1.
+  89 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  89 | WARNING | [x] Array double arrow not aligned correctly; expected 11 space(s) between "'default'" and double arrow, but found 1.
+  90 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  90 | WARNING | [x] Array double arrow not aligned correctly; expected 14 space(s) between "'desc'" and double arrow, but found 1.
+  90 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  90 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  91 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  91 | WARNING | [x] Array double arrow not aligned correctly; expected 16 space(s) between "'id'" and double arrow, but found 1.
+  92 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  92 | ERROR   | [x] Short array syntax is not allowed
+  93 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  93 | WARNING | [x] Array double arrow not aligned correctly; expected 2 space(s) between "'min'" and double arrow, but found 1.
+  94 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  95 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  96 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  97 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  97 | WARNING | [x] Array double arrow not aligned correctly; expected 11 space(s) between "'blacklists_order_status'" and double arrow, but found 1.
+  97 | ERROR   | [x] Short array syntax is not allowed
+  98 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  98 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'name'" and double arrow, but found 1.
+  98 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  98 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  99 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  99 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'css'" and double arrow, but found 1.
+ 100 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 100 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'type'" and double arrow, but found 1.
+ 101 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 101 | WARNING | [x] Array double arrow not aligned correctly; expected 3 space(s) between "'class'" and double arrow, but found 1.
+ 102 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 102 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'desc'" and double arrow, but found 1.
+ 102 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 102 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 103 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 104 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 104 | WARNING | [x] Array double arrow not aligned correctly; expected 6 space(s) between "'id'" and double arrow, but found 1.
+ 105 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 106 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 106 | WARNING | [x] Array double arrow not aligned correctly; expected 11 space(s) between "'allow_blacklist_by_name'" and double arrow, but found 1.
+ 106 | ERROR   | [x] Short array syntax is not allowed
+ 107 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 107 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'name'" and double arrow, but found 1.
+ 107 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 107 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 108 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 108 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'css'" and double arrow, but found 1.
+ 109 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 109 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'type'" and double arrow, but found 1.
+ 110 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 111 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 111 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'desc'" and double arrow, but found 1.
+ 111 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 111 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 112 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 112 | WARNING | [x] Array double arrow not aligned correctly; expected 6 space(s) between "'id'" and double arrow, but found 1.
+ 113 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 114 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 114 | WARNING | [x] Array double arrow not aligned correctly; expected 18 space(s) between "'blacklists_names'" and double arrow, but found 1.
+ 114 | ERROR   | [x] Short array syntax is not allowed
+ 115 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 115 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 115 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 116 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 116 | WARNING | [x] Array double arrow not aligned correctly; expected 2 space(s) between "'css'" and double arrow, but found 1.
+ 117 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 118 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 118 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 118 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 119 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 119 | WARNING | [x] Array double arrow not aligned correctly; expected 3 space(s) between "'id'" and double arrow, but found 1.
+ 120 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 121 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 121 | WARNING | [x] Array double arrow not aligned correctly; expected 17 space(s) between "'blacklists_phones'" and double arrow, but found 1.
+ 121 | ERROR   | [x] Short array syntax is not allowed
+ 122 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 122 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 122 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 123 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 123 | WARNING | [x] Array double arrow not aligned correctly; expected 2 space(s) between "'css'" and double arrow, but found 1.
+ 124 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 125 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 125 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 125 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 126 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 126 | WARNING | [x] Array double arrow not aligned correctly; expected 3 space(s) between "'id'" and double arrow, but found 1.
+ 127 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 128 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 128 | WARNING | [x] Array double arrow not aligned correctly; expected 17 space(s) between "'blacklists_emails'" and double arrow, but found 1.
+ 128 | ERROR   | [x] Short array syntax is not allowed
+ 129 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 129 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 129 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 130 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 130 | WARNING | [x] Array double arrow not aligned correctly; expected 2 space(s) between "'css'" and double arrow, but found 1.
+ 131 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 132 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 132 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 132 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 133 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 133 | WARNING | [x] Array double arrow not aligned correctly; expected 3 space(s) between "'id'" and double arrow, but found 1.
+ 134 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 135 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 135 | WARNING | [x] Array double arrow not aligned correctly; expected 20 space(s) between "'blacklists_ips'" and double arrow, but found 1.
+ 135 | ERROR   | [x] Short array syntax is not allowed
+ 136 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 136 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 136 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 137 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 137 | WARNING | [x] Array double arrow not aligned correctly; expected 2 space(s) between "'css'" and double arrow, but found 1.
+ 138 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 139 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 139 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 139 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 140 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 140 | WARNING | [x] Array double arrow not aligned correctly; expected 3 space(s) between "'id'" and double arrow, but found 1.
+ 141 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 142 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 142 | WARNING | [x] Array double arrow not aligned correctly; expected 23 space(s) between "'section_end'" and double arrow, but found 1.
+ 142 | ERROR   | [x] Short array syntax is not allowed
+ 143 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 144 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 144 | WARNING | [x] Array double arrow not aligned correctly; expected 3 space(s) between "'id'" and double arrow, but found 1.
+ 145 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 146 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 148 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 148 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 148 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 149 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 150 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 152 | ERROR   | [x] No space found before comment text; expected "// init the Setting" but found "//init the Setting"
+ 152 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 158 | ERROR   | [x] Opening parenthesis of a multi-line function call must be the last content on the line
+ 158 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 159 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 159 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 159 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 159 | WARNING | [ ] Processing form data without nonce verification.
+ 159 | WARNING | [ ] Processing form data without nonce verification.
+ 159 | ERROR   | [ ] Use Yoda Condition checks, you must.
+ 160 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 161 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 162 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 163 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 164 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 165 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 166 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 166 | ERROR   | [x] Line indented incorrectly; expected at least 2 tabs, found 1
+ 167 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 168 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 279 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /Users/ricardo/devWork/manageFraudOrders/woo-manage-fraud-orders/includes/admin/class-wmfo-bulk-blacklist.php
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 138 ERRORS AND 5 WARNINGS AFFECTING 53 LINES
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  4 | ERROR   | [ ] There must be exactly one blank line after the file comment
+  4 | ERROR   | [ ] Missing @package tag in file comment
+  5 | ERROR   | [x] No space after opening parenthesis is prohibited
+  5 | ERROR   | [x] Expected 1 space before "!"; 0 found
+  5 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  5 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  5 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  5 | ERROR   | [x] No space before closing parenthesis is prohibited
+  6 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  6 | ERROR   | [ ] Missing doc comment for class WMFO_Bulk_Blacklist
+  8 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  8 | ERROR   | [ ] Missing doc comment for function __construct()
+  9 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  9 | ERROR   | [x] Opening parenthesis of a multi-line function call must be the last content on the line
+  9 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  9 | ERROR   | [x] Short array syntax is not allowed
+ 10 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 11 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 12 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 12 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 12 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 12 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+ 13 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 13 | ERROR   | [x] Opening parenthesis of a multi-line function call must be the last content on the line
+ 13 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 13 | ERROR   | [x] Short array syntax is not allowed
+ 14 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 15 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 16 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 16 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 16 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 16 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+ 17 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 17 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 17 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 17 | ERROR   | [x] Missing space after array opener.
+ 17 | ERROR   | [x] Short array syntax is not allowed
+ 17 | ERROR   | [x] Missing space before array closer.
+ 19 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 21 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 21 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 21 | ERROR   | [ ] Missing doc comment for function register_bulk_action()
+ 21 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
+ 21 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 22 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 22 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 22 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 24 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 25 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 27 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 27 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 27 | ERROR   | [ ] Missing doc comment for function handle_bulk_blacklisting()
+ 27 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
+ 27 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 28 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 28 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 28 | ERROR   | [ ] Use Yoda Condition checks, you must.
+ 28 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 29 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 30 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 31 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 31 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 31 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 32 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 32 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 32 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 33 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 33 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 34 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 34 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 34 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 35 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 35 | ERROR   | [x] No space found before comment text; expected "// update the blacklists" but found "//update the blacklists"
+ 35 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 36 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 36 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 36 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 36 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 36 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 37 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 37 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 38 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 39 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 40 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 40 | ERROR   | [x] Opening parenthesis of a multi-line function call must be the last content on the line
+ 40 | ERROR   | [x] Short array syntax is not allowed
+ 41 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 42 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 42 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'changed'" and double arrow, but found 1.
+ 42 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 42 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 43 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 43 | WARNING | [x] Array double arrow not aligned correctly; expected 9 space(s) between "'ids'" and double arrow, but found 1.
+ 43 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 43 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 44 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 44 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 44 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+ 46 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 47 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 49 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 49 | ERROR   | [ ] Missing doc comment for function admin_notice()
+ 50 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 51 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 52 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 52 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 52 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 53 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 54 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 56 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 56 | ERROR   | [x] Space after opening control structure is required
+ 56 | ERROR   | [x] Expected 1 space(s) after IF keyword; 0 found
+ 56 | ERROR   | [x] Inline control structures are not allowed
+ 56 | ERROR   | [x] Expected 1 space after "!"; 0 found
+ 56 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 56 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 56 | WARNING | [ ] Processing form data without nonce verification.
+ 57 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 59 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 59 | ERROR   | [x] Space after opening control structure is required
+ 59 | ERROR   | [x] Expected 1 space(s) after IF keyword; 0 found
+ 59 | ERROR   | [x] Inline control structures are not allowed
+ 59 | WARNING | [ ] Processing form data without nonce verification.
+ 59 | ERROR   | [ ] Use Yoda Condition checks, you must.
+ 60 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 62 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 62 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 62 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 62 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 62 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 62 | WARNING | [ ] Using the WPCS native whitelist comments is deprecated. Please use the PHPCS native "phpcs:ignore Standard.Category.SniffName.ErrorCode" annotations instead. Found:
+    |         |     // WPCS: input var ok, CSRF ok.
+    |         |     
+ 63 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 63 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 63 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 63 | ERROR   | [ ] All output should be run through an escaping function (see the Security sections in the WordPress Developer Handbooks), found '_n'.
+ 63 | ERROR   | [ ] A gettext call containing placeholders was found, but was not accompanied by a "translators:" comment on the line above to clarify the meaning of the placeholders.
+ 63 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 63 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 63 | ERROR   | [ ] All output should be run through an escaping function (see the Security sections in the WordPress Developer Handbooks), found '$orders_count'.
+ 65 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 66 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 68 | ERROR   | [x] File must end with a newline character
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 126 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /Users/ricardo/devWork/manageFraudOrders/woo-manage-fraud-orders/includes/admin/class-wmfo-blacklist-action.php
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 179 ERRORS AND 7 WARNINGS AFFECTING 77 LINES
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  1 | ERROR   | [ ] Class file names should be based on the class name with "class-" prepended. Expected class-wmfo-order-actions.php, but found class-wmfo-blacklist-action.php.
+  4 | ERROR   | [ ] Missing @package tag in file comment
+  6 | ERROR   | [x] No space after opening parenthesis is prohibited
+  6 | ERROR   | [x] Expected 1 space before "!"; 0 found
+  6 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  6 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  6 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  6 | ERROR   | [x] No space before closing parenthesis is prohibited
+  7 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  7 | ERROR   | [ ] Missing doc comment for class WMFO_Order_Actions
+  9 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  9 | WARNING | [ ] Property name "$_instance" should not be prefixed with an underscore to indicate visibility
+  9 | ERROR   | [ ] Missing member variable doc comment
+ 11 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 11 | ERROR   | [ ] Missing doc comment for function __construct()
+ 12 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 13 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 14 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 14 | ERROR   | [ ] Doc comment short description must start with a capital letter
+ 15 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 16 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 17 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 17 | ERROR   | [x] Opening parenthesis of a multi-line function call must be the last content on the line
+ 17 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 17 | ERROR   | [x] Short array syntax is not allowed
+ 18 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 19 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 20 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 20 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 20 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 20 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+ 21 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 22 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 23 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 24 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 25 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 26 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 26 | ERROR   | [x] Opening parenthesis of a multi-line function call must be the last content on the line
+ 26 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 26 | ERROR   | [x] Short array syntax is not allowed
+ 27 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 28 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 29 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 29 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 29 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+ 29 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+ 30 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 32 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 32 | ERROR   | [ ] Missing short description in doc comment
+ 33 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 34 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 35 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 36 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 36 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 36 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 36 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 36 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 37 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 38 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 40 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 41 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 43 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 43 | ERROR   | [ ] Missing short description in doc comment
+ 43 | ERROR   | [ ] Doc comment for parameter "$order_actions" missing
+ 44 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 44 | ERROR   | [ ] Missing parameter name
+ 45 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 46 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 47 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 47 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 47 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
+ 47 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 48 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 48 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 48 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 50 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 50 | ERROR   | [x] No space found before comment text; expected "// Show this only if customer details of this order is in blacklist" but found "//Show this only if customer details of
+    |         |     this order is in blacklist"
+ 50 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 51 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 51 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 51 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 51 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 51 | WARNING | [ ] Processing form data without nonce verification.
+ 51 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 51 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 51 | WARNING | [ ] Processing form data without nonce verification.
+ 51 | WARNING | [ ] Processing form data without nonce verification.
+ 51 | ERROR   | [ ] Use Yoda Condition checks, you must.
+ 51 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 52 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 52 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 52 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 52 | WARNING | [ ] Detected usage of a non-sanitized input variable: $_GET['post']
+ 52 | WARNING | [ ] Processing form data without nonce verification.
+ 54 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 54 | ERROR   | [x] No space found before comment text; expected "// Check if the order details of this current order is in black list" but found "//Check if the order details of this
+    |         |     current order is in black list"
+ 54 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 55 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 55 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 55 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 55 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 55 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 55 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 55 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 56 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 56 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 56 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 57 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 58 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 60 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 61 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 63 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 63 | ERROR   | [ ] Missing short description in doc comment
+ 63 | ERROR   | [ ] Doc comment for parameter "$post_id" missing
+ 63 | ERROR   | [ ] Doc comment for parameter "$post" missing
+ 64 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 64 | ERROR   | [ ] Missing parameter name
+ 65 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 65 | ERROR   | [ ] Missing parameter name
+ 66 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 67 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 67 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 67 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
+ 67 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 68 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 68 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 68 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 70 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 70 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 71 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 71 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 71 | ERROR   | [x] Expected 1 space before "!"; 0 found
+ 71 | ERROR   | [x] Expected 1 space after "!"; 0 found
+ 71 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 71 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 71 | ERROR   | [ ] Processing form data without nonce verification.
+ 71 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 72 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 72 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 72 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 72 | WARNING | [ ] Detected usage of a non-sanitized input variable: $_POST['wc_order_action']
+ 72 | ERROR   | [ ] Processing form data without nonce verification.
+ 73 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 73 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 74 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 74 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 74 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 75 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 75 | ERROR   | [x] No space found before comment text; expected "// Add the customer details to Blacklist" but found "//Add the customer details to Blacklist"
+ 75 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 76 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 76 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 76 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 77 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 77 | ERROR   | [x] No space found before comment text; expected "// update the blacklists" but found "//update the blacklists"
+ 77 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 78 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 78 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 78 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 78 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 78 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 79 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 79 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 79 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 80 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 81 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 81 | ERROR   | [ ] Expected 1 space after closing brace; newline found
+ 82 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 82 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 82 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 83 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 83 | ERROR   | [x] No space found before comment text; expected "// update the blacklists" but found "//update the blacklists"
+ 83 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 84 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 84 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 84 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 84 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 84 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 85 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 85 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 85 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 86 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 87 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 88 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 89 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 90 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 153 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /Users/ricardo/devWork/manageFraudOrders/woo-manage-fraud-orders/includes/wmfo-functions.php
+----------------------------------------------------------------------------------------------------------------------------------------
+FOUND 60 ERRORS AND 2 WARNINGS AFFECTING 24 LINES
+----------------------------------------------------------------------------------------------------------------------------------------
+  3 | ERROR   | [x] Expected 1 space after asterisk; 0 found
+  5 | ERROR   | [ ] Missing @package tag in file comment
+  7 | ERROR   | [ ] Doc comment for parameter "$order" missing
+ 10 | ERROR   | [ ] There must be no blank lines after the function comment
+ 12 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 12 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
+ 12 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 13 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 13 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 13 | ERROR   | [x] Expected 1 space before "!"; 0 found
+ 13 | ERROR   | [x] Expected 1 space after "!"; 0 found
+ 13 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 14 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 14 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "false" but found "FALSE"
+ 15 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 17 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 17 | ERROR   | [x] Short array syntax is not allowed
+ 18 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 18 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'full_name'" and double arrow, but found 1.
+ 19 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 19 | WARNING | [x] Array double arrow not aligned correctly; expected 4 space(s) between "'ip_address'" and double arrow, but found 1.
+ 20 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 21 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 22 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 29 | ERROR   | [x] Additional blank lines found at end of doc comment
+ 29 | ERROR   | [ ] There must be no blank lines after the function comment
+ 32 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 32 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 32 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 32 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 32 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 33 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 33 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 33 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 33 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 33 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 34 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 34 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 34 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 34 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 34 | ERROR   | [ ] Header "HTTP_X_FORWARDED_FOR" is user-controlled and should be properly validated before use.
+ 34 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 35 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 36 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 37 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 37 | ERROR   | [x] Expected 1 space(s) after cast statement; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 37 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 37 | ERROR   | [ ] Header "HTTP_X_FORWARDED_FOR" is user-controlled and should be properly validated before use.
+ 40 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 42 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 43 | ERROR   | [x] File must end with a newline character
+----------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 56 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /Users/ricardo/devWork/manageFraudOrders/woo-manage-fraud-orders/includes/class-wmfo-blacklist-handler.php
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 317 ERRORS AND 8 WARNINGS AFFECTING 120 LINES
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   4 | ERROR   | [x] Expected 1 space after asterisk; 0 found
+   5 | ERROR   | [x] Expected 1 space after asterisk; 0 found
+   6 | ERROR   | [ ] Missing @package tag in file comment
+   8 | ERROR   | [x] No space after opening parenthesis is prohibited
+   8 | ERROR   | [x] Expected 1 space before "!"; 0 found
+   8 | ERROR   | [x] Expected 1 space after "!"; 0 found
+   8 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+   8 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+   8 | ERROR   | [x] No space before closing parenthesis is prohibited
+   9 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  12 | ERROR   | [x] No space after opening parenthesis is prohibited
+  12 | ERROR   | [x] Expected 1 space before "!"; 0 found
+  12 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  12 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  12 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  12 | ERROR   | [x] No space before closing parenthesis is prohibited
+  13 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  14 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  15 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  16 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  17 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  17 | ERROR   | [ ] Missing short description in doc comment
+  17 | ERROR   | [ ] Doc comment for parameter "$key" missing
+  18 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  18 | ERROR   | [ ] Missing parameter name
+  19 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  19 | ERROR   | [ ] Missing parameter comment
+  20 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  21 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  22 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  22 | ERROR   | [x] No space after opening parenthesis is prohibited
+  22 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
+  22 | ERROR   | [x] No space before closing parenthesis is prohibited
+  23 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  23 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  23 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  23 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  23 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  24 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  26 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  26 | ERROR   | [ ] Missing short description in doc comment
+  27 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  28 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  29 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  30 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  30 | ERROR   | [x] Short array syntax is not allowed
+  31 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  31 | WARNING | [x] Array double arrow not aligned correctly; expected 8 space(s) between "'prev_black_list_ips'" and double arrow, but found 1.
+  31 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  31 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  32 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  32 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  32 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  33 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  33 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'prev_black_list_phones'" and double arrow, but found 1.
+  33 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  33 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  34 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  34 | WARNING | [x] Array double arrow not aligned correctly; expected 5 space(s) between "'prev_black_list_emails'" and double arrow, but found 1.
+  34 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  34 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  35 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  37 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  39 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  39 | ERROR   | [ ] Missing short description in doc comment
+  39 | ERROR   | [ ] Doc comment for parameter "$key" missing
+  39 | ERROR   | [ ] Doc comment for parameter "$pre_values" missing
+  39 | ERROR   | [ ] Doc comment for parameter "$to_add" missing
+  40 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  40 | ERROR   | [ ] Missing parameter name
+  41 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  41 | ERROR   | [ ] Missing parameter name
+  42 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  42 | ERROR   | [ ] Missing parameter name
+  43 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  43 | ERROR   | [ ] Missing parameter comment
+  43 | ERROR   | [x] Expected 5 spaces after parameter type; 1 found
+  44 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  45 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  45 | ERROR   | [x] No space after opening parenthesis is prohibited
+  45 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
+  45 | ERROR   | [x] No space before closing parenthesis is prohibited
+  46 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  46 | ERROR   | [x] No space after opening parenthesis is prohibited
+  46 | ERROR   | [ ] Use Yoda Condition checks, you must.
+  46 | ERROR   | [x] No space before closing parenthesis is prohibited
+  47 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  47 | ERROR   | [x] No space after opening parenthesis is prohibited
+  47 | ERROR   | [ ] Use Yoda Condition checks, you must.
+  47 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "false" but found "FALSE"
+  47 | ERROR   | [ ] Use Yoda Condition checks, you must.
+  47 | ERROR   | [x] No space before closing parenthesis is prohibited
+  48 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  49 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  51 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  51 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  51 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  51 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  51 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  51 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  52 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  53 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  53 | ERROR   | [x] No space after opening parenthesis is prohibited
+  53 | ERROR   | [ ] Use Yoda Condition checks, you must.
+  53 | ERROR   | [x] No space before closing parenthesis is prohibited
+  54 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  54 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  54 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  55 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  55 | ERROR   | [x] No space after opening parenthesis is prohibited
+  55 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  55 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  55 | ERROR   | [x] No space before closing parenthesis is prohibited
+  56 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  56 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  56 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  57 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  57 | ERROR   | [x] No space after opening parenthesis is prohibited
+  57 | ERROR   | [ ] Use Yoda Condition checks, you must.
+  57 | ERROR   | [x] No space before closing parenthesis is prohibited
+  58 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  58 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  58 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  58 | ERROR   | [x] Array keys must be surrounded by spaces unless they contain a string or an integer.
+  59 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  60 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  61 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  61 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  61 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  62 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  64 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  64 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  64 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  64 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  64 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  65 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  67 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  67 | ERROR   | [ ] Missing short description in doc comment
+  68 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  68 | ERROR   | [ ] Missing parameter comment
+  68 | ERROR   | [x] Expected 2 spaces after parameter type; 1 found
+  69 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  69 | ERROR   | [ ] Missing parameter comment
+  69 | ERROR   | [x] Expected 3 spaces after parameter type; 1 found
+  70 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  70 | ERROR   | [ ] Missing parameter comment
+  71 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  72 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  73 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  73 | ERROR   | [x] No space after opening parenthesis is prohibited
+  73 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
+  73 | ERROR   | [x] Short array syntax is not allowed
+  73 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "null" but found "NULL"
+  73 | ERROR   | [x] No space before closing parenthesis is prohibited
+  74 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  75 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  75 | ERROR   | [x] No space after opening parenthesis is prohibited
+  75 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  75 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  75 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  75 | ERROR   | [x] No space before closing parenthesis is prohibited
+  76 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  76 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "false" but found "FALSE"
+  77 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  79 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  79 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  79 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  80 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  80 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  80 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  81 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  81 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  81 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  82 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  82 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  82 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  84 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  84 | ERROR   | [x] No space found before comment text; expected "// handle the cancellation of order" but found "//handle the cancellation of order"
+  84 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+  85 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  85 | ERROR   | [x] No space after opening parenthesis is prohibited
+  85 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "null" but found "NULL"
+  85 | ERROR   | [x] No space before closing parenthesis is prohibited
+  86 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  86 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  86 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  87 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  89 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  89 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "true" but found "TRUE"
+  90 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  92 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  92 | ERROR   | [ ] Missing short description in doc comment
+  92 | ERROR   | [ ] Doc comment for parameter "$order" missing
+  93 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  93 | ERROR   | [ ] Missing parameter name
+  94 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  95 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  95 | ERROR   | [x] No space after opening parenthesis is prohibited
+  95 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
+  95 | ERROR   | [x] No space before closing parenthesis is prohibited
+  97 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  97 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  97 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  97 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  97 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  99 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  99 | ERROR   | [x] No space found before comment text; expected "// Set the order status to Cancelled" but found "//Set the order status to Cancelled"
+  99 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 100 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 100 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 100 | ERROR   | [x] Expected 1 space before "!"; 0 found
+ 100 | ERROR   | [x] Expected 1 space after "!"; 0 found
+ 100 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 100 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 100 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 101 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 101 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 101 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 102 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 103 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 105 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 106 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 107 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 108 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 109 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 109 | WARNING | [x] Equals sign not aligned with surrounding assignments; expected 10 spaces but found 1 space
+ 109 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 109 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 110 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 110 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 110 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 112 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 112 | ERROR   | [x] No space found before comment text; expected "// with some reason, get_option with default value not working" but found "//with some reason, get_option with default
+     |         |     value not working"
+ 112 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 114 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 114 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 114 | ERROR   | [x] Expected 1 space before "!"; 0 found
+ 114 | ERROR   | [x] Expected 1 space after "!"; 0 found
+ 114 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 114 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 114 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 115 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 115 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 115 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 116 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 117 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 119 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 119 | ERROR   | [ ] Missing short description in doc comment
+ 119 | ERROR   | [ ] Doc comment for parameter "$customer_details" missing
+ 120 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 120 | ERROR   | [ ] Missing parameter name
+ 121 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 122 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 123 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 123 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 123 | ERROR   | [x] Expected 1 spaces after opening parenthesis; 0 found
+ 123 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 124 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 124 | ERROR   | [x] No space found before comment text; expected "// Check for ony by one, return TRUE as soon as first matching" but found "//Check for ony by one, return TRUE as soon
+     |         |     as first matching"
+ 124 | ERROR   | [ ] Inline comments must end in full-stops, exclamation marks, or question marks
+ 125 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 125 | WARNING | [x] Equals sign not aligned with surrounding assignments; expected 4 spaces but found 1 space
+ 125 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 125 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 126 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 126 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 126 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 127 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 127 | WARNING | [x] Equals sign not aligned with surrounding assignments; expected 12 spaces but found 1 space
+ 127 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 127 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 128 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 128 | WARNING | [x] Equals sign not aligned with surrounding assignments; expected 9 spaces but found 1 space
+ 128 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 128 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 129 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 129 | WARNING | [x] Equals sign not aligned with surrounding assignments; expected 9 spaces but found 1 space
+ 129 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 129 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 131 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 131 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 131 | ERROR   | [ ] Use Yoda Condition checks, you must.
+ 131 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 131 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 131 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 131 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 131 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 131 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 131 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 132 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 133 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 133 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 133 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 133 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 133 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 133 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 133 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 133 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 133 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 134 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 135 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 135 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 135 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 135 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 135 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 135 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 135 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 135 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 135 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 136 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 137 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 137 | ERROR   | [x] No space after opening parenthesis is prohibited
+ 137 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 137 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 137 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 137 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 137 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 137 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 137 | ERROR   | [x] No space before closing parenthesis is prohibited
+ 138 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 139 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 141 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 142 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 143 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 144 | ERROR   | [x] File must end with a newline character
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 291 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+FILE: /Users/ricardo/devWork/manageFraudOrders/woo-manage-fraud-orders/includes/class-woo-manage-fraud-orders.php
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOUND 184 ERRORS AND 3 WARNINGS AFFECTING 94 LINES
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+   6 | ERROR   | [ ] Missing @package tag in file comment
+   8 | ERROR   | [x] Expected 1 space after "!"; 0 found
+   8 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+   8 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+   9 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  12 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  12 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  12 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  13 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  13 | ERROR   | [ ] Missing doc comment for class Woo_Manage_Fraud_Orders
+  15 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  15 | ERROR   | [ ] Missing member variable doc comment
+  16 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  16 | WARNING | [ ] Property name "$_instance" should not be prefixed with an underscore to indicate visibility
+  16 | ERROR   | [ ] Missing member variable doc comment
+  18 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  18 | ERROR   | [ ] Missing doc comment for function __construct()
+  19 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  20 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  21 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  22 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  24 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  24 | ERROR   | [ ] Missing short description in doc comment
+  25 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  26 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  27 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  28 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  28 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  28 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  29 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  30 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  32 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  33 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  35 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  36 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  37 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  38 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  39 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  39 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  39 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  39 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "null" but found "NULL"
+  39 | ERROR   | [x] TRUE, FALSE and NULL must be lowercase; expected "false" but found "FALSE"
+  41 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  41 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  41 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  41 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  41 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  42 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  42 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  42 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  42 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  42 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  43 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  43 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  43 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  44 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  44 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  44 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  45 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  47 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  47 | ERROR   | [ ] Missing short description in doc comment
+  47 | ERROR   | [ ] Doc comment for parameter "$name" missing
+  47 | ERROR   | [ ] Doc comment for parameter "$value" missing
+  48 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  48 | ERROR   | [ ] Missing parameter name
+  49 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  49 | ERROR   | [ ] Missing parameter name
+  50 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  51 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  51 | ERROR   | [ ] Constant name, as a string, should be used along with `define()`.
+  52 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  52 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  52 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  52 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  52 | ERROR   | [ ] Constant name, as a string, should be used along with `defined()`.
+  53 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  53 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  53 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  53 | ERROR   | [ ] Constant name, as a string, should be used along with `define()`.
+  54 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  55 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  57 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  58 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  59 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  60 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  61 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  61 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  61 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  61 | ERROR   | [x] Missing space after array opener.
+  61 | ERROR   | [x] Short array syntax is not allowed
+  61 | ERROR   | [x] Missing space before array closer.
+  63 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  63 | ERROR   | [x] Opening parenthesis of a multi-line function call must be the last content on the line
+  63 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  63 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  63 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  63 | ERROR   | [x] Short array syntax is not allowed
+  64 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  65 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  66 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  66 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  66 | ERROR   | [x] Only one argument is allowed per line in a multi-line function call
+  66 | ERROR   | [x] Closing parenthesis of a multi-line function call must be on a line by itself
+  67 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  67 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  67 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  67 | ERROR   | [x] Missing space after array opener.
+  67 | ERROR   | [x] Short array syntax is not allowed
+  67 | ERROR   | [x] Missing space before array closer.
+  68 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  70 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  71 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  71 | ERROR   | [ ] Doc comment short description must start with a capital letter
+  72 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  73 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  74 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  74 | ERROR   | [x] Expected 1 space after "!"; 0 found
+  74 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  74 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  74 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  74 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  74 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  74 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  76 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  76 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  76 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  76 | ERROR   | [ ] A gettext call containing placeholders was found, but was not accompanied by a "translators:" comment on the line above to clarify the meaning of the placeholders.
+  76 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  76 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  76 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  76 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  77 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  77 | WARNING | [ ] Silencing errors is strongly discouraged. Use proper error checking instead. Found: @trigger_error('', ...
+  77 | WARNING | [ ] trigger_error() found. Debug code should not normally be used in production.
+  77 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  77 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  79 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  80 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  82 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  82 | ERROR   | [ ] Missing short description in doc comment
+  82 | ERROR   | [ ] Doc comment for parameter "$actions" missing
+  83 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  83 | ERROR   | [ ] Missing parameter name
+  84 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  85 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  86 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  88 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  89 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  89 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  89 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  89 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  89 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  90 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  92 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  92 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+  92 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+  93 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  95 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  96 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  97 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  98 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+  99 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 100 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 101 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 102 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 102 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 102 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 102 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 102 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 102 | ERROR   | [x] Expected 1 spaces after opening bracket; 0 found
+ 102 | ERROR   | [x] Expected 1 spaces before closing bracket; 0 found
+ 103 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 104 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 106 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 107 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 108 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 109 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 110 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 111 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 112 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 113 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 114 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 115 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 116 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 117 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 118 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+ 120 | ERROR   | [x] Tabs must be used to indent lines; spaces are not allowed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+PHPCBF CAN FIX THE 165 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+

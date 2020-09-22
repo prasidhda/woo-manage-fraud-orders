@@ -1,0 +1,45 @@
+
+FILE: ...oo-manage-fraud-orders/includes/class-wmfo-track-fraud-attempts.php
+-------------------------------------------------------------------------
+FOUND 4 ERRORS AND 7 WARNINGS AFFECTING 8 LINES
+-------------------------------------------------------------------------
+  60 | WARNING | Detected usage of a non-sanitized input variable:
+     |         | $_POST['billing_first_name']
+  61 | WARNING | Detected usage of a non-sanitized input variable:
+     |         | $_POST['billing_last_name']
+  64 | WARNING | Detected usage of a non-sanitized input variable:
+     |         | $_POST['billing_email']
+  65 | WARNING | Detected usage of a non-sanitized input variable:
+     |         | $_POST['billing_phone']
+ 102 | WARNING | Detected usage of a non-sanitized input variable:
+     |         | $_POST['billing_email']
+ 107 | WARNING | Detected usage of a non-sanitized input variable:
+     |         | $_POST['billing_phone']
+ 138 | ERROR   | Due to server-side caching, server-side based client
+     |         | related logic might not work. We recommend implementing
+     |         | client side logic in JavaScript instead.
+ 138 | ERROR   | Due to server-side caching, server-side based client
+     |         | related logic might not work. We recommend implementing
+     |         | client side logic in JavaScript instead.
+ 138 | WARNING | Detected usage of a non-sanitized input variable:
+     |         | $_COOKIE[$fraud_attempts_md5]
+ 138 | ERROR   | Due to server-side caching, server-side based client
+     |         | related logic might not work. We recommend implementing
+     |         | client side logic in JavaScript instead.
+ 141 | ERROR   | Due to server-side caching, server-side based client
+     |         | related logic might not work. We recommend implementing
+     |         | client side logic in JavaScript instead.
+-------------------------------------------------------------------------
+
+
+FILE: ...-manage-fraud-orders/includes/admin/class-wmfo-blacklist-action.php
+-------------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 2 LINES
+-------------------------------------------------------------------------
+ 52 | WARNING | Detected usage of a non-sanitized input variable:
+    |         | $_GET['post']
+ 72 | WARNING | Detected usage of a non-sanitized input variable:
+    |         | $_POST['wc_order_action']
+-------------------------------------------------------------------------
+
+
