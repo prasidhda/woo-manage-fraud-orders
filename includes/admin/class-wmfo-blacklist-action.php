@@ -69,7 +69,7 @@ if (!class_exists('WMFO_Order_Actions')) {
 
             // Handle button actions
             if (!empty($_POST['wc_order_action'])) {
-                $action = wc_clean( sanitize_text_field( $_POST['wc_order_action'] ) );
+                $action = sanitize_text_field( $_POST['wc_order_action'] );
                 // Get customer's IP address, billing phone and Email Address
                 $customer = wmfo_get_customer_details_of_order($order);
                 //Add the customer details to Blacklist
