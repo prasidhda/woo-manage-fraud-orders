@@ -14,14 +14,14 @@ if ( !class_exists('WMFO_Track_Customers') ) {
         public static $_instance;
 
         public function __construct() {
-            add_action('woocommerce_after_checkout_validation', [
+            add_action('woocommerce_after_checkout_validation', array(
                 $this,
                 'manage_blacklisted_customers',
-            ], 10, 2);
-            add_action('woocommerce_checkout_order_processed', [
+            ), 10, 2);
+            add_action('woocommerce_checkout_order_processed', array(
                 $this,
                 'manage_multiple_failed_attempts',
-            ], 100, 3);
+            ), 100, 3);
         }
 
         public static function instance() {
@@ -51,11 +51,11 @@ if ( !class_exists('WMFO_Track_Customers') ) {
             }
 
             $allow_blacklist_by_name = get_option('wmfo_allow_blacklist_by_name', 'no');
-            $prev_black_list_names = get_option('wmfo_black_list_names', TRUE);
+            $prev_black_list_names = get_option('wmfo_black_list_names', true);
 
-            $prev_black_list_ips = get_option('wmfo_black_list_ips', TRUE);
-            $prev_black_list_phones = get_option('wmfo_black_list_phones', TRUE);
-            $prev_black_list_emails = get_option('wmfo_black_list_emails', TRUE);
+            $prev_black_list_ips = get_option('wmfo_black_list_ips', true);
+            $prev_black_list_phones = get_option('wmfo_black_list_phones', true);
+            $prev_black_list_emails = get_option('wmfo_black_list_emails', true);
 
             $first_name = isset($_POST['billing_first_name']) ? sanitize_text_field($_POST['billing_first_name']) : '';
             $last_name = isset($_POST['billing_last_name']) ? sanitize_text_field($_POST['billing_last_name']) : '';
@@ -83,7 +83,7 @@ if ( !class_exists('WMFO_Track_Customers') ) {
              * If the customer previously has blocked order status in setting, He/She will be blocked from placing
              * order
              */
-            $blacklists_order_status = get_option('wmfo_black_list_order_status', TRUE);
+            $blacklists_order_status = get_option('wmfo_black_list_order_status', true);
 
             //Get all previous orders of current customer
             $args = array(
@@ -135,10 +135,10 @@ if ( !class_exists('WMFO_Track_Customers') ) {
             if ( $order->get_status() === 'failed' ) {
                 //md5 the name of the cookie for fraud_attempts
                 $fraud_attempts_md5 = md5('fraud_attempts');
-                $fraud_attempts = (!isset($_COOKIE[$fraud_attempts_md5]) || NULL === $_COOKIE[$fraud_attempts_md5]) ? 0 : sanitize_text_field( $_COOKIE[$fraud_attempts_md5] );
+                $fraud_attempts = (!isset($_COOKIE[$fraud_attempts_md5]) || null === $_COOKIE[$fraud_attempts_md5]) ? 0 : sanitize_text_field( $_COOKIE[$fraud_attempts_md5] );
 
                 $cookie_value = (int)$fraud_attempts + 1;
-                setcookie($fraud_attempts_md5, $cookie_value, time() + (60 * 60), "/"); // 86400 = 1 day
+                setcookie($fraud_attempts_md5, $cookie_value, time() + (60 * 60), '/'); // 86400 = 1 day
                 //Get the allowed failed order limit, default to 3
                 $fraud_limit = get_option('wmfo_black_list_allowed_fraud_attempts') != '' ? get_option('wmfo_black_list_allowed_fraud_attempts') : 5;
 
