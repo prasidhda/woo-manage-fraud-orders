@@ -61,9 +61,25 @@ if (!class_exists('WMFO_Bulk_Blacklist')) {
                 return;
             }
 
-            $orders_count = isset($_REQUEST['changed']) ? absint($_REQUEST['changed']) : 0; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            printf('<div id="message" class="updated fade">' . esc_attr(_n('%s order has been affected by bulk blacklisting.', '%s orders have been affected by bulk blacklisting.', $orders_count, 'domain')) . '</div>', (int) $orders_count);
-
+            $orders_count = isset($_REQUEST['changed']) ? absint($_REQUEST['changed']) : 0;
+            ?>
+            <div id="message" class="updated fade">
+                <?php
+                    echo esc_html(
+                        sprintf(
+                            // translators: a number of orders.
+                            _n(
+                                '%d order has been affected by bulk blacklisting.',
+                                '%d orders have been affected by bulk blacklisting.',
+                                $orders_count,
+                                'woo-manage-fraud-orders'
+                            ),
+                            $orders_count
+                        )
+                    );
+                ?>
+            </div>
+            <?php
         }
     }
 }
