@@ -27,12 +27,12 @@ if (!class_exists('WMFO_Blacklist_Handler')) {
          * @return array
          */
         public static function get_blacklists() {
-            return [
+            return array(
                 'prev_black_list_ips' => self::get_setting('wmfo_black_list_ips'),
                 'prev_wmfo_black_list_names' => self::get_setting('wmfo_black_list_names'),
                 'prev_black_list_phones' => self::get_setting('wmfo_black_list_phones'),
                 'prev_black_list_emails' => self::get_setting('wmfo_black_list_emails'),
-            ];
+            );
 
         }
 
@@ -43,18 +43,18 @@ if (!class_exists('WMFO_Blacklist_Handler')) {
          * @param string $action
          */
         public static function update_blacklist($key, $pre_values, $to_add, $action = 'add') {
-            if ($action == 'add') {
-                if ($pre_values === FALSE || $pre_values == '') {
+            if ('add' == $action) {
+                if (false === $pre_values || '' == $pre_values) {
                     $new_values = $to_add;
                 } else {
 
                     $new_values = !in_array($to_add, explode(PHP_EOL, $pre_values)) ? $pre_values . PHP_EOL . $to_add : $pre_values;
                 }
-            } elseif ($action == 'remove') {
+            } elseif ('remove' == $action) {
                 $in_array_value = explode(PHP_EOL, $pre_values);
                 if (in_array($to_add, $in_array_value)) {
                     $array_key = array_search($to_add, $in_array_value);
-                    if ($array_key !== false) {
+                    if (false !== $array_key) {
                         unset($in_array_value[$array_key]);
                     }
                 }
@@ -70,10 +70,10 @@ if (!class_exists('WMFO_Blacklist_Handler')) {
          * @param string $action
          * @return bool
          */
-        public static function init($customer = [], $order = NULL, $action = 'add') {
+        public static function init($customer = array(), $order = null, $action = 'add') {
             $prev_blacklisted_data = self::get_blacklists();
             if (empty($customer) || !$customer) {
-                return FALSE;
+                return false;
             }
 
             self::update_blacklist('wmfo_black_list_names', $prev_blacklisted_data['prev_wmfo_black_list_names'], $customer['full_name'], $action);
@@ -82,11 +82,11 @@ if (!class_exists('WMFO_Blacklist_Handler')) {
             self::update_blacklist('wmfo_black_list_emails', $prev_blacklisted_data['prev_black_list_emails'], $customer['billing_email'], $action);
 
             //handle the cancellation of order
-            if (NULL !== $order) {
+            if (null !== $order) {
                 self::cancel_order($order);
             }
 
-            return TRUE;
+            return true;
         }
 
         /**
@@ -128,7 +128,7 @@ if (!class_exists('WMFO_Blacklist_Handler')) {
             $blacklisted_emails = self::get_setting('wmfo_black_list_emails');
             $blacklisted_phones = self::get_setting('wmfo_black_list_phones');
 
-            if ($allow_blacklist_by_name == 'yes' && in_array($customer_details['full_name'], array_map('trim', explode(PHP_EOL, $blacklisted_customer_names)))) {
+            if ('yes' == $allow_blacklist_by_name && in_array($customer_details['full_name'], array_map('trim', explode(PHP_EOL, $blacklisted_customer_names)))) {
                 return true;
             } elseif (in_array($customer_details['ip_address'], array_map('trim', explode(PHP_EOL, $blacklisted_ips)))) {
                 return true;

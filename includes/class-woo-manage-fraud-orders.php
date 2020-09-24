@@ -36,7 +36,7 @@ if ( !class_exists('Woo_Manage_Fraud_Orders') ) {
          * Define constants
          */
         private function define_constants() {
-            $upload_dir = wp_upload_dir(NULL, FALSE);
+            $upload_dir = wp_upload_dir(null, false);
 
             $this->define('WMFO_ABSPATH', dirname(WMFO_PLUGIN_FILE) . '/');
             $this->define('WMFO_PLUGIN_BASENAME', plugin_basename(WMFO_PLUGIN_FILE));
@@ -58,13 +58,13 @@ if ( !class_exists('Woo_Manage_Fraud_Orders') ) {
          * Init hooks
          */
         private function init_hooks() {
-            register_activation_hook(WMFO_PLUGIN_FILE, [$this, 'install']);
+            register_activation_hook(WMFO_PLUGIN_FILE, array($this, 'install'));
 
-            add_filter('plugin_action_links_' . plugin_basename(WMFO_PLUGIN_FILE), [
+            add_filter('plugin_action_links_' . plugin_basename(WMFO_PLUGIN_FILE), array(
                 $this,
                 'action_links',
-            ], 99, 1);
-            add_action('plugins_loaded', [$this, 'load_text_domain']);
+            ), 99, 1);
+            add_action('plugins_loaded', array($this, 'load_text_domain'));
         }
 
         /**

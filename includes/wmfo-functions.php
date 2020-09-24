@@ -11,15 +11,15 @@
 
 function wmfo_get_customer_details_of_order($order) {
     if (!$order) {
-        return FALSE;
+        return false;
     }
 
-    return [
+    return array(
         'full_name' => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
         'ip_address' => $order->get_customer_ip_address(),
         'billing_phone' => $order->get_billing_phone(),
         'billing_email' => $order->get_billing_email(),
-    ];
+    );
 }
 
 /**

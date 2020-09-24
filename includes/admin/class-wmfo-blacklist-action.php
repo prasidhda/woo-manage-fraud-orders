@@ -14,19 +14,19 @@ if (!class_exists('WMFO_Order_Actions')) {
              * woocommerce_order_actions => To add/remove the order actions
              * We are adding the new action , "Blacklist order"
              */
-            add_filter('woocommerce_order_actions', [
+            add_filter('woocommerce_order_actions', array(
                 $this,
                 'add_new_order_action',
-            ], 99, 1);
+            ), 99, 1);
             /**
              *
              * 'woocommerce_process_shop_order_meta' => Handling the order action
              * We are blocking the customer email, phone and IP address of current order
              */
-            add_action('woocommerce_process_shop_order_meta', [
+            add_action('woocommerce_process_shop_order_meta', array(
                 $this,
                 'update_blacklist',
-            ], 60, 2);
+            ), 60, 2);
         }
 
         /**
