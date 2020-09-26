@@ -6,15 +6,15 @@ if (!class_exists('WMFO_Bulk_Blacklist')) {
     class WMFO_Bulk_Blacklist {
 
         public function __construct() {
-            add_filter('bulk_actions-edit-shop_order', [
+            add_filter('bulk_actions-edit-shop_order', array(
                 $this,
                 'register_bulk_action',
-            ], 99, 1);
-            add_filter('handle_bulk_actions-edit-shop_order', [
+            ), 99, 1);
+            add_filter('handle_bulk_actions-edit-shop_order', array(
                 $this,
                 'handle_bulk_blacklisting',
-            ], 10, 3);
-            add_action('admin_notices', [$this, 'admin_notice']);
+            ), 10, 3);
+            add_action('admin_notices', array($this, 'admin_notice'));
 
         }
 
@@ -25,7 +25,7 @@ if (!class_exists('WMFO_Bulk_Blacklist')) {
         }
 
         public function handle_bulk_blacklisting($redirect_to, $action, $post_ids) {
-            if ($action !== 'blacklist-customer') {
+            if ('blacklist-customer' !== $action) {
                 return $redirect_to;
             }
             foreach ($post_ids as $post_id) {
@@ -37,11 +37,11 @@ if (!class_exists('WMFO_Bulk_Blacklist')) {
                     WMFO_Blacklist_Handler::init($customer, $order);
                 }
             }
-            $redirect_to = add_query_arg([
+            $redirect_to = add_query_arg(array(
                 'bulk_action' => $action,
                 'changed' => count($post_ids),
                 'ids' => join(',', $post_ids),
-            ], $redirect_to);
+            ), $redirect_to);
 
             return $redirect_to;
         }
@@ -53,15 +53,33 @@ if (!class_exists('WMFO_Bulk_Blacklist')) {
                 return;
             }
 
-            if( !isset($_REQUEST['bulk_action']))
+            if( !isset($_REQUEST['bulk_action'])) {
                 return;
+            }
 
-            if($_REQUEST['bulk_action'] != 'blacklist-customer')
+            if('blacklist-customer' != $_REQUEST['bulk_action']) {
                 return;
+            }
 
-            $orders_count = isset($_REQUEST['changed']) ? absint($_REQUEST['changed']) : 0; // WPCS: input var ok, CSRF ok.
-            printf('<div id="message" class="updated fade">' . _n('%s order has been affected by bulk blacklisting.', '%s orders have been affected by bulk blacklisting.', $orders_count, 'domain') . '</div>', $orders_count);
-
+            $orders_count = isset($_REQUEST['changed']) ? absint($_REQUEST['changed']) : 0;
+            ?>
+            <div id="message" class="updated fade">
+                <?php
+                    echo esc_html(
+                        sprintf(
+                            // translators: a number of orders.
+                            _n(
+                                '%d order has been affected by bulk blacklisting.',
+                                '%d orders have been affected by bulk blacklisting.',
+                                $orders_count,
+                                'woo-manage-fraud-orders'
+                            ),
+                            $orders_count
+                        )
+                    );
+                ?>
+            </div>
+            <?php
         }
     }
 }

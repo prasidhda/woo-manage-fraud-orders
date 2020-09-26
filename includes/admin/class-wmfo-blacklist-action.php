@@ -14,19 +14,19 @@ if (!class_exists('WMFO_Order_Actions')) {
              * woocommerce_order_actions => To add/remove the order actions
              * We are adding the new action , "Blacklist order"
              */
-            add_filter('woocommerce_order_actions', [
+            add_filter('woocommerce_order_actions', array(
                 $this,
                 'add_new_order_action',
-            ], 99, 1);
+            ), 99, 1);
             /**
              *
              * 'woocommerce_process_shop_order_meta' => Handling the order action
              * We are blocking the customer email, phone and IP address of current order
              */
-            add_action('woocommerce_process_shop_order_meta', [
+            add_action('woocommerce_process_shop_order_meta', array(
                 $this,
                 'update_blacklist',
-            ], 60, 2);
+            ), 60, 2);
         }
 
         /**
@@ -49,7 +49,7 @@ if (!class_exists('WMFO_Order_Actions')) {
 
             //Show this only if customer details of this order is in blacklist
             if (isset($_GET['post']) && isset($_GET['action']) && $_GET['action'] == 'edit') {
-                $order = wc_get_order($_GET['post']);
+                $order = wc_get_order( sanitize_text_field( $_GET['post'] ) );
 
                 //Check if the order details of this current order is in black list
                 if (WMFO_Blacklist_Handler::is_blacklisted(wmfo_get_customer_details_of_order($order))) {
@@ -69,7 +69,7 @@ if (!class_exists('WMFO_Order_Actions')) {
 
             // Handle button actions
             if (!empty($_POST['wc_order_action'])) {
-                $action = wc_clean($_POST['wc_order_action']);
+                $action = sanitize_text_field( $_POST['wc_order_action'] );
                 // Get customer's IP address, billing phone and Email Address
                 $customer = wmfo_get_customer_details_of_order($order);
                 //Add the customer details to Blacklist
