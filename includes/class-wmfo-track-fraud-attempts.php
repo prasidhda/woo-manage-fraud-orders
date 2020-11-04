@@ -56,6 +56,7 @@ if ( !class_exists('WMFO_Track_Customers') ) {
             $prev_black_list_ips = get_option('wmfo_black_list_ips', true);
             $prev_black_list_phones = get_option('wmfo_black_list_phones', true);
             $prev_black_list_emails = get_option('wmfo_black_list_emails', true);
+            $prev_black_list_email_domains = get_option('wmfo_black_list_email_domains', true);
 
             $first_name = isset($_POST['billing_first_name']) ? sanitize_text_field($_POST['billing_first_name']) : '';
             $last_name = isset($_POST['billing_last_name']) ? sanitize_text_field($_POST['billing_last_name']) : '';
@@ -66,11 +67,15 @@ if ( !class_exists('WMFO_Track_Customers') ) {
 
             $ip_address = method_exists('WC_Geolocation', 'get_ip_address') ? WC_Geolocation::get_ip_address() : wmfo_get_ip_address();
 
+            $domain = substr($billing_email, strpos($billing_email, '@') + 1);
+
             //Block this checkout if this customers details are already blacklisted
             if ( $full_name && $allow_blacklist_by_name == 'yes' && $prev_black_list_names && in_array($full_name, explode(PHP_EOL, $prev_black_list_names)) ||
                 $ip_address && $prev_black_list_ips && in_array($ip_address, explode(PHP_EOL, $prev_black_list_ips)) ||
                 $prev_black_list_phones && $billing_phone && in_array($billing_phone, explode(PHP_EOL, $prev_black_list_phones)) ||
-                $billing_email && $prev_black_list_emails && in_array($billing_email, explode(PHP_EOL, $prev_black_list_emails)) ) {
+                $billing_email && $prev_black_list_emails && in_array($billing_email, explode(PHP_EOL, $prev_black_list_emails)) ||
+                $domain && $prev_black_list_email_domains && in_array($domain, explode(PHP_EOL, $prev_black_list_email_domains))
+            ) {
                 if ( method_exists('WMFO_Blacklist_Handler', 'show_blocked_message') ) {
                     WMFO_Blacklist_Handler::show_blocked_message();
                 }
@@ -99,12 +104,12 @@ if ( !class_exists('WMFO_Track_Customers') ) {
                     ),
                     array(
                         'key' => '_billing_email',
-                        'value' => sanitize_email( $_POST['billing_email'] ), // For guest customer
+                        'value' => sanitize_email($_POST['billing_email']), // For guest customer
                         'compare' => '=',
                     ),
                     array(
                         'key' => '_billing_phone',
-                        'value' => sanitize_text_field( $_POST['billing_phone'] ), // For guest customer
+                        'value' => sanitize_text_field($_POST['billing_phone']), // For guest customer
                         'compare' => '=',
                     ),
                 ),
@@ -129,13 +134,13 @@ if ( !class_exists('WMFO_Track_Customers') ) {
          *
          * 'manage_multiple_failed_attempts' will only track the multiple failed attempts after the creating of failed
          * order by customer, This is helpful when customer enter the correct format of the data but payment gateway
-         * couldn't authorize the payment. Typical example willl be Electronic check, CC processing
+         * couldn't authorize the payment. Typical example will be Electronic check, CC processing
          */
         public static function manage_multiple_failed_attempts( $order_id, $posted_data, $order ) {
             if ( $order->get_status() === 'failed' ) {
                 //md5 the name of the cookie for fraud_attempts
                 $fraud_attempts_md5 = md5('fraud_attempts');
-                $fraud_attempts = (!isset($_COOKIE[$fraud_attempts_md5]) || null === $_COOKIE[$fraud_attempts_md5]) ? 0 : sanitize_text_field( $_COOKIE[$fraud_attempts_md5] );
+                $fraud_attempts = (!isset($_COOKIE[$fraud_attempts_md5]) || null === $_COOKIE[$fraud_attempts_md5]) ? 0 : sanitize_text_field($_COOKIE[$fraud_attempts_md5]);
 
                 $cookie_value = (int)$fraud_attempts + 1;
                 setcookie($fraud_attempts_md5, $cookie_value, time() + (60 * 60), '/'); // 86400 = 1 day

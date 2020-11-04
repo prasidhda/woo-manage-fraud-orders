@@ -52,6 +52,7 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                 'wmfo_black_list_names',
                 'wmfo_black_list_phones',
                 'wmfo_black_list_emails',
+                'wmfo_black_list_email_domains',
                 'wmfo_black_list_ips',
             )) ) {
                 //check if there are  duplication of blacklisted values
@@ -131,6 +132,13 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'type' => 'textarea',
                     'desc' => esc_html__('Enter Emails in new line', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_black_list_emails',
+                ),
+                'blacklists_email_domains' => array(
+                    'name' => esc_html__('Blacklisted Email Domains.', 'woo-manage-fraud-orders'),
+                    'css' => 'width:600px;height:200px',
+                    'type' => 'textarea',
+                    'desc' => esc_html__('Enter email domain in new line. Example "mailnator.com"', 'woo-manage-fraud-orders'),
+                    'id' => 'wmfo_black_list_email_domains',
                 ),
                 'blacklists_ips' => array(
                     'name' => esc_html__('Blacklisted IP Addresses', 'woo-manage-fraud-orders'),
