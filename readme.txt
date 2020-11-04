@@ -3,7 +3,7 @@ Contributors: prasidhda, sranzan
 Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers
 Requires at least: 4.6
 Tested up to: 5.5
-Stable tag: 1.5.5
+Stable tag: 1.6.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -53,6 +53,10 @@ Yes, absolutely. You can choose the multiple orders statuses in setting and this
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+
+= 1.6.0 =
+* Compatibility check with WC 4.6.1
+* Blocking by email domain
 
 = 1.5.5 =
 * Compatibility check with WP 5.5 & WC 4.4.1
