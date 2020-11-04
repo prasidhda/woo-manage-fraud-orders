@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woo Manage Fraud Orders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 09:46+0000\n"
-"PO-Revision-Date: 2020-07-13 09:46+0000\n"
+"POT-Creation-Date: 2020-11-04 10:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: PRASIDHDA MALLA <pranuk.prwnsi@gmail.com>\n"
 "Language-Team: \n"
 "Language: \n"
@@ -37,74 +37,82 @@ msgid "Sorry, You are blocked from checking out."
 msgstr ""
 
 #: includes/admin/class-wmfo-settings.php:25
-#: includes/admin/class-wmfo-settings.php:72
+#: includes/admin/class-wmfo-settings.php:73
 msgid "Blacklisted Customers"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:78
+#: includes/admin/class-wmfo-settings.php:79
 msgid "Blacklists Notice Message"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:82
+#: includes/admin/class-wmfo-settings.php:83
 msgid "Enter the message to be shown for blocked customers"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:86
+#: includes/admin/class-wmfo-settings.php:87
 msgid "Number of allowed Fraud Attempts"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:90
+#: includes/admin/class-wmfo-settings.php:91
 msgid ""
 "Enter the number of allowed fraud attempts before blocking automatically"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:98
+#: includes/admin/class-wmfo-settings.php:99
 msgid "Blacklisted Order Statuses"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:102
+#: includes/admin/class-wmfo-settings.php:103
 msgid ""
 "You can select multiple order statuses. If customer has previous order in "
 "one of above selected order items, He/She will not be able to place order."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:107
+#: includes/admin/class-wmfo-settings.php:108
 msgid "Allow blacklist by Name ?"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:111
+#: includes/admin/class-wmfo-settings.php:112
 msgid "Check this to blacklist customer by their name. "
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:115
+#: includes/admin/class-wmfo-settings.php:116
 msgid "Blacklisted Names"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:118
+#: includes/admin/class-wmfo-settings.php:119
 msgid "Enter combined first name and last name in new line. Eg. \"John Doe\""
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:122
+#: includes/admin/class-wmfo-settings.php:123
 msgid "Blacklisted Phones"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:125
+#: includes/admin/class-wmfo-settings.php:126
 msgid "Enter Phones in new line"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:129
+#: includes/admin/class-wmfo-settings.php:130
 msgid "Blacklisted Emails"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:132
+#: includes/admin/class-wmfo-settings.php:133
 msgid "Enter Emails in new line"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:136
+#: includes/admin/class-wmfo-settings.php:137
+msgid "Blacklisted Email Domains."
+msgstr ""
+
+#: includes/admin/class-wmfo-settings.php:140
+msgid "Enter email domain in new line. Example \"mailnator.com\""
+msgstr ""
+
+#: includes/admin/class-wmfo-settings.php:144
 msgid "Blacklisted IP Addresses"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:139
+#: includes/admin/class-wmfo-settings.php:147
 msgid "Enter IPs in new line"
 msgstr ""
 
@@ -118,4 +126,36 @@ msgstr ""
 
 #: includes/admin/class-wmfo-bulk-blacklist.php:22
 msgid "Blacklist Customer"
+msgstr ""
+
+#. a number of orders.
+#: includes/admin/class-wmfo-bulk-blacklist.php:71
+#, php-format
+msgid "%d order has been affected by bulk blacklisting."
+msgid_plural "%d orders have been affected by bulk blacklisting."
+msgstr[0] ""
+msgstr[1] ""
+
+#. Name of the plugin
+msgid "Woo Manage Fraud Orders"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"WooCommerce plugin to manage the fraud orders by blackilisting the "
+"customer's details."
+msgstr ""
+
+#. URI of the plugin
+msgid ""
+"https://prasidhda.com.np/how-to-blacklist-customers-from-placing-order-in-"
+"woocommerce/"
+msgstr ""
+
+#. Author of the plugin
+msgid "Prasidhda Malla"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://prasidhda.com.np/"
 msgstr ""
