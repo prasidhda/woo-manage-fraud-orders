@@ -149,9 +149,9 @@ if ( !class_exists('WMFO_Track_Customers') ) {
 
                 if ( (int)$fraud_attempts >= $fraud_limit ) {
                     //Show the blocking message in the checkout page.
-                    if ( method_exists('WMFO_Blacklist_Handler', 'show_blocked_message') ) {
-                        WMFO_Blacklist_Handler::show_blocked_message();
-                    }
+                    // if ( method_exists('WMFO_Blacklist_Handler', 'show_blocked_message') ) {
+                        // WMFO_Blacklist_Handler::show_blocked_message();
+                    // }
 
                     //Block this customer for future sessions as well
                     //And cancel the order

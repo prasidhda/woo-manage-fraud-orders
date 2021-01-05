@@ -84,6 +84,9 @@ if ( !class_exists('WMFO_Blacklist_Handler') ) {
             //handle the cancellation of order
             if ( null !== $order ) {
                 self::cancel_order($order);
+				$default_notice = esc_html__('Sorry, You are blocked from checking out.', 'woo-manage-fraud-orders');
+				$wmfo_black_list_message = self::get_setting('wmfo_black_list_message', $default_notice);
+				throw new Exception($wmfo_black_list_message);
             }
 
             return true;
