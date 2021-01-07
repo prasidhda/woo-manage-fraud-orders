@@ -3,7 +3,7 @@
  * Class to handle the updating of blacklists while editing the order page
  */
 
-if (!class_exists('WMFO_Order_Actions')) {
+if ( !class_exists('WMFO_Order_Actions') ) {
     class WMFO_Order_Actions {
 
         public static $_instance;
@@ -33,7 +33,7 @@ if (!class_exists('WMFO_Order_Actions')) {
          * @return WMFO_Order_Actions
          */
         public static function instance() {
-            if (is_null(self::$_instance)) {
+            if ( is_null(self::$_instance) ) {
                 self::$_instance = new self();
             }
 
@@ -44,15 +44,15 @@ if (!class_exists('WMFO_Order_Actions')) {
          * @param $order_actions
          * @return mixed
          */
-        public static function add_new_order_action($order_actions) {
+        public static function add_new_order_action( $order_actions ) {
             $order_actions['black_list_order'] = __('Blacklist order', 'woo-manage-fraud-orders');
 
             //Show this only if customer details of this order is in blacklist
-            if (isset($_GET['post']) && isset($_GET['action']) && $_GET['action'] == 'edit') {
-                $order = wc_get_order( sanitize_text_field( $_GET['post'] ) );
+            if ( isset($_GET['post']) && isset($_GET['action']) && $_GET['action'] == 'edit' ) {
+                $order = wc_get_order(sanitize_text_field($_GET['post']));
 
                 //Check if the order details of this current order is in black list
-                if (WMFO_Blacklist_Handler::is_blacklisted(wmfo_get_customer_details_of_order($order))) {
+                if ( WMFO_Blacklist_Handler::is_blacklisted(wmfo_get_customer_details_of_order($order)) ) {
                     $order_actions['remove_from_black_list'] = __('Remove from Blacklist', 'woo-manage-fraud-orders');
                 }
             }
@@ -64,25 +64,25 @@ if (!class_exists('WMFO_Order_Actions')) {
          * @param $post_id
          * @param $post
          */
-        public static function update_blacklist($post_id, $post) {
+        public static function update_blacklist( $post_id, $post ) {
             $order = wc_get_order($post_id);
 
             // Handle button actions
-            if (!empty($_POST['wc_order_action'])) {
-                $action = sanitize_text_field( $_POST['wc_order_action'] );
+            if ( !empty($_POST['wc_order_action']) ) {
+                $action = sanitize_text_field($_POST['wc_order_action']);
                 // Get customer's IP address, billing phone and Email Address
                 $customer = wmfo_get_customer_details_of_order($order);
                 //Add the customer details to Blacklist
-                if ('black_list_order' === $action) {
+                if ( 'black_list_order' === $action ) {
                     //update the blacklists
-                    if (method_exists('WMFO_Blacklist_Handler', 'init')) {
-                        WMFO_Blacklist_Handler::init($customer, $order);
+                    if ( method_exists('WMFO_Blacklist_Handler', 'init') ) {
+                        WMFO_Blacklist_Handler::init($customer, $order, 'add', 'back');
                     }
                 } //Remove the customer details from blacklist
-                elseif ('remove_from_black_list' === $action) {
+                elseif ( 'remove_from_black_list' === $action ) {
                     //update the blacklists
-                    if (method_exists('WMFO_Blacklist_Handler', 'init')) {
-                        WMFO_Blacklist_Handler::init($customer, $order, 'remove');
+                    if ( method_exists('WMFO_Blacklist_Handler', 'init') ) {
+                        WMFO_Blacklist_Handler::init($customer, $order, 'remove', 'back');
                     }
                 }
             }
