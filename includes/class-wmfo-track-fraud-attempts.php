@@ -143,16 +143,11 @@ if ( !class_exists('WMFO_Track_Customers') ) {
                 $fraud_attempts = (!isset($_COOKIE[$fraud_attempts_md5]) || null === $_COOKIE[$fraud_attempts_md5]) ? 0 : sanitize_text_field($_COOKIE[$fraud_attempts_md5]);
 
                 $cookie_value = (int)$fraud_attempts + 1;
-                setcookie($fraud_attempts_md5, $cookie_value, time() + (60 * 60), '/'); // 86400 = 1 day
+                setcookie($fraud_attempts_md5, $cookie_value, time() + (60 * 60 * 30), '/'); // 30 days
                 //Get the allowed failed order limit, default to 3
                 $fraud_limit = get_option('wmfo_black_list_allowed_fraud_attempts') != '' ? get_option('wmfo_black_list_allowed_fraud_attempts') : 5;
 
                 if ( (int)$fraud_attempts >= $fraud_limit ) {
-                    //Show the blocking message in the checkout page.
-                    if ( method_exists('WMFO_Blacklist_Handler', 'show_blocked_message') ) {
-                        WMFO_Blacklist_Handler::show_blocked_message();
-                    }
-
                     //Block this customer for future sessions as well
                     //And cancel the order
                     $customer = wmfo_get_customer_details_of_order($order);
