@@ -34,7 +34,7 @@ if (!class_exists('WMFO_Bulk_Blacklist')) {
                 $customer = wmfo_get_customer_details_of_order($order);
                 //update the blacklists
                 if (method_exists('WMFO_Blacklist_Handler', 'init')) {
-                    WMFO_Blacklist_Handler::init($customer, $order);
+                    WMFO_Blacklist_Handler::init($customer, $order, 'add', 'back');
                 }
             }
             $redirect_to = add_query_arg(array(
@@ -43,7 +43,8 @@ if (!class_exists('WMFO_Bulk_Blacklist')) {
                 'ids' => join(',', $post_ids),
             ), $redirect_to);
 
-            return $redirect_to;
+            wp_safe_redirect($redirect_to) ;
+            exit();
         }
 
         public function admin_notice() {

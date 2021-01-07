@@ -68,9 +68,10 @@ if ( !class_exists('WMFO_Blacklist_Handler') ) {
          * @param array $customer
          * @param null $order
          * @param string $action
+         * @param string $context
          * @return bool
          */
-        public static function init( $customer = array(), $order = null, $action = 'add' ) {
+        public static function init( $customer = array(), $order = null, $action = 'add', $context = 'front' ) {
             $prev_blacklisted_data = self::get_blacklists();
             if ( empty($customer) || !$customer ) {
                 return false;
@@ -83,10 +84,12 @@ if ( !class_exists('WMFO_Blacklist_Handler') ) {
 
             //handle the cancellation of order
             if ( null !== $order ) {
-                self::cancel_order($order);
-                $default_notice = esc_html__('Sorry, You are blocked from checking out.', 'woo-manage-fraud-orders');
-                $wmfo_black_list_message = self::get_setting('wmfo_black_list_message', $default_notice);
-                throw new Exception($wmfo_black_list_message);
+                self::cancel_order($order, $action);
+                if ( 'front' === $context ) {
+                    $default_notice = esc_html__('Sorry, You are blocked from checking out.', 'woo-manage-fraud-orders');
+                    $wmfo_black_list_message = self::get_setting('wmfo_black_list_message', $default_notice);
+                    throw new Exception($wmfo_black_list_message);
+                }
             }
 
             return true;
@@ -94,15 +97,21 @@ if ( !class_exists('WMFO_Blacklist_Handler') ) {
 
         /**
          * @param $order
+         * @param $action
          */
-        public static function cancel_order( $order ) {
-
+        public static function cancel_order( $order, $action = 'add' ) {
+            if ( 'remove' === $action ) {
+                $order->add_order_note(esc_html__('Order details removed from blacklist.', 'woo-manage-fraud-orders'));
+                return true;
+            }
             $order_note = apply_filters('wmfo_cancel_order_note', esc_html__('Order details blacklisted for future checkout.', 'woo-manage-fraud-orders'), $order);
 
-            //Set the order status to Cancelled
+            //Set the order status to "Cancelled"
             if ( !$order->has_status('cancelled') ) {
                 $order->update_status('cancelled', $order_note);
+                return true;
             }
+            $order->add_order_note($order_note);
         }
 
         /**
