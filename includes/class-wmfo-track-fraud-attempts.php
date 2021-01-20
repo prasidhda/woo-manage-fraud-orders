@@ -16,11 +16,20 @@ if ( !class_exists('WMFO_Track_Customers') ) {
         public function __construct() {
             add_action('woocommerce_after_checkout_validation', array(
                 $this,
-                'manage_blacklisted_customers',
+                'manage_blacklisted_customers_checkout',
             ), 10, 2);
+
+            add_action('woocommerce_before_pay_action', array(
+                $this, 'manage_blacklisted_customers_order_pay'),
+                99, 1);
+
+            add_action('woocommerce_after_pay_action', array(
+                $this, 'manage_multiple_failed_attempts_order_pay'),
+                99, 1);
+
             add_action('woocommerce_checkout_order_processed', array(
                 $this,
-                'manage_multiple_failed_attempts',
+                'manage_multiple_failed_attempts_checkout',
             ), 100, 3);
         }
 
@@ -32,8 +41,11 @@ if ( !class_exists('WMFO_Track_Customers') ) {
             return self::$_instance;
         }
 
-        public static function manage_blacklisted_customers( $data, $errors ) {
-
+        /**
+         * @param $data
+         * @param $errors
+         */
+        public static function manage_blacklisted_customers_checkout( $data, $errors ) {
             //Check if there are any other errors first
             //If there are, return
             if ( !empty($errors->errors) ) {
@@ -50,6 +62,41 @@ if ( !class_exists('WMFO_Track_Customers') ) {
                 return;
             }
 
+            $customer_details = array();
+
+            $first_name = isset($_POST['billing_first_name']) ? sanitize_text_field($_POST['billing_first_name']) : '';
+            $last_name = isset($_POST['billing_last_name']) ? sanitize_text_field($_POST['billing_last_name']) : '';
+            $customer_details['full_name'] = $first_name . ' ' . $last_name;
+
+            $customer_details['billing_email'] = isset($_POST['billing_email']) ? sanitize_email($_POST['billing_email']) : '';
+            $customer_details['billing_phone'] = isset($_POST['billing_phone']) ? sanitize_text_field($_POST['billing_phone']) : '';
+
+            self::manage_blacklisted_customers($customer_details);
+        }
+
+        /**
+         * @param $order
+         */
+        public static function manage_blacklisted_customers_order_pay( $order ) {
+            $customer_details = array();
+
+            $first_name = $order->get_billing_first_name();
+            $last_name = $order->get_billing_last_name();
+            $customer_details['full_name'] = $first_name . ' ' . $last_name;
+
+            $customer_details['billing_email'] = $order->get_billing_email();
+            $customer_details['billing_phone'] = $order->get_billing_phone();
+
+            self::manage_blacklisted_customers($customer_details);
+        }
+
+        /**
+         * @param $customer_details
+         */
+        public static function manage_blacklisted_customers( $customer_details ) {
+            $customer_details['ip_address'] = method_exists('WC_Geolocation', 'get_ip_address') ? WC_Geolocation::get_ip_address() : wmfo_get_ip_address();
+            $domain = substr($customer_details['billing_email'], strpos($customer_details['billing_email'], '@') + 1);
+
             $allow_blacklist_by_name = get_option('wmfo_allow_blacklist_by_name', 'no');
             $prev_black_list_names = get_option('wmfo_black_list_names', true);
 
@@ -58,22 +105,11 @@ if ( !class_exists('WMFO_Track_Customers') ) {
             $prev_black_list_emails = get_option('wmfo_black_list_emails', true);
             $prev_black_list_email_domains = get_option('wmfo_black_list_email_domains', true);
 
-            $first_name = isset($_POST['billing_first_name']) ? sanitize_text_field($_POST['billing_first_name']) : '';
-            $last_name = isset($_POST['billing_last_name']) ? sanitize_text_field($_POST['billing_last_name']) : '';
-            $full_name = $first_name . ' ' . $last_name;
-
-            $billing_email = isset($_POST['billing_email']) ? sanitize_email($_POST['billing_email']) : '';
-            $billing_phone = isset($_POST['billing_phone']) ? sanitize_text_field($_POST['billing_phone']) : '';
-
-            $ip_address = method_exists('WC_Geolocation', 'get_ip_address') ? WC_Geolocation::get_ip_address() : wmfo_get_ip_address();
-
-            $domain = substr($billing_email, strpos($billing_email, '@') + 1);
-
             //Block this checkout if this customers details are already blacklisted
-            if ( $full_name && $allow_blacklist_by_name == 'yes' && $prev_black_list_names && in_array($full_name, explode(PHP_EOL, $prev_black_list_names)) ||
-                $ip_address && $prev_black_list_ips && in_array($ip_address, explode(PHP_EOL, $prev_black_list_ips)) ||
-                $prev_black_list_phones && $billing_phone && in_array($billing_phone, explode(PHP_EOL, $prev_black_list_phones)) ||
-                $billing_email && $prev_black_list_emails && in_array($billing_email, explode(PHP_EOL, $prev_black_list_emails)) ||
+            if ( $customer_details['full_name'] && $allow_blacklist_by_name == 'yes' && $prev_black_list_names && in_array($customer_details['full_name'], explode(PHP_EOL, $prev_black_list_names)) ||
+                $customer_details['ip_address'] && $prev_black_list_ips && in_array($customer_details['ip_address'], explode(PHP_EOL, $prev_black_list_ips)) ||
+                $prev_black_list_phones && $customer_details['billing_phone'] && in_array($customer_details['billing_phone'], explode(PHP_EOL, $prev_black_list_phones)) ||
+                $customer_details['billing_email'] && $prev_black_list_emails && in_array($customer_details['billing_email'], explode(PHP_EOL, $prev_black_list_emails)) ||
                 $domain && $prev_black_list_email_domains && in_array($domain, explode(PHP_EOL, $prev_black_list_email_domains))
             ) {
                 if ( method_exists('WMFO_Blacklist_Handler', 'show_blocked_message') ) {
@@ -131,12 +167,34 @@ if ( !class_exists('WMFO_Track_Customers') ) {
         }
 
         /**
+         * @param $order_id
+         * @param $posted_data
+         * @param $order
+         * @throws Exception
+         */
+        public static function manage_multiple_failed_attempts_checkout( $order_id, $posted_data, $order ) {
+            self::manage_multiple_failed_attempts($order);
+        }
+
+        /**
+         * @param $order
+         * @throws Exception
+         */
+        public static function manage_multiple_failed_attempts_order_pay( $order ) {
+            self::manage_multiple_failed_attempts($order, 'order-pay');
+        }
+
+        /**
          *
          * 'manage_multiple_failed_attempts' will only track the multiple failed attempts after the creating of failed
          * order by customer, This is helpful when customer enter the correct format of the data but payment gateway
          * couldn't authorize the payment. Typical example will be Electronic check, CC processing
+         *
+         * @param $order
+         * @param string $context
+         * @throws Exception
          */
-        public static function manage_multiple_failed_attempts( $order_id, $posted_data, $order ) {
+        public static function manage_multiple_failed_attempts( $order, $context = 'front' ) {
             if ( $order->get_status() === 'failed' ) {
                 //md5 the name of the cookie for fraud_attempts
                 $fraud_attempts_md5 = md5('fraud_attempts');
@@ -152,7 +210,7 @@ if ( !class_exists('WMFO_Track_Customers') ) {
                     //And cancel the order
                     $customer = wmfo_get_customer_details_of_order($order);
                     if ( method_exists('WMFO_Blacklist_Handler', 'init') ) {
-                        WMFO_Blacklist_Handler::init($customer, $order);
+                        WMFO_Blacklist_Handler::init($customer, $order, 'add', $context);
                     }
                 }
             }
