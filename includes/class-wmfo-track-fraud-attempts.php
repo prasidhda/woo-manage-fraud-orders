@@ -20,11 +20,13 @@ if ( !class_exists('WMFO_Track_Customers') ) {
             ), 10, 2);
 
             add_action('woocommerce_before_pay_action', array(
-                $this, 'manage_blacklisted_customers_order_pay'),
+                $this,
+                'manage_blacklisted_customers_order_pay'),
                 99, 1);
 
             add_action('woocommerce_after_pay_action', array(
-                $this, 'manage_multiple_failed_attempts_order_pay'),
+                $this,
+                'manage_multiple_failed_attempts_order_pay'),
                 99, 1);
 
             add_action('woocommerce_api_wc_gateway_eway_payment_failed', array(
@@ -198,6 +200,7 @@ if ( !class_exists('WMFO_Track_Customers') ) {
          * @throws Exception
          */
         public static function manage_multiple_failed_attempts_eway( $order, $result, $error, $obj ) {
+
             self::manage_multiple_failed_attempts($order, 'order-pay');
         }
 
