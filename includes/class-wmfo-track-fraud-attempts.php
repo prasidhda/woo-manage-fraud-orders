@@ -20,17 +20,25 @@ if ( !class_exists('WMFO_Track_Customers') ) {
             ), 10, 2);
 
             add_action('woocommerce_before_pay_action', array(
-                $this, 'manage_blacklisted_customers_order_pay'),
+                $this,
+                'manage_blacklisted_customers_order_pay'),
                 99, 1);
 
             add_action('woocommerce_after_pay_action', array(
-                $this, 'manage_multiple_failed_attempts_order_pay'),
+                $this,
+                'manage_multiple_failed_attempts_order_pay'),
                 99, 1);
+
+            add_action('woocommerce_api_wc_gateway_eway_payment_failed', array(
+                $this,
+                'manage_multiple_failed_attempts_eway'
+            ), 100, 4);
 
             add_action('woocommerce_checkout_order_processed', array(
                 $this,
                 'manage_multiple_failed_attempts_checkout',
             ), 100, 3);
+
         }
 
         public static function instance() {
@@ -185,6 +193,18 @@ if ( !class_exists('WMFO_Track_Customers') ) {
         }
 
         /**
+         * @param $order
+         * @param $result
+         * @param $error
+         * @param $obj
+         * @throws Exception
+         */
+        public static function manage_multiple_failed_attempts_eway( $order, $result, $error, $obj ) {
+
+            self::manage_multiple_failed_attempts($order, 'order-pay');
+        }
+
+        /**
          *
          * 'manage_multiple_failed_attempts' will only track the multiple failed attempts after the creating of failed
          * order by customer, This is helpful when customer enter the correct format of the data but payment gateway
@@ -198,7 +218,7 @@ if ( !class_exists('WMFO_Track_Customers') ) {
             if ( $order->get_status() === 'failed' ) {
                 //md5 the name of the cookie for fraud_attempts
                 $fraud_attempts_md5 = md5('fraud_attempts');
-                $fraud_attempts = (!isset($_COOKIE[$fraud_attempts_md5]) || null === $_COOKIE[$fraud_attempts_md5]) ? 0 : sanitize_text_field($_COOKIE[$fraud_attempts_md5]);
+                $fraud_attempts = (!isset($_COOKIE[$fraud_attempts_md5]) || (null === $_COOKIE[$fraud_attempts_md5])) ? 0 : sanitize_text_field($_COOKIE[$fraud_attempts_md5]);
 
                 $cookie_value = (int)$fraud_attempts + 1;
                 setcookie($fraud_attempts_md5, $cookie_value, time() + (60 * 60 * 30), '/'); // 30 days
