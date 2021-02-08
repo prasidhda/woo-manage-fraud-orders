@@ -79,7 +79,7 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'name' => esc_html__('Blacklists Notice Message', 'woo-manage-fraud-orders'),
                     'css' => 'width:600px;height:50px',
                     'type' => 'textarea',
-                    'default' => 'Sorry, You are being restricted from placing order.',
+                    'default' => esc_html__('Sorry, You are being restricted from placing orders.', 'woo-manage-fraud-orders'),
                     'desc' => esc_html__('Enter the message to be shown for blocked customers', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_black_list_message',
                 ),
