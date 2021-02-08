@@ -201,7 +201,7 @@ if ( !class_exists('WMFO_Track_Customers') ) {
          */
         public static function manage_multiple_failed_attempts_eway( $order, $result, $error, $obj ) {
 
-            self::manage_multiple_failed_attempts($order, 'order-pay');
+            self::manage_multiple_failed_attempts($order, 'order-pay-eway');
         }
 
         /**
@@ -224,7 +224,6 @@ if ( !class_exists('WMFO_Track_Customers') ) {
                 setcookie($fraud_attempts_md5, $cookie_value, time() + (60 * 60 * 30), '/'); // 30 days
                 //Get the allowed failed order limit, default to 3
                 $fraud_limit = get_option('wmfo_black_list_allowed_fraud_attempts') != '' ? get_option('wmfo_black_list_allowed_fraud_attempts') : 5;
-
                 if ( (int)$fraud_attempts >= $fraud_limit ) {
                     //Block this customer for future sessions as well
                     //And cancel the order
