@@ -12,7 +12,7 @@ if ( !defined('ABSPATH') ) {
 if ( !class_exists('Woo_Manage_Fraud_Orders') ) {
     class Woo_Manage_Fraud_Orders {
 
-        public $version = '1.7.1';
+        public $version = '1.7.2';
         public static $_instance;
 
         public function __construct() {
