@@ -3,7 +3,7 @@ Contributors: prasidhda, sranzan
 Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers
 Requires at least: 4.6
 Tested up to: 5.6
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -53,6 +53,10 @@ Yes, absolutely. You can choose the multiple orders statuses in setting and this
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+= 1.7.2 =
+* fix: order status cancelled on blacklisting from backend
+* Compatibility check WC 5.0.0
+
 = 1.7.1 =
 * add: compatibility check with eWay
 * Compatibility check WC 4.9.2

@@ -126,9 +126,8 @@ if ( !class_exists('WMFO_Blacklist_Handler') ) {
             $blacklisted_order_note = apply_filters('wmfo_blacklisted_order_note', esc_html__('Order details blacklisted for future checkout.', 'woo-manage-fraud-orders'), $order);
 
             //Set the order status to "Cancelled"
-            if ( $context !== 'back' && !$order->has_status('cancelled') ) {
+            if ( !$order->has_status('cancelled') ) {
                 $order->update_status('cancelled', $blacklisted_order_note);
-                return true;
             }
             $order->add_order_note($blacklisted_order_note);
         }
