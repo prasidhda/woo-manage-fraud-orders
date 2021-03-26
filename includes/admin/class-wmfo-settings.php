@@ -14,14 +14,14 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
             add_filter('woocommerce_admin_settings_sanitize_option', __CLASS__ . '::update_setting_filter', 100, 3);
         }
 
-        /**
-         * Add a new settings tab to the WooCommerce settings tabs array.hp
-         *
-         * @param array $settings_tabs Array of WooCommerce setting tabs & their labels, excluding the Subscription tab.
-         *
-         * @return array $settings_tabs Array of WooCommerce setting tabs & their labels, including the Subscription tab.
-         */
-        public static function add_settings_tab( $settings_tabs ) {
+	    /**
+	     * Add a new settings tab to the WooCommerce settings tabs array.hp
+	     *
+	     * @param array $settings_tabs Array of WooCommerce setting tabs & their labels, excluding the Subscription tab.
+	     *
+	     * @return array $settings_tabs Array of WooCommerce setting tabs & their labels, including the Subscription tab.
+	     */
+        public static function add_settings_tab( array $settings_tabs ): array {
             $settings_tabs['settings_tab_blacklists'] = esc_html__('Blacklisted Customers', 'woo-manage-fraud-orders');
 
             return $settings_tabs;
@@ -67,7 +67,7 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
          * @see woocommerce_admin_fields() function.
          *
          */
-        public static function get_settings() {
+        public static function get_settings(): array {
             $settings = array(
                 'section_title' => array(
                     'name' => esc_html__('Blacklisted Customers', 'woo-manage-fraud-orders'),
@@ -103,6 +103,15 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'desc' => esc_html__('You can select multiple order statuses. If customer has previous order in one of above selected order items, He/She will not be able to place order.', 'woo-manage-fraud-orders'),
                     'options' => wc_get_order_statuses(),
                     'id' => 'wmfo_black_list_order_status',
+                ),
+                'blacklists_product_types' => array(
+	                'name' => esc_html__('Blacklisted Product Types', 'woo-manage-fraud-orders'),
+	                'css' => 'width:600px;height:auto',
+	                'type' => 'multiselect',
+	                'class' => 'wc-enhanced-select',
+	                'desc' => esc_html__('You can select multiple product types. If selected, customer will be blocked only if they have product of at least one selected product types in the cart.', 'woo-manage-fraud-orders'),
+	                'options' => wc_get_product_types(),
+	                'id' => 'wmfo_black_list_product_types',
                 ),
                 'allow_blacklist_by_name' => array(
                     'name' => esc_html__('Allow blacklist by Name ?', 'woo-manage-fraud-orders'),
