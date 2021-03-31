@@ -12,7 +12,7 @@ if ( !defined('ABSPATH') ) {
 if ( !class_exists('Woo_Manage_Fraud_Orders') ) {
     class Woo_Manage_Fraud_Orders {
 
-        public $version = '1.7.2';
+        public $version = '2.0.0';
         public static $_instance;
 
         public function __construct() {
@@ -24,7 +24,7 @@ if ( !class_exists('Woo_Manage_Fraud_Orders') ) {
         /**
          * @return Woo_Manage_Fraud_Orders
          */
-        public static function instance() {
+        public static function instance(): Woo_Manage_Fraud_Orders {
             if ( is_null(self::$_instance) ) {
                 self::$_instance = new self();
             }
@@ -83,7 +83,7 @@ if ( !class_exists('Woo_Manage_Fraud_Orders') ) {
          * @param $actions
          * @return array
          */
-        public static function action_links( $actions ) {
+        public static function action_links( $actions ): array {
 
             $new_actions = array(
                 'settings' => '<a href="' . admin_url('admin.php?page=wc-settings&tab=settings_tab_blacklists') . '">' . __('Settings', 'woo-manage-fraud-orders') . '</a>',
@@ -112,6 +112,7 @@ if ( !class_exists('Woo_Manage_Fraud_Orders') ) {
             require_once WMFO_ABSPATH . 'includes/class-wmfo-track-fraud-attempts.php';
             if ( is_admin() ) {
                 require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-settings.php';
+                require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-order-metabox.php';
                 require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-blacklist-action.php';
                 require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-bulk-blacklist.php';
             }

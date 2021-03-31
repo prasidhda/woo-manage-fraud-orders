@@ -7,6 +7,10 @@
 /**
  * Function to get the customer details
  * Billing Phone, Email and IP address
+ *
+ * @param $order
+ *
+ * @return array|false
  */
 
 function wmfo_get_customer_details_of_order($order) {
@@ -28,7 +32,7 @@ function wmfo_get_customer_details_of_order($order) {
  *
  */
 
-function wmfo_get_ip_address() {
+function wmfo_get_ip_address(): string {
     if (isset($_SERVER['HTTP_X_REAL_IP'])) { // WPCS: input var ok, CSRF ok.
         return sanitize_text_field(wp_unslash($_SERVER['HTTP_X_REAL_IP'])); // WPCS: input var ok, CSRF ok.
     } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) { // WPCS: input var ok, CSRF ok.

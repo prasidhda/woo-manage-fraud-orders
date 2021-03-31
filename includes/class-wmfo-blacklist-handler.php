@@ -5,176 +5,183 @@
  *Show the message in checkout page
  */
 
-if ( !defined('ABSPATH') ) {
-    exit();
+if ( ! defined( 'ABSPATH' ) ) {
+	exit();
 }
 
-if ( !class_exists('WMFO_Blacklist_Handler') ) {
-    /**
-     * Class WMFO_Blacklist_Handler
-     */
-    class WMFO_Blacklist_Handler {
-        /**
-         * @param $key
-         * @param string $default
-         * @return mixed|string|void
-         */
-        public static function get_setting( $key, $default = '' ) {
-            return get_option($key) ? get_option($key) : $default;
-        }
+if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
+	/**
+	 * Class WMFO_Blacklist_Handler
+	 */
+	class WMFO_Blacklist_Handler {
+		/**
+		 * @param $key
+		 * @param string $default
+		 *
+		 * @return mixed
+		 */
+		public static function get_setting( $key, $default = '' ): string {
+			return get_option( $key ) ? get_option( $key ) : $default;
+		}
 
-        /**
-         * @return array
-         */
-        public static function get_blacklists() {
-            return array(
-                'prev_black_list_ips' => self::get_setting('wmfo_black_list_ips'),
-                'prev_wmfo_black_list_names' => self::get_setting('wmfo_black_list_names'),
-                'prev_black_list_phones' => self::get_setting('wmfo_black_list_phones'),
-                'prev_black_list_emails' => self::get_setting('wmfo_black_list_emails'),
-            );
+		/**
+		 * @return array
+		 */
+		 public static function get_blacklists(): array {
+			return array(
+				'prev_black_list_ips'        => self::get_setting( 'wmfo_black_list_ips' ),
+				'prev_wmfo_black_list_names' => self::get_setting( 'wmfo_black_list_names' ),
+				'prev_black_list_phones'     => self::get_setting( 'wmfo_black_list_phones' ),
+				'prev_black_list_emails'     => self::get_setting( 'wmfo_black_list_emails' ),
+			);
 
-        }
+		}
 
-        /**
-         * @param $key
-         * @param $pre_values
-         * @param $to_add
-         * @param string $action
-         */
-        public static function update_blacklist( $key, $pre_values, $to_add, $action = 'add' ) {
-            if ( 'add' == $action ) {
-                if ( false === $pre_values || '' == $pre_values ) {
-                    $new_values = $to_add;
-                } else {
+		/**
+		 * @param $key
+		 * @param $pre_values
+		 * @param $to_add
+		 * @param string $action
+		 */
+		public static function update_blacklist( $key, $pre_values, $to_add, $action = 'add' ) {
+			if ( 'add' == $action ) {
+				if ( false === $pre_values || '' == $pre_values ) {
+					$new_values = $to_add;
+				} else {
 
-                    $new_values = !in_array($to_add, explode(PHP_EOL, $pre_values)) ? $pre_values . PHP_EOL . $to_add : $pre_values;
-                }
-            } elseif ( 'remove' == $action ) {
-                $in_array_value = explode(PHP_EOL, $pre_values);
-                if ( in_array($to_add, $in_array_value) ) {
-                    $array_key = array_search($to_add, $in_array_value);
-                    if ( false !== $array_key ) {
-                        unset($in_array_value[$array_key]);
-                    }
-                }
-                $new_values = implode(PHP_EOL, $in_array_value);
-            }
+					$new_values = ! in_array( $to_add, explode( PHP_EOL, $pre_values ) ) ? $pre_values . PHP_EOL . $to_add : $pre_values;
+				}
+			} elseif ( 'remove' == $action ) {
+				$in_array_value = explode( PHP_EOL, $pre_values );
+				if ( in_array( $to_add, $in_array_value ) ) {
+					$array_key = array_search( $to_add, $in_array_value );
+					if ( false !== $array_key ) {
+						unset( $in_array_value[ $array_key ] );
+					}
+				}
+				$new_values = implode( PHP_EOL, $in_array_value );
+			}
 
-            update_option($key, trim($new_values));
-        }
+			update_option( $key, trim( $new_values ) );
+		}
 
-        /**
-         * @param array $customer
-         * @param null $order
-         * @param string $action
-         * @param string $context
-         * @return bool
-         */
-        public static function init( $customer = array(), $order = null, $action = 'add', $context = 'front' ) {
-            $prev_blacklisted_data = self::get_blacklists();
-            if ( empty($customer) || !$customer ) {
-                return false;
-            }
+		/**
+		 * @param array $customer
+		 * @param null $order
+		 * @param string $action
+		 * @param string $context
+		 *
+		 * @return bool
+		 * @throws Exception
+		 */
+		public static function init( $customer = array(), $order = null, $action = 'add', $context = 'front' ): bool {
+			$prev_blacklisted_data = self::get_blacklists();
+			if ( empty( $customer ) || ! $customer ) {
+				return false;
+			}
 
-            self::update_blacklist('wmfo_black_list_names', $prev_blacklisted_data['prev_wmfo_black_list_names'], $customer['full_name'], $action);
-            self::update_blacklist('wmfo_black_list_ips', $prev_blacklisted_data['prev_black_list_ips'], $customer['ip_address'], $action);
-            self::update_blacklist('wmfo_black_list_phones', $prev_blacklisted_data['prev_black_list_phones'], $customer['billing_phone'], $action);
-            self::update_blacklist('wmfo_black_list_emails', $prev_blacklisted_data['prev_black_list_emails'], $customer['billing_email'], $action);
+			self::update_blacklist( 'wmfo_black_list_names', $prev_blacklisted_data['prev_wmfo_black_list_names'], $customer['full_name'], $action );
+			self::update_blacklist( 'wmfo_black_list_ips', $prev_blacklisted_data['prev_black_list_ips'], $customer['ip_address'], $action );
+			self::update_blacklist( 'wmfo_black_list_phones', $prev_blacklisted_data['prev_black_list_phones'], $customer['billing_phone'], $action );
+			self::update_blacklist( 'wmfo_black_list_emails', $prev_blacklisted_data['prev_black_list_emails'], $customer['billing_email'], $action );
 
-            //handle the cancellation of order
-            if ( null !== $order ) {
-                $default_notice = esc_html__('Sorry, You are being restricted from placing orders.', 'woo-manage-fraud-orders');
-                $wmfo_black_list_message = self::get_setting('wmfo_black_list_message', $default_notice);
-                self::cancel_order($order, $action, $context);
+			//handle the cancellation of order
+			if ( null !== $order ) {
+				$default_notice          = esc_html__( 'Sorry, You are being restricted from placing orders.', 'woo-manage-fraud-orders' );
+				$wmfo_black_list_message = self::get_setting( 'wmfo_black_list_message', $default_notice );
 
-                if ( $context === 'front') {
-                    throw new Exception($wmfo_black_list_message);
-                }
+				self::cancel_order( $order, $action );
 
-                if ( in_array($context, array('order-pay', 'order-pay-eway')) ) {
-                    if ( !wc_has_notice($wmfo_black_list_message, 'error') ) {
-                        wc_add_notice($wmfo_black_list_message, 'error');
-                    }
-                }
+				if ( $context === 'front' ) {
+					throw new Exception( $wmfo_black_list_message );
+				}
 
-                if ( $context === 'order-pay-eway' ) {
-                    if ( isset($_GET['AccessCode']) ) {
-                        wp_redirect($order->get_checkout_payment_url(false));
-                        exit();
-                    } else {
-                        throw new Exception();
-                    }
-                }
+				if ( in_array( $context, array( 'order-pay', 'order-pay-eway' ) ) ) {
+					if ( ! wc_has_notice( $wmfo_black_list_message, 'error' ) ) {
+						wc_add_notice( $wmfo_black_list_message, 'error' );
+					}
+				}
 
+				if ( $context === 'order-pay-eway' ) {
+					if ( isset( $_GET['AccessCode'] ) ) {
+						wp_redirect( $order->get_checkout_payment_url( false ) );
+						exit();
+					} else {
+						throw new Exception();
+					}
+				}
+			}
 
-            }
+			return true;
+		}
 
-            return true;
-        }
+		/**
+		 * @param $order
+		 * @param string $action
+		 *
+		 * @return bool
+		 */
+		public static function cancel_order( $order, $action = 'add' ): bool {
+			if ( 'remove' === $action ) {
+				$order->add_order_note( apply_filters( 'wmfo_remove_blacklisted_order_note', esc_html__( 'Order details removed from blacklist.', 'woo-manage-fraud-orders' ) ) );
 
-        /**
-         * @param $order
-         * @param $action
-         * @param $context
-         */
-        public static function cancel_order( $order, $action = 'add', $context = 'front' ) {
-            if ( 'remove' === $action ) {
-                $order->add_order_note(apply_filters('wmfo_remove_blacklisted_order_note', esc_html__('Order details removed from blacklist.', 'woo-manage-fraud-orders')));
-                return true;
-            }
-            $blacklisted_order_note = apply_filters('wmfo_blacklisted_order_note', esc_html__('Order details blacklisted for future checkout.', 'woo-manage-fraud-orders'), $order);
+				return true;
+			}
+			$blacklisted_order_note = apply_filters( 'wmfo_blacklisted_order_note', esc_html__( 'Order details blacklisted for future checkout.', 'woo-manage-fraud-orders' ), $order );
 
-            //Set the order status to "Cancelled"
-            if ( !$order->has_status('cancelled') ) {
-                $order->update_status('cancelled', $blacklisted_order_note);
-            }
-            $order->add_order_note($blacklisted_order_note);
-        }
+			//Set the order status to "Cancelled"
+			if ( ! $order->has_status( 'cancelled' ) && $order->get_type() === 'shop_order' ) {
+				$order->update_status( 'cancelled', $blacklisted_order_note );
+			}
+			$order->add_order_note( $blacklisted_order_note );
 
-        /**
-         * Show the blocked message to the customer
-         */
-        public static function show_blocked_message() {
-            $default_notice = esc_html__('Sorry, You are being restricted from placing orders.', 'woo-manage-fraud-orders');
-            $wmfo_black_list_message = self::get_setting('wmfo_black_list_message', $default_notice);
+			return true;
+		}
 
-            //with some reason, get_option with default value not working
+		/**
+		 * Show the blocked message to the customer
+		 */
+		public static function show_blocked_message() {
+			$default_notice          = esc_html__( 'Sorry, You are being restricted from placing orders.', 'woo-manage-fraud-orders' );
+			$wmfo_black_list_message = self::get_setting( 'wmfo_black_list_message', $default_notice );
 
-            if ( !wc_has_notice($wmfo_black_list_message) ) {
-                wc_add_notice($wmfo_black_list_message, 'error');
-            }
-        }
+			//with some reason, get_option with default value not working
 
-        /**
-         * @param $customer_details
-         * @return bool
-         */
-        public static function is_blacklisted( $customer_details ) {
-            //Check for ony by one, return TRUE as soon as first matching
-            $allow_blacklist_by_name = get_option('wmfo_allow_blacklist_by_name', 'no');
-            $blacklisted_customer_names = self::get_setting('wmfo_black_list_names');
-            $blacklisted_ips = self::get_setting('wmfo_black_list_ips');
-            $blacklisted_emails = self::get_setting('wmfo_black_list_emails');
-            $blacklisted_email_domains = self::get_setting('wmfo_black_list_email_domains');
-            $blacklisted_phones = self::get_setting('wmfo_black_list_phones');
+			if ( ! wc_has_notice( $wmfo_black_list_message ) ) {
+				wc_add_notice( $wmfo_black_list_message, 'error' );
+			}
+		}
 
-            $email = $customer_details['billing_email'];
-            $domain = substr($email, strpos($email, '@') + 1);
+		/**
+		 * @param $customer_details
+		 *
+		 * @return bool
+		 */
+		public static function is_blacklisted( $customer_details ): bool {
+			//Check for ony by one, return TRUE as soon as first matching
+			$allow_blacklist_by_name    = get_option( 'wmfo_allow_blacklist_by_name', 'no' );
+			$blacklisted_customer_names = self::get_setting( 'wmfo_black_list_names' );
+			$blacklisted_ips            = self::get_setting( 'wmfo_black_list_ips' );
+			$blacklisted_emails         = self::get_setting( 'wmfo_black_list_emails' );
+			$blacklisted_email_domains  = self::get_setting( 'wmfo_black_list_email_domains' );
+			$blacklisted_phones         = self::get_setting( 'wmfo_black_list_phones' );
 
-            if ( 'yes' == $allow_blacklist_by_name && in_array($customer_details['full_name'], array_map('trim', explode(PHP_EOL, $blacklisted_customer_names))) ) {
-                return true;
-            } elseif ( in_array($customer_details['ip_address'], array_map('trim', explode(PHP_EOL, $blacklisted_ips))) ) {
-                return true;
-            } elseif ( in_array($customer_details['billing_email'], array_map('trim', explode(PHP_EOL, $blacklisted_emails))) ) {
-                return true;
-            } elseif ( in_array($domain, array_map('trim', explode(PHP_EOL, $blacklisted_email_domains))) ) {
-                return true;
-            } elseif ( in_array($customer_details['billing_phone'], array_map('trim', explode(PHP_EOL, $blacklisted_phones))) ) {
-                return true;
-            }
+			$email  = $customer_details['billing_email'];
+			$domain = substr( $email, strpos( $email, '@' ) + 1 );
 
-            return false;
-        }
-    }
+			if ( 'yes' == $allow_blacklist_by_name && in_array( $customer_details['full_name'], array_map( 'trim', explode( PHP_EOL, $blacklisted_customer_names ) ) ) ) {
+				return true;
+			} elseif ( in_array( $customer_details['ip_address'], array_map( 'trim', explode( PHP_EOL, $blacklisted_ips ) ) ) ) {
+				return true;
+			} elseif ( in_array( $customer_details['billing_email'], array_map( 'trim', explode( PHP_EOL, $blacklisted_emails ) ) ) ) {
+				return true;
+			} elseif ( in_array( $domain, array_map( 'trim', explode( PHP_EOL, $blacklisted_email_domains ) ) ) ) {
+				return true;
+			} elseif ( in_array( $customer_details['billing_phone'], array_map( 'trim', explode( PHP_EOL, $blacklisted_phones ) ) ) ) {
+				return true;
+			}
+
+			return false;
+		}
+	}
 }
