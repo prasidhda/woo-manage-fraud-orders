@@ -14,14 +14,14 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
             add_filter('woocommerce_admin_settings_sanitize_option', __CLASS__ . '::update_setting_filter', 100, 3);
         }
 
-        /**
-         * Add a new settings tab to the WooCommerce settings tabs array.hp
-         *
-         * @param array $settings_tabs Array of WooCommerce setting tabs & their labels, excluding the Subscription tab.
-         *
-         * @return array $settings_tabs Array of WooCommerce setting tabs & their labels, including the Subscription tab.
-         */
-        public static function add_settings_tab( $settings_tabs ) {
+	    /**
+	     * Add a new settings tab to the WooCommerce settings tabs array.hp
+	     *
+	     * @param array $settings_tabs Array of WooCommerce setting tabs & their labels, excluding the Subscription tab.
+	     *
+	     * @return array $settings_tabs Array of WooCommerce setting tabs & their labels, including the Subscription tab.
+	     */
+        public static function add_settings_tab( array $settings_tabs ): array {
             $settings_tabs['settings_tab_blacklists'] = esc_html__('Blacklisted Customers', 'woo-manage-fraud-orders');
 
             return $settings_tabs;
@@ -67,7 +67,7 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
          * @see woocommerce_admin_fields() function.
          *
          */
-        public static function get_settings() {
+        public static function get_settings(): array {
             $settings = array(
                 'section_title' => array(
                     'name' => esc_html__('Blacklisted Customers', 'woo-manage-fraud-orders'),
@@ -82,27 +82,40 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'default' => esc_html__('Sorry, You are being restricted from placing orders.', 'woo-manage-fraud-orders'),
                     'desc' => esc_html__('Enter the message to be shown for blocked customers', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_black_list_message',
+                    'desc_tip' => true,
                 ),
                 'blacklists_allowed_fraud_attempts' => array(
                     'name' => esc_html__('Number of allowed Fraud Attempts', 'woo-manage-fraud-orders'),
                     'type' => 'number',
                     'css' => 'width:50px',
                     'default' => 5,
-                    'desc' => esc_html__('Enter the number of allowed fraud attempts before blocking automatically', 'woo-manage-fraud-orders'),
+                    'desc' => esc_html__('Enter the number of allowed fraud attempts before blocking automatically.', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_black_list_allowed_fraud_attempts',
                     'custom_attributes' => array(
                         'min' => 0,
                         'step' => 1,
                     ),
+                    'desc_tip' => esc_html__('This will block customers from placing an order if they try more than the specified number of attempts and the order still fails. Legitimate reasons for an order failing could be entering wrong credit card number or address verification mismatch. If the customer continues to try to complete the order, the order will be blocked and notice message sent after the specified number of retries.', 'woo-manage-fraud-orders'),
                 ),
                 'blacklists_order_status' => array(
                     'name' => esc_html__('Blacklisted Order Statuses', 'woo-manage-fraud-orders'),
                     'css' => 'width:600px;height:auto',
                     'type' => 'multiselect',
                     'class' => 'wc-enhanced-select',
-                    'desc' => esc_html__('You can select multiple order statuses. If customer has previous order in one of above selected order items, He/She will not be able to place order.', 'woo-manage-fraud-orders'),
+                    'desc' => esc_html__('You can select multiple order statuses.If customer has previous order in one of above selected order items, He/She will not be able to place order.', 'woo-manage-fraud-orders'),
                     'options' => wc_get_order_statuses(),
                     'id' => 'wmfo_black_list_order_status',
+                    'desc_tip' => true,
+                ),
+                'blacklists_product_types' => array(
+	                'name' => esc_html__('Blacklisted Product Types', 'woo-manage-fraud-orders'),
+	                'css' => 'width:600px;height:auto',
+	                'type' => 'multiselect',
+	                'class' => 'wc-enhanced-select',
+	                'desc' => esc_html__('You can select multiple product types.', 'woo-manage-fraud-orders'),
+	                'options' => wc_get_product_types(),
+	                'id' => 'wmfo_black_list_product_types',
+	                'desc_tip' => esc_html__('If selected, customer will be blocked only if they have product of at least one selected product types in the cart.', 'woo-manage-fraud-orders'),
                 ),
                 'allow_blacklist_by_name' => array(
                     'name' => esc_html__('Allow blacklist by Name ?', 'woo-manage-fraud-orders'),
@@ -111,6 +124,7 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'default' => 'no',
                     'desc' => esc_html__('Check this to blacklist customer by their name. ', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_allow_blacklist_by_name',
+                    'desc_tip' => false,
                 ),
                 'blacklists_names' => array(
                     'name' => __('Blacklisted Names', 'woo-manage-fraud-orders'),
@@ -118,6 +132,7 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'type' => 'textarea',
                     'desc' => esc_html__('Enter combined first name and last name in new line. Eg. "John Doe"', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_black_list_names',
+                    'desc_tip' => false,
                 ),
                 'blacklists_phones' => array(
                     'name' => esc_html__('Blacklisted Phones', 'woo-manage-fraud-orders'),
@@ -125,6 +140,7 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'type' => 'textarea',
                     'desc' => esc_html__('Enter Phones in new line', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_black_list_phones',
+                    'desc_tip' => false,
                 ),
                 'blacklists_emails' => array(
                     'name' => esc_html__('Blacklisted Emails', 'woo-manage-fraud-orders'),
@@ -132,6 +148,7 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'type' => 'textarea',
                     'desc' => esc_html__('Enter Emails in new line', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_black_list_emails',
+                    'desc_tip' => false,
                 ),
                 'blacklists_email_domains' => array(
                     'name' => esc_html__('Blacklisted Email Domains.', 'woo-manage-fraud-orders'),
@@ -139,6 +156,7 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'type' => 'textarea',
                     'desc' => esc_html__('Enter email domain in new line. Example "mailnator.com"', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_black_list_email_domains',
+                    'desc_tip' => false,
                 ),
                 'blacklists_ips' => array(
                     'name' => esc_html__('Blacklisted IP Addresses', 'woo-manage-fraud-orders'),
@@ -146,6 +164,7 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'type' => 'textarea',
                     'desc' => esc_html__('Enter IPs in new line', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_black_list_ips',
+                    'desc_tip' => false,
                 ),
                 'section_end' => array(
                     'type' => 'sectionend',
