@@ -89,10 +89,10 @@ if ( !class_exists('WMFO_Settings_Tab') ) {
                     'type' => 'number',
                     'css' => 'width:50px',
                     'default' => 5,
-                    'desc' => esc_html__('Enter the number of allowed fraud attempts before blocking automatically.', 'woo-manage-fraud-orders'),
+                    'desc' => esc_html__('Enter the number of allowed fraud attempts before blocking automatically. It counts increases only if order status changes to failed on order placement.', 'woo-manage-fraud-orders'),
                     'id' => 'wmfo_black_list_allowed_fraud_attempts',
                     'custom_attributes' => array(
-                        'min' => 0,
+                        'min' => 1,
                         'step' => 1,
                     ),
                     'desc_tip' => esc_html__('This will block customers from placing an order if they try more than the specified number of attempts and the order still fails. Legitimate reasons for an order failing could be entering wrong credit card number or address verification mismatch. If the customer continues to try to complete the order, the order will be blocked and notice message sent after the specified number of retries.', 'woo-manage-fraud-orders'),

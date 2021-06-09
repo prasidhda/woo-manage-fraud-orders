@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woo Manage Fraud Orders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 05:40+0000\n"
+"POT-Creation-Date: 2021-06-09 04:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -103,7 +103,8 @@ msgstr ""
 
 #: includes/admin/class-wmfo-settings.php:92
 msgid ""
-"Enter the number of allowed fraud attempts before blocking automatically."
+"Enter the number of allowed fraud attempts before blocking automatically. It "
+"counts increases only if order status changes to failed on order placement."
 msgstr ""
 
 #. Author URI of the plugin
