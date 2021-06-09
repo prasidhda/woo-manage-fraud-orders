@@ -75,10 +75,9 @@ if ( ! class_exists( 'WMFO_Track_Customers' ) ) {
 			// This is check for the woocommerce subscription
 			// If allowed to skip the blacklisting for subscription renewal order payment, return
 			if ( function_exists( 'wcs_cart_contains_renewal' ) ) {
-				$order_id  = null;
 				$cart_item = wcs_cart_contains_renewal();
 
-				if ( false !== $cart_item && isset( $cart_item['subscription_renewal']['renewal_order_id'] ) ) {
+				if ( isset( $cart_item['subscription_renewal']['renewal_order_id'] ) ) {
 					$renewal_order = wc_get_order( $cart_item['subscription_renewal']['renewal_order_id'] );
 
 					if ( $renewal_order ) {
@@ -286,7 +285,7 @@ if ( ! class_exists( 'WMFO_Track_Customers' ) ) {
 			if ( $order->get_status() === 'failed' ) {
 				//md5 the name of the cookie for fraud_attempts
 				$fraud_attempts_md5 = md5( 'fraud_attempts' );
-				$fraud_attempts     = ( ! isset( $_COOKIE[ $fraud_attempts_md5 ] ) || ( null === $_COOKIE[ $fraud_attempts_md5 ] ) ) ? 0 : sanitize_text_field( $_COOKIE[ $fraud_attempts_md5 ] );
+				$fraud_attempts     = ( ! isset( $_COOKIE[ $fraud_attempts_md5 ] ) || ( null === $_COOKIE[ $fraud_attempts_md5 ] ) ) ? 1 : sanitize_text_field( $_COOKIE[ $fraud_attempts_md5 ] );
 
 				$cookie_value = (int) $fraud_attempts + 1;
 				setcookie( $fraud_attempts_md5, $cookie_value, time() + ( 60 * 60 * 30 ), '/' ); // 30 days
