@@ -48,6 +48,9 @@ if ( ! class_exists( 'WMFO_Order_Actions' ) ) {
 			//Show this only if customer details of this order is in blacklist
 			if ( isset( $_GET['post'] ) && isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) {
 				$order = wc_get_order( sanitize_text_field( $_GET['post'] ) );
+				if ( !$order )
+					return $order_actions;
+
 				if ( 'shop_order' !== $order->get_type() ) {
 					return $order_actions;
 				}
