@@ -182,7 +182,7 @@ msgstr ""
 
 #. Description of the plugin
 msgid ""
-"WooCommerce plugin to manage the fraud orders by blackilisting the "
+"WooCommerce plugin to manage the fraud orders by blacklisting the "
 "customer's details."
 msgstr ""
 

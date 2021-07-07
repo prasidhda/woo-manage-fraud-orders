@@ -1,122 +1,150 @@
 <?php
 /**
  * Main class
- * Handles everything from here, includes  file for the backend settings and
- * blacklisting funcitonalities Inlcudes the frontend handlers as well
+ * Handles everything from here, includes the file for the backend settings and
+ * blacklisting funcitonalities, inlcudes the frontend handlers as well.
+ *
+ * @package woo-manage-fraud-orders
  */
 
-if ( !defined('ABSPATH') ) {
-    exit();
+if ( ! defined( 'ABSPATH' ) ) {
+	exit();
 }
 
-if ( !class_exists('Woo_Manage_Fraud_Orders') ) {
-    class Woo_Manage_Fraud_Orders {
+if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 
-        public $version = '2.0.2';
-        public static $_instance;
+	/**
+	 * Class Woo_Manage_Fraud_Orders
+	 */
+	class Woo_Manage_Fraud_Orders {
 
-        public function __construct() {
-            $this->define_constants();
-            $this->includes();
-            $this->init_hooks();
-        }
+		/**
+		 * The current plugin version.
+		 *
+		 * @var string $version
+		 */
+		public $version = '2.0.2';
 
-        /**
-         * @return Woo_Manage_Fraud_Orders
-         */
-        public static function instance(): Woo_Manage_Fraud_Orders {
-            if ( is_null(self::$_instance) ) {
-                self::$_instance = new self();
-            }
+		/**
+		 * Store the class singleton.
+		 *
+		 * @var ?Woo_Manage_Fraud_Orders
+		 */
+		protected static $instance = null;
 
-            return self::$_instance;
-        }
+		/**
+		 * Instantiate the class.
+		 */
+		protected function __construct() {
+			$this->define_constants();
+			$this->includes();
+			$this->init_hooks();
+		}
 
-        /**
-         * Define constants
-         */
-        private function define_constants() {
-            $upload_dir = wp_upload_dir(null, false);
+		/**
+		 * Get an instance of the class.
+		 *
+		 * @return Woo_Manage_Fraud_Orders
+		 */
+		public static function instance() {
+			if ( is_null( self::$instance ) ) {
+				self::$instance = new self();
+			}
 
-            $this->define('WMFO_ABSPATH', dirname(WMFO_PLUGIN_FILE) . '/');
-            $this->define('WMFO_PLUGIN_BASENAME', plugin_basename(WMFO_PLUGIN_FILE));
-            $this->define('WMFO_VERSION', $this->version);
-            $this->define('WMFO_LOG_DIR', $upload_dir['basedir'] . '/wmfo-logs/');
-        }
+			return self::$instance;
+		}
 
-        /**
-         * @param $name
-         * @param $value
-         */
-        private function define( $name, $value ) {
-            if ( !defined($name) ) {
-                define($name, $value);
-            }
-        }
+		/**
+		 * Define constants
+		 */
+		private function define_constants() {
+			$upload_dir = wp_upload_dir( null, false );
 
-        /**
-         * Init hooks
-         */
-        private function init_hooks() {
-            register_activation_hook(WMFO_PLUGIN_FILE, array($this, 'install'));
+			$this->define( 'WMFO_ABSPATH', dirname( WMFO_PLUGIN_FILE ) . '/' );
+			$this->define( 'WMFO_PLUGIN_BASENAME', plugin_basename( WMFO_PLUGIN_FILE ) );
+			$this->define( 'WMFO_VERSION', $this->version );
+			$this->define( 'WMFO_LOG_DIR', $upload_dir['basedir'] . '/wmfo-logs/' );
+		}
 
-            add_filter('plugin_action_links_' . plugin_basename(WMFO_PLUGIN_FILE), array(
-                $this,
-                'action_links',
-            ), 99, 1);
-            add_action('plugins_loaded', array($this, 'load_text_domain'));
-        }
+		/**
+		 * Define a constant if it has not already been defined.
+		 *
+		 * @param string $name The name of the constant to define.
+		 * @param mixed  $value The value of the constant.
+		 */
+		private function define( $name, $value ) {
+			if ( ! defined( $name ) ) {
+				define( $name, $value );
+			}
+		}
 
-        /**
-         * plugin dependency check
-         */
-        public function install() {
-            if ( !in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins'))) ) {
+		/**
+		 * Init hooks
+		 */
+		private function init_hooks() {
+			register_activation_hook( WMFO_PLUGIN_FILE, array( $this, 'install' ) );
 
-                echo sprintf(esc_html__('Woo Manage Fraud Orders depends on %s to work!', 'woo-manage-fraud-orders'), '<a href="https://wordpress.org/plugins/woocommerce/" target="_blank">' . esc_html__('WooCommerce', 'woo-manage-fraud-orders') . '</a>');
-                @trigger_error('', E_USER_ERROR);
+			add_filter( 'plugin_action_links_' . plugin_basename( WMFO_PLUGIN_FILE ), array( $this, 'action_links' ), 99, 1 );
+			add_action( 'plugins_loaded', array( $this, 'load_text_domain' ) );
+		}
 
-            }
-        }
+		/**
+		 * Check is WooCommerce active.
+		 */
+		public function install() {
+			if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
 
-        /**
-         * @param $actions
-         * @return array
-         */
-        public static function action_links( $actions ): array {
+				echo sprintf( esc_html__( 'Woo Manage Fraud Orders depends on %s to work!', 'woo-manage-fraud-orders' ), '<a href="https://wordpress.org/plugins/woocommerce/" target="_blank">' . esc_html__( 'WooCommerce', 'woo-manage-fraud-orders' ) . '</a>' );
+				@trigger_error( '', E_USER_ERROR );
 
-            $new_actions = array(
-                'settings' => '<a href="' . admin_url('admin.php?page=wc-settings&tab=settings_tab_blacklists') . '">' . __('Settings', 'woo-manage-fraud-orders') . '</a>',
-            );
+			}
+		}
 
-            return array_merge($new_actions, $actions);
-        }
+		/**
+		 * Add the `Settings` link under the plugin name on plugins.php.
+		 *
+		 * @hooked plugin_action_links_{plugin_basename}
+		 * @see WP_Plugins_List_Table::single_row()
+		 *
+		 * @param array<string, string> $actions The existing registered links.
+		 * @return array<string, string>
+		 */
+		public static function action_links( $actions ): array {
 
-        /**
-         * Load text domain for translation
-         */
-        public function load_text_domain() {
-            load_plugin_textdomain(
-                'woo-manage-fraud-orders',
-                false,
-                dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
-            );
-        }
+			$new_actions = array(
+				'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=settings_tab_blacklists' ) . '">' . __( 'Settings', 'woo-manage-fraud-orders' ) . '</a>',
+			);
 
-        /**
-         * Include needed files
-         */
-        public function includes() {
-            require_once WMFO_ABSPATH . 'includes/wmfo-functions.php';
-            require_once WMFO_ABSPATH . 'includes/class-wmfo-blacklist-handler.php';
-            require_once WMFO_ABSPATH . 'includes/class-wmfo-track-fraud-attempts.php';
-            if ( is_admin() ) {
-                require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-settings.php';
-                require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-order-metabox.php';
-                require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-blacklist-action.php';
-                require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-bulk-blacklist.php';
-            }
-        }
+			return array_merge( $new_actions, $actions );
+		}
 
-    }
+		/**
+		 * Load text domain for translation
+		 *
+		 * @hooked plugins_loaded
+		 */
+		public function load_text_domain() {
+			load_plugin_textdomain(
+				'woo-manage-fraud-orders',
+				false,
+				dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+			);
+		}
+
+		/**
+		 * Include required files.
+		 */
+		public function includes() {
+			require_once WMFO_ABSPATH . 'includes/wmfo-functions.php';
+			require_once WMFO_ABSPATH . 'includes/class-wmfo-blacklist-handler.php';
+			require_once WMFO_ABSPATH . 'includes/class-wmfo-track-fraud-attempts.php';
+			if ( is_admin() ) {
+				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-settings-tab.php';
+				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-order-metabox.php';
+				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-order-actions.php';
+				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-bulk-blacklist.php';
+			}
+		}
+
+	}
 }
