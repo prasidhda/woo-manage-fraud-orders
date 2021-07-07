@@ -1,5 +1,5 @@
 === Woo Manage Fraud Orders ===
-Contributors: prasidhda, sranzan
+Contributors: prasidhda, sranzan, BrianHenryIE
 Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers
 Requires at least: 4.6
 Tested up to: 5.7
