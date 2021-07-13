@@ -1,0 +1,30 @@
+{
+  "name": "woo-manage-fraud-orders",
+  "version": "2.0.2",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "docker:down": "npx wc-e2e docker:down",
+    "docker:ssh": "npx wc-e2e docker:ssh",
+    "docker:up": "npx wc-e2e docker:up",
+    "test:e2e": "npx wc-e2e test:e2e",
+    "test:e2e-debug": "npx wc-e2e test:e2e-debug",
+    "test:e2e-dev": "npx wc-e2e test:e2e-dev"
+  },
+  "author": "Prasidhda Malla",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "@woocommerce/api": "^0.2.0",
+    "@woocommerce/e2e-core-tests": "^0.1.4",
+    "@woocommerce/e2e-environment": "^0.2.2",
+    "@woocommerce/e2e-utils": "^0.1.5",
+    "@wordpress/e2e-test-utils": "^5.3.0",
+    "jest": "^27.0.6"
+  },
+  "jest": {
+    "excludeNodeModules": false
+  }
+}
