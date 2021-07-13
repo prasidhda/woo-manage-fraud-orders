@@ -40,3 +40,6 @@ Thumbs.db
 /.phpintel
 *.po~
 *.pot~
+
+node_modules
+package-lock.json
