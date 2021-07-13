@@ -34,7 +34,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 *
 		 * @used-by self::init()
 		 *
-		 * @return array<string,string>
+		 * @return array<string,string|array>
 		 */
 		public static function get_blacklists(): array {
 			return array(
@@ -42,6 +42,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 				'prev_wmfo_black_list_names' => self::get_setting( 'wmfo_black_list_names' ),
 				'prev_black_list_phones'     => self::get_setting( 'wmfo_black_list_phones' ),
 				'prev_black_list_emails'     => self::get_setting( 'wmfo_black_list_emails' ),
+				'prev_black_list_addresses'  => self::get_setting( 'wmfo_black_list_addresses' ),
 			);
 
 		}
@@ -51,7 +52,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 *
 		 * @param string $key The wp_options name.
 		 * @param string $pre_values The preexisting values, as a string, one per line.
-		 * @param string $to_add The value to add.
+		 * @param string $to_add The value(s) to add.
 		 * @param string $action "add"|"remove".
 		 */
 		public static function update_blacklist( $key, $pre_values, $to_add, $action = 'add' ) {
@@ -60,14 +61,20 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 				if ( empty( $pre_values ) ) {
 					$new_values = $to_add;
 				} else {
-					$new_values = ! in_array( $to_add, explode( PHP_EOL, $pre_values ), true ) ? $pre_values . PHP_EOL . $to_add : $pre_values;
+					$to_add_entries = explode( PHP_EOL, $to_add );
+					foreach ( $to_add_entries as $to_add_entry ) {
+						$new_values = ! in_array( $to_add_entry, explode( PHP_EOL, $pre_values ), true ) ? $pre_values . PHP_EOL . $to_add_entry : $pre_values;
+					}
 				}
 			} elseif ( 'remove' === $action ) {
 				$in_array_value = explode( PHP_EOL, $pre_values );
-				if ( in_array( $to_add, $in_array_value, true ) ) {
-					$array_key = array_search( $to_add, $in_array_value, true );
-					if ( false !== $array_key ) {
-						unset( $in_array_value[ $array_key ] );
+				$to_add_entries = explode( PHP_EOL, $to_add );
+				foreach ( $to_add_entries as $to_add_entry ) {
+					if ( in_array( $to_add_entry, $in_array_value, true ) ) {
+						$array_key = array_search( $to_add_entry, $in_array_value, true );
+						if ( false !== $array_key ) {
+							unset( $in_array_value[ $array_key ] );
+						}
 					}
 				}
 				$new_values = implode( PHP_EOL, $in_array_value );
@@ -84,10 +91,10 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 *
 		 * @see wmfo_get_customer_details_of_order()
 		 *
-		 * @param array<string,string>|false $customer Customer details (optional if an order is provided).
-		 * @param ?WC_Order                  $order A WooCommerce order (option if customer details are provided).
-		 * @param string                     $action "add"|"remove".
-		 * @param string                     $context "front"|"order-pay-eway".
+		 * @param array<string,string|array>|false $customer Customer details (optional if an order is provided).
+		 * @param ?WC_Order                        $order A WooCommerce order (option if customer details are provided).
+		 * @param string                           $action "add"|"remove".
+		 * @param string                           $context "front"|"order-pay-eway".
 		 *
 		 * @return bool
 		 * @throws Exception
@@ -102,6 +109,9 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			self::update_blacklist( 'wmfo_black_list_ips', $prev_blacklisted_data['prev_black_list_ips'], $customer['ip_address'], $action );
 			self::update_blacklist( 'wmfo_black_list_phones', $prev_blacklisted_data['prev_black_list_phones'], $customer['billing_phone'], $action );
 			self::update_blacklist( 'wmfo_black_list_emails', $prev_blacklisted_data['prev_black_list_emails'], $customer['billing_email'], $action );
+			// If billing and shipping address are the same, only save one.
+			$addresses = implode( PHP_EOL, array_unique( array( implode( ',', $customer['billing_address'] ), implode( ',', $customer['shipping_address'] ) ) ) );
+			self::update_blacklist( 'wmfo_black_list_addresses', $prev_blacklisted_data['prev_black_list_addresses'], $addresses, $action );
 
 			// Handle the cancellation of order.
 			if ( null !== $order ) {
@@ -192,6 +202,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			$blacklisted_emails         = self::get_setting( 'wmfo_black_list_emails' );
 			$blacklisted_email_domains  = self::get_setting( 'wmfo_black_list_email_domains' );
 			$blacklisted_phones         = self::get_setting( 'wmfo_black_list_phones' );
+			$blacklisted_addresses      = self::get_setting( 'wmfo_black_list_addresses' );
 
 			$email  = $customer_details['billing_email'];
 			$domain = substr( $email, strpos( $email, '@' ) + 1 );
@@ -206,6 +217,64 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 				return true;
 			} elseif ( in_array( $customer_details['billing_phone'], array_map( 'trim', explode( PHP_EOL, $blacklisted_phones ) ), true ) ) {
 				return true;
+			}
+
+			// Map country name to country code.
+			// AF => Afghanistan.
+			$countries_list = WC()->countries->get_countries();
+			$countries_list = array_map( 'strtolower', $countries_list );
+			$countries_list = array_flip( $countries_list );
+
+			$customer_billing_address_parts = $customer_details['billing_address'];
+			$customer_billing_address_parts = array_map(
+				'strtolower',
+				array_map(
+					function( $element ) use ( $countries_list ) {
+						if ( isset( $countries_list[ $element ] ) ) {
+							return $countries_list[ $element ];
+						}
+						return trim( $element );
+					},
+					$customer_billing_address_parts
+				)
+			);
+
+			$customer_shipping_address_parts = $customer_details['shipping_address'] ?? array();
+			$customer_shipping_address_parts = array_map(
+				'strtolower',
+				array_map(
+					function( $element ) use ( $countries_list ) {
+						if ( isset( $countries_list[ $element ] ) ) {
+							return $countries_list[ $element ];
+						}
+						return trim( $element );
+					},
+					$customer_shipping_address_parts
+				)
+			);
+
+			foreach ( array_filter( explode( PHP_EOL, strtolower( $blacklisted_addresses ) ) ) as $blacklisted_address ) {
+				$blacklisted_address_parts = explode( ',', $blacklisted_address );
+				$blacklisted_address_parts = array_map(
+					function( $element ) use ( $countries_list ) {
+						if ( isset( $countries_list[ $element ] ) ) {
+							return $countries_list[ $element ];
+						}
+						return trim( $element );
+					},
+					$blacklisted_address_parts
+				);
+				/**
+				 * If all the parts of the blacklisted address are in the customer's address
+				 *
+				 * @see https://stackoverflow.com/a/22651134/
+				 */
+				$address_match = ! array_diff( $blacklisted_address_parts, $customer_billing_address_parts )
+					|| ! array_diff( $blacklisted_address_parts, $customer_shipping_address_parts );
+
+				if ( $address_match ) {
+					return true;
+				}
 			}
 
 			return false;

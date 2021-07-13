@@ -107,6 +107,25 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 			$customer_details['billing_email'] = isset( $data['billing_email'] ) ? $data['billing_email'] : '';
 			$customer_details['billing_phone'] = isset( $data['billing_phone'] ) ? $data['billing_phone'] : '';
 
+			$customer_details['billing_address'] = array(
+				$data['billing_address_1'],
+				$data['billing_address_2'],
+				$data['billing_city'],
+				$data['billing_state'],
+				$data['billing_postcode'],
+				$data['billing_country'],
+			);
+			if ( isset( $data['shipping_country'] ) ) {
+				$customer_details['shipping_address'] = array(
+					$data['shipping_address_1'],
+					$data['shipping_address_2'],
+					$data['shipping_city'],
+					$data['shipping_state'],
+					$data['shipping_postcode'],
+					$data['shipping_country'],
+				);
+			}
+
 			$cart_items = WC()->cart->get_cart();
 
 			$product_items = array();
@@ -149,9 +168,9 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 *
 		 * @see wmfo_get_customer_details_of_order()
 		 *
-		 * @param array<string,string> $customer_details The customer details that might be blacklisted.
-		 * @param int[]                $product_items The product ids in the order.
-		 * @param ?WC_Order            $order The WooCommerce order.
+		 * @param array<string,string|array> $customer_details The customer details that might be blacklisted.
+		 * @param int[]                      $product_items The product ids in the order.
+		 * @param ?WC_Order                  $order The WooCommerce order.
 		 */
 		public static function manage_blacklisted_customers( $customer_details, $product_items, $order = null ) {
 			// As very first step, check if there is skipping set for order pay.
@@ -170,26 +189,11 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 
 			$customer_details['ip_address'] = method_exists( 'WC_Geolocation', 'get_ip_address' ) ? WC_Geolocation::get_ip_address() : wmfo_get_ip_address();
 
-			$domain                  = substr( $customer_details['billing_email'], strpos( $customer_details['billing_email'], '@' ) + 1 );
-			$allow_blacklist_by_name = get_option( 'wmfo_allow_blacklist_by_name', 'no' );
-			$prev_black_list_names   = get_option( 'wmfo_black_list_names', '' );
-
-			$prev_black_list_ips           = get_option( 'wmfo_black_list_ips', '' );
-			$prev_black_list_phones        = get_option( 'wmfo_black_list_phones', '' );
-			$prev_black_list_emails        = get_option( 'wmfo_black_list_emails', '' );
-			$prev_black_list_email_domains = get_option( 'wmfo_black_list_email_domains', '' );
-
 			// Block this checkout if this customers details are already blacklisted.
-			if ( $customer_details['full_name'] && 'yes' === $allow_blacklist_by_name && $prev_black_list_names && in_array( $customer_details['full_name'], explode( PHP_EOL, $prev_black_list_names ), true ) ||
-				$customer_details['ip_address'] && $prev_black_list_ips && in_array( $customer_details['ip_address'], explode( PHP_EOL, $prev_black_list_ips ), true ) ||
-				$prev_black_list_phones && $customer_details['billing_phone'] && in_array( $customer_details['billing_phone'], explode( PHP_EOL, $prev_black_list_phones ), true ) ||
-				$customer_details['billing_email'] && $prev_black_list_emails && in_array( $customer_details['billing_email'], explode( PHP_EOL, $prev_black_list_emails ), true ) ||
-				$domain && $prev_black_list_email_domains && in_array( $domain, explode( PHP_EOL, $prev_black_list_email_domains ), true )
-			) {
+			if ( WMFO_Blacklist_Handler::is_blacklisted( $customer_details ) ) {
 				if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
 					WMFO_Blacklist_Handler::show_blocked_message();
 				}
-
 				return;
 			}
 

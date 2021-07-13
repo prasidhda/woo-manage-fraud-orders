@@ -12,18 +12,24 @@
  *
  * @param WC_Order $order The WooCommerce order object.
  *
- * @return array<string,string>|false
+ * @return array<string,string|array>|false
  */
 function wmfo_get_customer_details_of_order( $order ) {
 	if ( ! ( $order instanceof WC_Order ) ) {
 		return false;
 	}
 
+	$address_keys     = array( 'address_1', 'address_2', 'city', 'state', 'postcode', 'country' );
+	$billing_address  = array_intersect_key( $order->get_address( 'billing' ), array_flip( $address_keys ) );
+	$shipping_address = array_intersect_key( $order->get_address( 'shipping' ), array_flip( $address_keys ) );
+
 	return array(
-		'full_name'     => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
-		'ip_address'    => $order->get_customer_ip_address(),
-		'billing_phone' => $order->get_billing_phone(),
-		'billing_email' => $order->get_billing_email(),
+		'full_name'        => $order->get_billing_first_name() . ' ' . $order->get_billing_last_name(),
+		'ip_address'       => $order->get_customer_ip_address(),
+		'billing_phone'    => $order->get_billing_phone(),
+		'billing_email'    => $order->get_billing_email(),
+		'billing_address'  => array_filter( array_map( 'trim', array_values( $billing_address ) ) ),
+		'shipping_address' => array_filter( array_map( 'trim', array_values( $shipping_address ) ) ) ?? array(),
 	);
 }
 

@@ -85,6 +85,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'wmfo_black_list_emails',
 					'wmfo_black_list_email_domains',
 					'wmfo_black_list_ips',
+					'wmfo_black_list_addresses',
 				),
 				true
 			) ) {
@@ -199,6 +200,14 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'type'     => 'textarea',
 					'desc'     => esc_html__( 'Enter IPs in new line', 'woo-manage-fraud-orders' ),
 					'id'       => 'wmfo_black_list_ips',
+					'desc_tip' => false,
+				),
+				'blacklists_addresses'              => array(
+					'name'     => esc_html__( 'Blacklisted Billing/Shipping Addresses', 'woo-manage-fraud-orders' ),
+					'css'      => 'width:600px;height:200px',
+					'type'     => 'textarea',
+					'desc'     => esc_html__( 'Enter one address per line, with each line of the address itself separated by a comma. Partial addresses can be used, e.g. "Springfield, US" will block every order in every town named Springfield in the US; "90210" will block all orders to that zip code.', 'woo-manage-fraud-orders' ),
+					'id'       => 'wmfo_black_list_addresses',
 					'desc_tip' => false,
 				),
 				'section_end'                       => array(
