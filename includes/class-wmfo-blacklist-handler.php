@@ -57,6 +57,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 */
 		public static function update_blacklist( $key, $pre_values, $to_add, $action = 'add' ) {
 			$new_values = null;
+			$to_add = str_replace(PHP_EOL, '', $to_add);
 			if ( 'add' === $action ) {
 				if ( empty( $pre_values ) ) {
 					$new_values = $to_add;
@@ -111,6 +112,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			self::update_blacklist( 'wmfo_black_list_emails', $prev_blacklisted_data['prev_black_list_emails'], $customer['billing_email'], $action );
 			// If billing and shipping address are the same, only save one.
 			$addresses = implode( PHP_EOL, array_unique( array( implode( ',', $customer['billing_address'] ), implode( ',', $customer['shipping_address'] ) ) ) );
+
 			self::update_blacklist( 'wmfo_black_list_addresses', $prev_blacklisted_data['prev_black_list_addresses'], $addresses, $action );
 
 			// Handle the cancellation of order.
