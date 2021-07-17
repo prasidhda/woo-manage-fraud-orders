@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woo Manage Fraud Orders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-09 04:36+0000\n"
+"POT-Creation-Date: 2021-07-15 02:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -17,91 +17,107 @@ msgstr ""
 "X-Domain: woo-manage-fraud-orders"
 
 #. a number of orders.
-#: includes/admin/class-wmfo-bulk-blacklist.php:72
+#: includes/admin/class-wmfo-bulk-blacklist.php:120
 #, php-format
 msgid "%d order has been affected by bulk blacklisting."
 msgid_plural "%d orders have been affected by bulk blacklisting."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/class-wmfo-settings.php:121
+#: includes/admin/class-wmfo-settings-tab.php:157
 msgid "Allow blacklist by Name ?"
 msgstr ""
 
-#: includes/admin/class-wmfo-bulk-blacklist.php:22
+#: includes/admin/class-wmfo-bulk-blacklist.php:36
 msgid "Blacklist Customer"
 msgstr ""
 
-#: includes/admin/class-wmfo-blacklist-action.php:55
+#: includes/admin/class-wmfo-order-actions.php:73
 msgid "Blacklist order"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:25
-#: includes/admin/class-wmfo-settings.php:73
+#: includes/admin/class-wmfo-settings-tab.php:206
+msgid "Blacklisted Billing/Shipping Addresses"
+msgstr ""
+
+#: includes/admin/class-wmfo-settings-tab.php:37
+#: includes/admin/class-wmfo-settings-tab.php:109
 msgid "Blacklisted Customers"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:154
+#: includes/admin/class-wmfo-settings-tab.php:190
 msgid "Blacklisted Email Domains."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:146
+#: includes/admin/class-wmfo-settings-tab.php:182
 msgid "Blacklisted Emails"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:162
+#: includes/admin/class-wmfo-settings-tab.php:198
 msgid "Blacklisted IP Addresses"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:130
+#: includes/admin/class-wmfo-settings-tab.php:166
 msgid "Blacklisted Names"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:101
+#: includes/admin/class-wmfo-settings-tab.php:137
 msgid "Blacklisted Order Statuses"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:138
+#: includes/admin/class-wmfo-settings-tab.php:174
 msgid "Blacklisted Phones"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:111
+#: includes/admin/class-wmfo-settings-tab.php:147
 msgid "Blacklisted Product Types"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:79
+#: includes/admin/class-wmfo-settings-tab.php:115
 msgid "Blacklists Notice Message"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:125
+#: includes/admin/class-wmfo-settings-tab.php:161
 msgid "Check this to blacklist customer by their name. "
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:133
+#: includes/admin/class-wmfo-order-metabox.php:67
+msgid "Check this to bypass this order payment from blacklisting."
+msgstr ""
+
+#: includes/admin/class-wmfo-settings-tab.php:169
 msgid "Enter combined first name and last name in new line. Eg. \"John Doe\""
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:157
+#: includes/admin/class-wmfo-settings-tab.php:193
 msgid "Enter email domain in new line. Example \"mailnator.com\""
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:149
+#: includes/admin/class-wmfo-settings-tab.php:185
 msgid "Enter Emails in new line"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:165
+#: includes/admin/class-wmfo-settings-tab.php:201
 msgid "Enter IPs in new line"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:141
+#: includes/admin/class-wmfo-settings-tab.php:209
+msgid ""
+"Enter one address per line, with each line of the address itself separated "
+"by a comma. Partial addresses can be used, e.g. \"Springfield, US\" will "
+"block every order in every town named Springfield in the US; \"90210\" will "
+"block all orders to that zip code."
+msgstr ""
+
+#: includes/admin/class-wmfo-settings-tab.php:177
 msgid "Enter Phones in new line"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:83
+#: includes/admin/class-wmfo-settings-tab.php:119
 msgid "Enter the message to be shown for blocked customers"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:92
+#: includes/admin/class-wmfo-settings-tab.php:128
 msgid ""
 "Enter the number of allowed fraud attempts before blocking automatically. It "
 "counts increases only if order status changes to failed on order placement."
@@ -117,21 +133,21 @@ msgid ""
 "woocommerce/"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:118
+#: includes/admin/class-wmfo-settings-tab.php:154
 msgid ""
 "If selected, customer will be blocked only if they have product of at least "
 "one selected product types in the cart."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:88
+#: includes/admin/class-wmfo-settings-tab.php:124
 msgid "Number of allowed Fraud Attempts"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:130
+#: includes/class-wmfo-blacklist-handler.php:165
 msgid "Order details blacklisted for future checkout."
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:126
+#: includes/class-wmfo-blacklist-handler.php:161
 msgid "Order details removed from blacklist."
 msgstr ""
 
@@ -139,21 +155,21 @@ msgstr ""
 msgid "Prasidhda Malla"
 msgstr ""
 
-#: includes/admin/class-wmfo-blacklist-action.php:58
+#: includes/admin/class-wmfo-order-actions.php:77
 msgid "Remove from Blacklist"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:89
+#: includes/class-woo-manage-fraud-orders.php:134
 msgid "Settings"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:90
-#: includes/class-wmfo-blacklist-handler.php:145
-#: includes/admin/class-wmfo-settings.php:82
+#: includes/class-wmfo-blacklist-handler.php:120
+#: includes/class-wmfo-blacklist-handler.php:180
+#: includes/admin/class-wmfo-settings-tab.php:118
 msgid "Sorry, You are being restricted from placing orders."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:98
+#: includes/admin/class-wmfo-settings-tab.php:134
 msgid ""
 "This will block customers from placing an order if they try more than the "
 "specified number of attempts and the order still fails. Legitimate reasons "
@@ -163,7 +179,7 @@ msgid ""
 "number of retries."
 msgstr ""
 
-#: includes/admin/class-wmfo-order-metabox.php:21
+#: includes/admin/class-wmfo-order-metabox.php:48
 msgid "WMFO"
 msgstr ""
 
@@ -171,27 +187,27 @@ msgstr ""
 msgid "Woo Manage Fraud Orders"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:76
+#: includes/class-woo-manage-fraud-orders.php:116
 #, php-format
 msgid "Woo Manage Fraud Orders depends on %s to work!"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:76
+#: includes/class-woo-manage-fraud-orders.php:116
 msgid "WooCommerce"
 msgstr ""
 
 #. Description of the plugin
 msgid ""
-"WooCommerce plugin to manage the fraud orders by blacklisting the "
-"customer's details."
+"WooCommerce plugin to manage the fraud orders by blacklisting the customer's "
+"details."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:105
+#: includes/admin/class-wmfo-settings-tab.php:141
 msgid ""
 "You can select multiple order statuses.If customer has previous order in one "
 "of above selected order items, He/She will not be able to place order."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings.php:115
+#: includes/admin/class-wmfo-settings-tab.php:151
 msgid "You can select multiple product types."
 msgstr ""
