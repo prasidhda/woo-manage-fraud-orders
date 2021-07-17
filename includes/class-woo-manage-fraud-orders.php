@@ -23,7 +23,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		 *
 		 * @var string $version
 		 */
-		public $version = '2.1.1';
+		public $version = '2.2.0';
 
 		/**
 		 * Store the class singleton.
@@ -86,10 +86,13 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 
 			add_filter( 'plugin_action_links_' . plugin_basename( WMFO_PLUGIN_FILE ), array( $this, 'action_links' ), 99, 1 );
 			add_action( 'plugins_loaded', array( $this, 'load_text_domain' ) );
+			add_action('init', array($this, 'may_be_create_log_dir_db_table'));
 		}
 
 		/**
 		 * Check is WooCommerce active.
+		 * Create log dir
+		 * Create log db table
 		 */
 		public function install() {
 
@@ -117,6 +120,21 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 				@trigger_error( '', E_USER_ERROR );
 
 			}
+
+			$this->may_be_create_log_dir_db_table();
+
+		}
+
+		/**
+		 * If plugin version is less them 2.1.1, return
+		 */
+		public function may_be_create_log_dir_db_table(){
+			require_once plugin_dir_path(WMFO_PLUGIN_FILE) . 'includes/class-wmfo-activator.php';
+
+			WMFO_Activator::create_db_table();
+
+			WMFO_Activator::create_upload_dir();
+
 		}
 
 		/**
@@ -156,6 +174,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		public function includes() {
 			require_once WMFO_ABSPATH . 'includes/wmfo-functions.php';
 			require_once WMFO_ABSPATH . 'includes/class-wmfo-blacklist-handler.php';
+			require_once WMFO_ABSPATH . 'includes/class-wmfo-log.php';
 			require_once WMFO_ABSPATH . 'includes/class-wmfo-track-fraud-attempts.php';
 			if ( is_admin() ) {
 				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-settings-tab.php';
