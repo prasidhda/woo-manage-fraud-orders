@@ -15,13 +15,13 @@ class WMFO_Activator {
 		    $charset_collate = $wpdb->get_charset_collate();
 		    $sql = "CREATE TABLE $table (
 				id mediumint(9) NOT NULL AUTO_INCREMENT,
-				first_name varchar(255) DEFAULT '' NOT NULL,
-				last_name varchar(255) DEFAULT '' NOT NULL,
+				full_name varchar(255) DEFAULT '' NOT NULL,
 				phone varchar(255) DEFAULT '' NOT NULL,
 				ip varchar(255) DEFAULT '' NOT NULL,
 				email varchar(255) DEFAULT '' NOT NULL,
 				billing_address varchar(255) DEFAULT '' NOT NULL,
 				shipping_address varchar(255) DEFAULT '' NOT NULL,
+				blacklisted_reason varchar(255) DEFAULT '' NOT NULL,
 				timestamp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 				PRIMARY KEY  (id)
 			) $charset_collate;";

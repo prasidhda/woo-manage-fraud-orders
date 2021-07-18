@@ -103,12 +103,12 @@ class WMFO_Logs_Table extends WP_List_Table {
 	 * @since  2.0.0
 	 * @access public
 	 */
-	function column_first_name( $item ) {
+	function column_full_name( $item ) {
 		$actions = array(
 			'delete' => sprintf( '<a href="?page=%1$s&action=%2$s&log=%3$s">%4$s</a>', $_REQUEST['page'], 'delete', $item['id'], __( 'Delete', 'woo-manage-fraud-orders' ) ),
 		);
 
-		return sprintf( '%1$s %2$s', $item['first_name'], $this->row_actions( $actions ) );
+		return sprintf( '%1$s %2$s', $item['full_name'], $this->row_actions( $actions ) );
 	}
 
 	/**
@@ -183,13 +183,13 @@ class WMFO_Logs_Table extends WP_List_Table {
 		}
 
 		$columns = array(
-			'first_name'         => __( 'First Name', 'woo-manage-fraud-orders' ),
-			'last_name'       => __( 'Last Name', 'woo-manage-fraud-orders' ),
+			'full_name'         => __( 'Full Name', 'woo-manage-fraud-orders' ),
 			'phone' => __( 'Phone', 'woo-manage-fraud-orders' ),
 			'ip'      => __( 'IP', 'woo-manage-fraud-orders' ),
 			'email'    => __( 'Email', 'woo-manage-fraud-orders' ),
 			'billing_address'        => __( 'Billing Address', 'woo-manage-fraud-orders' ),
 			'shipping_address'              => __( 'Shipping Address', 'woo-manage-fraud-orders' ),
+			'blacklisted_reason'              => __( 'Blacklisted Reason', 'woo-manage-fraud-orders' ),
 			'timestamp'         => __( 'Date', 'woo-manage-fraud-orders' ),
 		);
 
@@ -224,13 +224,13 @@ class WMFO_Logs_Table extends WP_List_Table {
 	 */
 	public function column_default( $item, $column_name ) {
 		switch ( $column_name ) {
-			case 'first_name':
-			case 'last_name':
+			case 'full_name':
 			case 'phone':
 			case 'ip':
 			case 'email':
 			case 'billing_address':
 			case 'shipping_address':
+			case 'blacklisted_reason':
 			case 'timestamp':
 				return $item[ $column_name ];
 

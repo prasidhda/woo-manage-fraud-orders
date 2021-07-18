@@ -4,8 +4,8 @@ if (!defined('ABSPATH')) {
     exit();
 }
 
-if (!class_exists('WMFO_Log')) {
-    class WMFO_Log {
+if (!class_exists('WMFO_Debug_Log')) {
+    class WMFO_Debug_Log {
         public $log_contents = null;
         public $log_path = null;
         public $log_file_name = null;
@@ -18,11 +18,11 @@ if (!class_exists('WMFO_Log')) {
          */
         public function __construct($path = null, $file_name = null) {
             $this->log_contents = '';
-            $this->log_path = WMFO_LOG_UPLOAD_DIR;
+            $this->log_path = WMFO_LOG_DIR;
             if ($path !== null) {
                 $this->log_path = $path;
             }
-            $this->log_file_name = date("Y-m-d") . '-wmfo-'  . '.txt';
+            $this->log_file_name = date("Y-m-d") . '-wmfo'  . '.txt';
 
             if ($file_name) {
                 $this->log_file_name = $file_name;

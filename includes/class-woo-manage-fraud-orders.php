@@ -175,7 +175,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		public function includes() {
 			require_once WMFO_ABSPATH . 'includes/wmfo-functions.php';
 			require_once WMFO_ABSPATH . 'includes/class-wmfo-blacklist-handler.php';
-			require_once WMFO_ABSPATH . 'includes/class-wmfo-log.php';
+			require_once WMFO_ABSPATH . 'includes/class-wmfo-debug-log.php';
 			require_once WMFO_ABSPATH . 'includes/class-wmfo-track-fraud-attempts.php';
 			require_once WMFO_ABSPATH . 'includes/class-wmfo-logs-handler.php';
 			if ( is_admin() ) {
