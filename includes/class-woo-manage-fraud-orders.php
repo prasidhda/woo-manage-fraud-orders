@@ -127,7 +127,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		}
 
 		/**
-		 * If plugin version is less them 2.1.1, return
+		 * Function to handle the creation of debug folder and DB table
 		 */
 		public function may_be_create_log_dir_db_table(){
 			require_once plugin_dir_path(WMFO_PLUGIN_FILE) . 'includes/class-wmfo-activator.php';
