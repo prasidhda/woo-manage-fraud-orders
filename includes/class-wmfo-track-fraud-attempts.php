@@ -100,12 +100,12 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 
 			$customer_details = array();
 
-			$first_name                    = isset( $data['billing_first_name'] ) ? $data['billing_first_name'] : '';
-			$last_name                     = isset( $data['billing_last_name'] ) ? $data['billing_last_name'] : '';
+			$first_name                    = $data['billing_first_name'] ?? '';
+			$last_name                     = $data['billing_last_name'] ?? '';
 			$customer_details['full_name'] = $first_name . ' ' . $last_name;
 
-			$customer_details['billing_email'] = isset( $data['billing_email'] ) ? $data['billing_email'] : '';
-			$customer_details['billing_phone'] = isset( $data['billing_phone'] ) ? $data['billing_phone'] : '';
+			$customer_details['billing_email'] = $data['billing_email'] ?? '';
+			$customer_details['billing_phone'] = $data['billing_phone'] ?? '';
 
 			$customer_details['billing_address'] = array(
 				$data['billing_address_1'],
@@ -193,6 +193,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 			if ( WMFO_Blacklist_Handler::is_blacklisted( $customer_details ) ) {
 				if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
 					WMFO_Blacklist_Handler::show_blocked_message();
+					WMFO_Blacklist_Handler::add_to_log($customer_details);
 				}
 				return;
 			}
@@ -241,7 +242,9 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 
 					if ( in_array( $prev_order->post_status, $blacklists_order_status, true ) ) {
 						if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
+							$GLOBALS['first_caught_blacklisted_reason'] = __('Order Status', 'woo-manage-fraud-orders');
 							WMFO_Blacklist_Handler::show_blocked_message();
+							WMFO_Blacklist_Handler::add_to_log($customer_details);
 						}
 						break;
 					}
@@ -282,10 +285,12 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		/**
 		 * Triggered when a payment with the gateway fails.
 		 *
-		 * @param WC_Order        $order The order whose payment failed.
-		 * @param stdClass        $_result The result from the API call.
-		 * @param string          $_error The error message.
+		 * @param WC_Order $order The order whose payment failed.
+		 * @param stdClass $_result The result from the API call.
+		 * @param string $_error The error message.
 		 * @param WC_Gateway_EWAY $_gateway The instance of the gateway.
+		 *
+		 * @throws Exception
 		 */
 		public static function manage_multiple_failed_attempts_eway( $order, $_result, $_error, $_gateway ) {
 

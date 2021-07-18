@@ -23,7 +23,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		 *
 		 * @var string $version
 		 */
-		public $version = '2.1.1';
+		public $version = '2.2.0';
 
 		/**
 		 * Store the class singleton.
@@ -86,10 +86,14 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 
 			add_filter( 'plugin_action_links_' . plugin_basename( WMFO_PLUGIN_FILE ), array( $this, 'action_links' ), 99, 1 );
 			add_action( 'plugins_loaded', array( $this, 'load_text_domain' ) );
+			add_action('init', array($this, 'may_be_create_log_dir_db_table'));
+			add_action('admin_menu', array($this, 'init_sub_menu'), 9999);
 		}
 
 		/**
 		 * Check is WooCommerce active.
+		 * Create log dir
+		 * Create log db table
 		 */
 		public function install() {
 
@@ -117,6 +121,21 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 				@trigger_error( '', E_USER_ERROR );
 
 			}
+
+			$this->may_be_create_log_dir_db_table();
+
+		}
+
+		/**
+		 * Function to handle the creation of debug folder and DB table
+		 */
+		public function may_be_create_log_dir_db_table(){
+			require_once plugin_dir_path(WMFO_PLUGIN_FILE) . 'includes/class-wmfo-activator.php';
+
+			WMFO_Activator::create_db_table();
+
+			WMFO_Activator::create_upload_dir();
+
 		}
 
 		/**
@@ -156,13 +175,35 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		public function includes() {
 			require_once WMFO_ABSPATH . 'includes/wmfo-functions.php';
 			require_once WMFO_ABSPATH . 'includes/class-wmfo-blacklist-handler.php';
+			require_once WMFO_ABSPATH . 'includes/class-wmfo-debug-log.php';
 			require_once WMFO_ABSPATH . 'includes/class-wmfo-track-fraud-attempts.php';
+			require_once WMFO_ABSPATH . 'includes/class-wmfo-logs-handler.php';
 			if ( is_admin() ) {
 				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-settings-tab.php';
 				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-order-metabox.php';
 				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-order-actions.php';
 				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-bulk-blacklist.php';
 			}
+		}
+
+		public function init_sub_menu(){
+			add_submenu_page( 'woocommerce', __( 'WMFO Logs', 'woo-manage-fraud-orders' ), __( 'WMFO Logs', 'woo-manage-fraud-orders' ),
+				'manage_options', 'wmfo-logs', array( $this, 'render_logs' ), 99999 );
+		}
+
+		public function render_logs() {
+			require_once plugin_dir_path(WMFO_PLUGIN_FILE) . 'includes/admin/class-wmfo-logs-table.php';
+			$logs = new WMFO_Logs_Table();
+			$logs->prepare_items();
+			?>
+			<div class="wrap">
+				<form method="post">
+					<h2><?php _e( 'Logs of Blacklisted attempts.', 'woo-manage-fraud-orders' ) ?></h2>
+                    <p><?php _e('This is not the blacklisted customer details. Rather,  It is the list of customers who could not manage to place order due to blacklisting.', 'woo-manage-fraud-orders'); ?></p>
+					<?php $logs->display(); ?>
+				</form>
+			</div>
+			<?php
 		}
 
 	}
