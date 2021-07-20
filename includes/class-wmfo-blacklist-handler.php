@@ -249,19 +249,19 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			$email  = $customer_details['billing_email'];
 			$domain = substr( $email, strpos( $email, '@' ) + 1 );
 
-			if ( 'yes' === $allow_blacklist_by_name && in_array( $customer_details['full_name'], array_map( 'trim', explode( PHP_EOL, $blacklisted_customer_names ) ), true ) ) {
+			if ( 'yes' === $allow_blacklist_by_name && !empty($blacklisted_customer_names) && in_array( $customer_details['full_name'], array_map( 'trim', explode( PHP_EOL, $blacklisted_customer_names ) ), true ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __('Full Name', 'woo-manage-fraud-orders');
 
 				return true;
-			} elseif ( in_array( $customer_details['ip_address'], array_map( 'trim', explode( PHP_EOL, $blacklisted_ips ) ), true ) ) {
+			} elseif ( !empty($blacklisted_ips) && in_array( $customer_details['ip_address'], array_map( 'trim', explode( PHP_EOL, $blacklisted_ips ) ), true ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __('IP Address', 'woo-manage-fraud-orders');
 
 				return true;
-			} elseif ( in_array( $customer_details['billing_email'], array_map( 'trim', explode( PHP_EOL, $blacklisted_emails ) ), true ) ) {
+			} elseif ( !empty($blacklisted_emails) && in_array( $customer_details['billing_email'], array_map( 'trim', explode( PHP_EOL, $blacklisted_emails ) ), true ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __('Billing Email', 'woo-manage-fraud-orders');
 
 				return true;
-			} elseif ( in_array( $domain, array_map( 'trim', explode( PHP_EOL, $blacklisted_email_domains ) ), true ) ) {
+			} elseif ( !empty($blacklisted_email_domains) && in_array( $domain, array_map( 'trim', explode( PHP_EOL, $blacklisted_email_domains ) ), true ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __('Email Domain', 'woo-manage-fraud-orders');
 
 				return true;
