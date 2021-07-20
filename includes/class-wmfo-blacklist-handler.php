@@ -265,7 +265,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __('Email Domain', 'woo-manage-fraud-orders');
 
 				return true;
-			} elseif ( in_array( $customer_details['billing_phone'], array_map( 'trim', explode( PHP_EOL, $blacklisted_phones ) ), true ) ) {
+			} elseif ( !empty($blacklisted_phones) && in_array( $customer_details['billing_phone'], array_map( 'trim', explode( PHP_EOL, $blacklisted_phones ) ), true ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __('Billing Phone', 'woo-manage-fraud-orders');
 
 				return true;
