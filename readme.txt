@@ -3,7 +3,7 @@ Contributors: prasidhda, sranzan, BrianHenryIE
 Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers
 Requires at least: 4.6
 Tested up to: 5.7
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -53,6 +53,9 @@ Yes, absolutely. You can choose the multiple orders statuses in setting and this
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+= 2.2.1 =
+* fix: disabled checkout field with corresponding empty blacklisted options blocking the order placement
+
 = 2.2.0 =
 * feature: Debug log and DB log of order placement restriction
 
