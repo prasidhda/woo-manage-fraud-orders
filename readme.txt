@@ -2,8 +2,8 @@
 Contributors: prasidhda, sranzan, BrianHenryIE
 Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers
 Requires at least: 4.6
-Tested up to: 5.7
-Stable tag: 2.2.1
+Tested up to: 5.8
+Stable tag: 2.3.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -27,8 +27,8 @@ Blacklist the customer, <a href="https://prasidhda.com.np/how-to-blacklist-custo
 
 == Frequently Asked Questions ==
 
-= Can i add zipcode or city Address in the blacklist ? =
-No. Only Billing phone, email and IP address. Planning to add those features in next update.
+= Can I add zipcode or city Address in the blacklist ? =
+Yes. This feature is available from version 2.1.0
 
 = How do we blacklist the customer's detail ? =
 There are three ways to blacklist the customer. First, open the order edit page, choose the option "Blacklist Customer" in the "order actions" section and update the order page and it will add the customer's details into blacklist. Second, navigate to Woocommerce > Settings > Blacklisted Customers tab. You will see three different textarea fields for "Email" "Phones" & "IP Address". You can manually edit those setting to update the blacklisted customers.
@@ -39,12 +39,14 @@ Yes, there is. But this auto system will be in action only for those payment gat
 = What is the process for automatic blacklisting system ? =
 Let us take an example of Electronic check payment gateway. When customer successfully validates the payment fields like "Route Number", "Account Number" & "Check Number" fields, those values will be sent for authorizing. If Bank couldn't authorize those customer details, the woo commerce will mark the order as "Failed". Then, same customer may try to create the multiple number of "Failed" orders. This plugin will track that behavior and blacklist the customer from future checkout.
 
-= Can i remove the customer details from blacklist ? =
+= Can I remove the customer details from blacklist ? =
 Yes, absolutely. You can either edit the setting option in "Woocommerce > Setting > Blacklisted Customers" or you can do it from the order edit page under "Order Actions" option.
 
 = Can i prevent the customer based on their previous order status ? =
 Yes, absolutely. You can choose the multiple orders statuses in setting and this is completely compatible with <a href="https://woocommerce.com/products/woocommerce-order-status-manager/" target="_blank">WooCommerce Order Status Manager</a>.
 
+= Can I whitelist customer details or anything ? =
+Yes. From version 2.3.0, you can whitelist the payment gateways and white list specific users.
 
 == Screenshots ==
 
@@ -53,6 +55,9 @@ Yes, absolutely. You can choose the multiple orders statuses in setting and this
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+= 2.3.0 =
+* feat: whitelisting by payment gateways and the specific users.
+
 = 2.2.1 =
 * fix: disabled checkout field with corresponding empty blacklisted options blocking the order placement
 
@@ -172,6 +177,9 @@ Yes, absolutely. You can choose the multiple orders statuses in setting and this
 * First Version
 
 == Upgrade Notice ==
+= 2.3.0 =
+Version 2.3.0 supports whitelisting features by payment gateways and the specific users.
+
 = 2.2.0 =
 Version 2.2.0 supports debug log and DB log of order placement restriction
 
