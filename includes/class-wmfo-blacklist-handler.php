@@ -26,11 +26,11 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 */
 		public static function get_blacklists(): array {
 			return array(
-				'prev_black_list_ips'        => get_option('wmfo_black_list_ips', ''),
-				'prev_wmfo_black_list_names' => get_option('wmfo_black_list_names', ''),
-				'prev_black_list_phones'     => get_option('wmfo_black_list_phones'),
-				'prev_black_list_emails'     => get_option('wmfo_black_list_emails', ''),
-				'prev_black_list_addresses'  => get_option('wmfo_black_list_addresses', ''),
+				'prev_black_list_ips'        => get_option( 'wmfo_black_list_ips', '' ),
+				'prev_wmfo_black_list_names' => get_option( 'wmfo_black_list_names', '' ),
+				'prev_black_list_phones'     => get_option( 'wmfo_black_list_phones' ),
+				'prev_black_list_emails'     => get_option( 'wmfo_black_list_emails', '' ),
+				'prev_black_list_addresses'  => get_option( 'wmfo_black_list_addresses', '' ),
 			);
 
 		}
@@ -107,7 +107,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			self::update_blacklist( 'wmfo_black_list_addresses', $prev_blacklisted_data['prev_black_list_addresses'], $addresses, $action );
 
 			if ( 'front' === $context ) {
-				$GLOBALS['first_caught_blacklisted_reason'] = __('Max Fraud Attempts exceeded','woo-manage-fraud-orders');
+				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Max Fraud Attempts exceeded', 'woo-manage-fraud-orders' );
 				WMFO_Blacklist_Handler::add_to_log( $customer );
 			}
 
@@ -191,14 +191,14 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			// Add log to file
 			$wmfo_enable_debug_log = get_option( 'wmfo_enable_debug_log', 'no' );
 
-			if($wmfo_enable_debug_log === 'yes'){
+			if ( $wmfo_enable_debug_log === 'yes' ) {
 				$debug_log = new WMFO_Debug_Log();
 				$debug_log->write( '----------start------------' );
 				$debug_log->write( 'Customer Details ==>' );
 				$debug_log->write( $customer_details );
 
 				$debug_log->write( 'Block type ==> ' . $first_caught_blacklisted_reason );
-				$debug_log->write( 'Timestamp ==> ' . current_time('mysql') );
+				$debug_log->write( 'Timestamp ==> ' . current_time( 'mysql' ) );
 
 				$debug_log->write( '----------end------------' );
 				$debug_log->write();
@@ -209,7 +209,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			//Add log to DB table
 			$wmfo_enable_db_log = get_option( 'wmfo_enable_db_log', 'yes' );
 
-			if('no' !== $wmfo_enable_db_log){
+			if ( 'no' !== $wmfo_enable_db_log ) {
 				$log_data = array(
 					'full_name'          => $customer_details['full_name'],
 					'phone'              => $customer_details['billing_phone'],
@@ -228,6 +228,29 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		}
 
 		/**
+		 * Check if the current details are whitelisted
+		 * Whitelist by payment gateway
+		 * Whitelist by user
+		 *
+		 * @param $customer_details
+		 *
+		 * @return bool
+		 */
+		public static function is_whitelisted( $customer_details ): bool {
+
+			$wmfo_white_listed_payment_gateways = get_option( 'wmfo_white_listed_payment_gateways', array() );
+			$wmfo_white_listed_customers        = get_option( 'wmfo_white_listed_customers', array() );
+
+			if ( in_array( $customer_details['payment_method'], $wmfo_white_listed_payment_gateways, true ) ) {
+				return true;
+			} elseif ( in_array( (string)get_current_user_id(), $wmfo_white_listed_customers, true ) ) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
 		 * The main function in the plugin: checks is the customer details blacklisted against the saved settings.
 		 *
 		 * @param array<string, string> $customer_details The details to check.
@@ -238,8 +261,8 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 */
 		public static function is_blacklisted( $customer_details ): bool {
 			// Check for ony by one, return TRUE as soon as first matching.
-			$allow_blacklist_by_name = get_option( 'wmfo_allow_blacklist_by_name', 'no' );
-			$blacklisted_customer_names =get_option( 'wmfo_black_list_names' );
+			$allow_blacklist_by_name    = get_option( 'wmfo_allow_blacklist_by_name', 'no' );
+			$blacklisted_customer_names = get_option( 'wmfo_black_list_names' );
 			$blacklisted_ips            = get_option( 'wmfo_black_list_ips' );
 			$blacklisted_emails         = get_option( 'wmfo_black_list_emails' );
 			$blacklisted_email_domains  = get_option( 'wmfo_black_list_email_domains' );
@@ -249,24 +272,24 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			$email  = $customer_details['billing_email'];
 			$domain = substr( $email, strpos( $email, '@' ) + 1 );
 
-			if ( 'yes' === $allow_blacklist_by_name && !empty($blacklisted_customer_names) && in_array( $customer_details['full_name'], array_map( 'trim', explode( PHP_EOL, $blacklisted_customer_names ) ), true ) ) {
-				$GLOBALS['first_caught_blacklisted_reason'] = __('Full Name', 'woo-manage-fraud-orders');
+			if ( 'yes' === $allow_blacklist_by_name && ! empty( $blacklisted_customer_names ) && in_array( $customer_details['full_name'], array_map( 'trim', explode( PHP_EOL, $blacklisted_customer_names ) ), true ) ) {
+				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Full Name', 'woo-manage-fraud-orders' );
 
 				return true;
-			} elseif ( !empty($blacklisted_ips) && in_array( $customer_details['ip_address'], array_map( 'trim', explode( PHP_EOL, $blacklisted_ips ) ), true ) ) {
-				$GLOBALS['first_caught_blacklisted_reason'] = __('IP Address', 'woo-manage-fraud-orders');
+			} elseif ( ! empty( $blacklisted_ips ) && in_array( $customer_details['ip_address'], array_map( 'trim', explode( PHP_EOL, $blacklisted_ips ) ), true ) ) {
+				$GLOBALS['first_caught_blacklisted_reason'] = __( 'IP Address', 'woo-manage-fraud-orders' );
 
 				return true;
-			} elseif ( !empty($blacklisted_emails) && in_array( $customer_details['billing_email'], array_map( 'trim', explode( PHP_EOL, $blacklisted_emails ) ), true ) ) {
-				$GLOBALS['first_caught_blacklisted_reason'] = __('Billing Email', 'woo-manage-fraud-orders');
+			} elseif ( ! empty( $blacklisted_emails ) && in_array( $customer_details['billing_email'], array_map( 'trim', explode( PHP_EOL, $blacklisted_emails ) ), true ) ) {
+				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Email', 'woo-manage-fraud-orders' );
 
 				return true;
-			} elseif ( !empty($blacklisted_email_domains) && in_array( $domain, array_map( 'trim', explode( PHP_EOL, $blacklisted_email_domains ) ), true ) ) {
-				$GLOBALS['first_caught_blacklisted_reason'] = __('Email Domain', 'woo-manage-fraud-orders');
+			} elseif ( ! empty( $blacklisted_email_domains ) && in_array( $domain, array_map( 'trim', explode( PHP_EOL, $blacklisted_email_domains ) ), true ) ) {
+				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Email Domain', 'woo-manage-fraud-orders' );
 
 				return true;
-			} elseif ( !empty($blacklisted_phones) && in_array( $customer_details['billing_phone'], array_map( 'trim', explode( PHP_EOL, $blacklisted_phones ) ), true ) ) {
-				$GLOBALS['first_caught_blacklisted_reason'] = __('Billing Phone', 'woo-manage-fraud-orders');
+			} elseif ( ! empty( $blacklisted_phones ) && in_array( $customer_details['billing_phone'], array_map( 'trim', explode( PHP_EOL, $blacklisted_phones ) ), true ) ) {
+				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Phone', 'woo-manage-fraud-orders' );
 
 				return true;
 			}
@@ -328,7 +351,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 				                 || ! array_diff( $blacklisted_address_parts, $customer_shipping_address_parts );
 
 				if ( $address_match ) {
-					$GLOBALS['first_caught_blacklisted_reason'] = __('Billing/Shipping Address', 'woo-manage-fraud-orders');
+					$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing/Shipping Address', 'woo-manage-fraud-orders' );
 
 					return true;
 				}

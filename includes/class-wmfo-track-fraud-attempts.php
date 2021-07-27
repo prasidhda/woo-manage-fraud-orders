@@ -106,6 +106,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 
 			$customer_details['billing_email'] = $data['billing_email'] ?? '';
 			$customer_details['billing_phone'] = $data['billing_phone'] ?? '';
+			$customer_details['payment_method'] = $data['payment_method'] ?? '';
 
 			$customer_details['billing_address'] = array(
 				$data['billing_address_1'],
@@ -173,6 +174,13 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 * @param ?WC_Order                  $order The WooCommerce order.
 		 */
 		public static function manage_blacklisted_customers( $customer_details, $product_items, $order = null ) {
+			//White list check
+			// If chosen payment gateway is on the whitelist, skip the blacklist check
+			if ( WMFO_Blacklist_Handler::is_whitelisted( $customer_details ) ) {
+
+				return;
+			}
+
 			// As very first step, check if there is skipping set for order pay.
 			if ( null !== $order ) {
 				$order_id = $order->get_id();
