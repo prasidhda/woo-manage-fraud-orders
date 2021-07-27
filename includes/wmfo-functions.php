@@ -50,3 +50,34 @@ function wmfo_get_ip_address(): string {
 
 	return '';
 }
+
+function wmfp_get_customers() {
+	$all_users = get_users();
+
+	$formatted_all_users = array();
+	foreach ( $all_users as $key => $user ) {
+		$formatted_all_users[ $user->get( 'ID' ) ] = $user->get( 'user_login' );
+	}
+
+	return $formatted_all_users;
+
+//	return $formatted_available_payment_gateways;
+}
+
+add_action( 'admin_init', function () {
+	wmfp_get_customers();
+} );
+
+/**
+ * get enabled gateways
+ * @return mixed
+ */
+function wmfp_get_enabled_payment_gateways() {
+	$available_payment_gateways           = WC()->payment_gateways->get_available_payment_gateways();
+	$formatted_available_payment_gateways = array();
+	foreach ( $available_payment_gateways as $key => $available_payment_gateway ) {
+		$formatted_available_payment_gateways[ $key ] = $available_payment_gateway->title;
+	}
+
+	return $formatted_available_payment_gateways;
+}

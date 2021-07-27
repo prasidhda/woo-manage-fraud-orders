@@ -19,19 +19,23 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 			add_filter( 'woocommerce_settings_tabs_array', array( self::class, 'add_settings_tab' ), 50 );
 			add_action( 'woocommerce_settings_tabs_settings_tab_blacklists', array( self::class, 'settings_tab' ) );
 			add_action( 'woocommerce_update_options_settings_tab_blacklists', array( self::class, 'update_settings' ) );
-			add_filter( 'woocommerce_admin_settings_sanitize_option', array( self::class, 'update_setting_filter' ), 100, 3 );
+			add_filter( 'woocommerce_admin_settings_sanitize_option', array(
+				self::class,
+				'update_setting_filter'
+			), 100, 3 );
 		}
 
 		/**
 		 * Add a new settings tab to the WooCommerce settings tabs array.hp
 		 *
 		 * @hooked woocommerce_settings_tabs_array
-		 * @see WC_Admin_Settings::output()
-		 * @see \Automattic\WooCommerce\Admin\Features\Navigation\CoreMenu::get_setting_items()
 		 *
 		 * @param array<string, string> $settings_tabs Array of WooCommerce setting tabs & their labels, excluding the Subscription tab.
 		 *
 		 * @return array<string, string>
+		 * @see WC_Admin_Settings::output()
+		 * @see \Automattic\WooCommerce\Admin\Features\Navigation\CoreMenu::get_setting_items()
+		 *
 		 */
 		public static function add_settings_tab( array $settings_tabs ): array {
 			$settings_tabs['settings_tab_blacklists'] = esc_html__( 'Blacklisted Customers', 'woo-manage-fraud-orders' );
@@ -67,14 +71,16 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 		 * Trim whitespace around each inputted value.
 		 *
 		 * @hooked woocommerce_admin_settings_sanitize_option
+		 *
+		 * @param mixed $value The value to sanitize and return.
+		 * @param array<string, mixed> $option A single option as defined in this class.
+		 * @param mixed $raw_value The $value before any previous filters changed it.
+		 *
+		 * @return mixed
 		 * @see WC_Admin_Settings::save_fields()
 		 *
 		 * @see WMFO_Settings_Tab::get_settings()
 		 *
-		 * @param mixed                $value The value to sanitize and return.
-		 * @param array<string, mixed> $option A single option as defined in this class.
-		 * @param mixed                $raw_value The $value before any previous filters changed it.
-		 * @return mixed
 		 */
 		public static function update_setting_filter( $value, $option, $raw_value ) {
 			if ( in_array(
@@ -99,9 +105,9 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 		/**
 		 * Get all the settings for this plugin.
 		 *
+		 * @return array<string, array<string, mixed>> Array of settings for WooCommerce to display.
 		 * @see woocommerce_admin_fields() function.
 		 *
-		 * @return array<string, array<string, mixed>> Array of settings for WooCommerce to display.
 		 */
 		public static function get_settings(): array {
 			$settings = array(
@@ -133,6 +139,26 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					),
 					'desc_tip'          => esc_html__( 'This will block customers from placing an order if they try more than the specified number of attempts and the order still fails. Legitimate reasons for an order failing could be entering wrong credit card number or address verification mismatch. If the customer continues to try to complete the order, the order will be blocked and notice message sent after the specified number of retries.', 'woo-manage-fraud-orders' ),
 				),
+				'whitelisted_payment_gateways'      => array(
+					'name'     => esc_html__( 'Whitelisted Payment Gateways', 'woo-manage-fraud-orders' ),
+					'css'      => 'width:600px;height:auto',
+					'type'     => 'multiselect',
+					'class'    => 'wc-enhanced-select',
+					'desc'     => esc_html__( 'You can select multiple payment gateways. Whitelist more priority than blacklists.', 'woo-manage-fraud-orders' ),
+					'options'  => wmfp_get_enabled_payment_gateways(),
+					'id'       => 'wmfo_white_listed_payment_gateways',
+					'desc_tip' => true,
+				),
+				'whitelisted_customers'      => array(
+					'name'     => esc_html__( 'Whitelisted Customers', 'woo-manage-fraud-orders' ),
+					'css'      => 'width:600px;height:auto',
+					'type'     => 'multiselect',
+					'class'    => 'wc-enhanced-select',
+					'desc'     => esc_html__( 'You can select multiple customers. Whitelist more priority than blacklists.', 'woo-manage-fraud-orders' ),
+					'options'  => wmfp_get_customers(),
+					'id'       => 'wmfo_white_listed_customers',
+					'desc_tip' => true,
+				),
 				'blacklists_order_status'           => array(
 					'name'     => esc_html__( 'Blacklisted Order Statuses', 'woo-manage-fraud-orders' ),
 					'css'      => 'width:600px;height:auto',
@@ -162,7 +188,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'id'       => 'wmfo_allow_blacklist_by_name',
 					'desc_tip' => false,
 				),
-				'enable_debug_log'           => array(
+				'enable_debug_log'                  => array(
 					'name'     => esc_html__( 'Enable debug log', 'woo-manage-fraud-orders' ),
 					'css'      => 'width:600px;height:200px',
 					'type'     => 'checkbox',
@@ -171,7 +197,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'id'       => 'wmfo_enable_debug_log',
 					'desc_tip' => false,
 				),
-				'enable_db_log'           => array(
+				'enable_db_log'                     => array(
 					'name'     => esc_html__( 'Enable DB log', 'woo-manage-fraud-orders' ),
 					'css'      => 'width:600px;height:200px',
 					'type'     => 'checkbox',
@@ -247,15 +273,15 @@ WMFO_Settings_Tab::init();
 add_action(
 	'admin_head',
 	function () {
-	    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_GET['tab'] ) && 'settings_tab_blacklists' === $_GET['tab'] ) : ?>
-		<style>
-			.wrap.woocommerce .forminp.forminp-multiselect span.description {
-				display: block;
-				padding: 10px 0 0;
-			}
-		</style>
-			<?php
-	endif;
+            <style>
+                .wrap.woocommerce .forminp.forminp-multiselect span.description {
+                    display: block;
+                    padding: 10px 0 0;
+                }
+            </style>
+		<?php
+		endif;
 	}
 );
