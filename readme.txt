@@ -27,25 +27,40 @@ Blacklist the customer, <a href="https://prasidhda.com.np/how-to-blacklist-custo
 
 == Frequently Asked Questions ==
 
-= Can I add zipcode or city Address in the blacklist ? =
+= Can I add zipcode or city Address in the blacklist? =
 Yes. This feature is available from version 2.1.0
 
-= How do we blacklist the customer's detail ? =
+= What is the basic rule for address blacklisting? =
+The full syntax for block by address is,
+“Street address 1, Address 2, City, State, ZIPCODE, Country”
+
+Also, the partial address can also be used. For example, “Springfield, US” will block every order in every city named Springfield in the US;
+Likewise, “90210” will block all orders to that zip code.
+
+Similarly, “Springfield, IL” will block all the orders from an address in a city named “Springfield” in the state “Illinois”.
+
+“Springfield” will block every order from “Springfield”.
+“IL” will block every order from the state “IL”.
+“US” will block orders from country “United States” and so on.
+
+So, the very simple rule is, you can create any combination of address fields “Street address 1, Address 2, City, State, ZIPCODE, Country” separated by a comma as needed.
+
+= How do we blacklist the customer's detail? =
 There are three ways to blacklist the customer. First, open the order edit page, choose the option "Blacklist Customer" in the "order actions" section and update the order page and it will add the customer's details into blacklist. Second, navigate to Woocommerce > Settings > Blacklisted Customers tab. You will see three different textarea fields for "Email" "Phones" & "IP Address". You can manually edit those setting to update the blacklisted customers.
 
-= Is there auto blacklisting system as well ? =
+= Is there auto blacklisting system as well? =
 Yes, there is. But this auto system will be in action only for those payment gateways which authorizes the payment details and charge instantly (Electronic Check, Credit Card) etc.
 
-= What is the process for automatic blacklisting system ? =
+= What is the process for automatic blacklisting system? =
 Let us take an example of Electronic check payment gateway. When customer successfully validates the payment fields like "Route Number", "Account Number" & "Check Number" fields, those values will be sent for authorizing. If Bank couldn't authorize those customer details, the woo commerce will mark the order as "Failed". Then, same customer may try to create the multiple number of "Failed" orders. This plugin will track that behavior and blacklist the customer from future checkout.
 
-= Can I remove the customer details from blacklist ? =
+= Can I remove the customer details from blacklist? =
 Yes, absolutely. You can either edit the setting option in "Woocommerce > Setting > Blacklisted Customers" or you can do it from the order edit page under "Order Actions" option.
 
-= Can i prevent the customer based on their previous order status ? =
+= Can I prevent the customer based on their previous order status? =
 Yes, absolutely. You can choose the multiple orders statuses in setting and this is completely compatible with <a href="https://woocommerce.com/products/woocommerce-order-status-manager/" target="_blank">WooCommerce Order Status Manager</a>.
 
-= Can I whitelist customer details or anything ? =
+= Can I whitelist customer details or anything? =
 Yes. From version 2.3.0, you can whitelist the payment gateways and white list specific users.
 
 == Screenshots ==
