@@ -60,13 +60,8 @@ function wmfp_get_customers() {
 	}
 
 	return $formatted_all_users;
-
-//	return $formatted_available_payment_gateways;
 }
 
-add_action( 'admin_init', function () {
-	wmfp_get_customers();
-} );
 
 /**
  * get enabled gateways
