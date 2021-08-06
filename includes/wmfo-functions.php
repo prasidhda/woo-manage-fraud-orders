@@ -51,6 +51,9 @@ function wmfo_get_ip_address(): string {
 	return '';
 }
 
+/**
+ * @return array
+ */
 function wmfp_get_customers() {
 	$all_users = get_users();
 
