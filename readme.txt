@@ -3,7 +3,7 @@ Contributors: prasidhda, sranzan, BrianHenryIE
 Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers
 Requires at least: 4.6
 Tested up to: 5.8
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -70,6 +70,9 @@ Yes. From version 2.3.0, you can whitelist the payment gateways and white list s
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+= 2.3.2=
+* feat: enable/disable option for blacklisted by address
+
 = 2.3.1 =
 * fix: garbage clean: related to 2-3-bug-query-per-user-in-admin.
 
