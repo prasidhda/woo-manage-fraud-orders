@@ -188,6 +188,15 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'id'       => 'wmfo_allow_blacklist_by_name',
 					'desc_tip' => false,
 				),
+				'allow_blacklist_by_address'           => array(
+					'name'     => esc_html__( 'Allow blacklist by Address ?', 'woo-manage-fraud-orders' ),
+					'css'      => 'width:600px;height:200px',
+					'type'     => 'checkbox',
+					'default'  => 'yes',
+					'desc'     => esc_html__( 'Check this to blacklist customer by their address. ', 'woo-manage-fraud-orders' ),
+					'id'       => 'wmfo_allow_blacklist_by_address',
+					'desc_tip' => false,
+				),
 				'enable_debug_log'                  => array(
 					'name'     => esc_html__( 'Enable debug log', 'woo-manage-fraud-orders' ),
 					'css'      => 'width:600px;height:200px',

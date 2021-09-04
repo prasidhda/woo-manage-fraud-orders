@@ -94,17 +94,28 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 				return false;
 			}
 
-			self::update_blacklist( 'wmfo_black_list_names', $prev_blacklisted_data['prev_wmfo_black_list_names'], $customer['full_name'], $action );
+			$allow_blacklist_by_name         = get_option( 'wmfo_allow_blacklist_by_name', 'no' );
+			$wmfo_allow_blacklist_by_address = get_option( 'wmfo_allow_blacklist_by_address', 'yes' );
+
+			if ( 'yes' == $allow_blacklist_by_name ) {
+				self::update_blacklist( 'wmfo_black_list_names', $prev_blacklisted_data['prev_wmfo_black_list_names'], $customer['full_name'], $action );
+
+			}
 			self::update_blacklist( 'wmfo_black_list_ips', $prev_blacklisted_data['prev_black_list_ips'], $customer['ip_address'], $action );
 			self::update_blacklist( 'wmfo_black_list_phones', $prev_blacklisted_data['prev_black_list_phones'], $customer['billing_phone'], $action );
 			self::update_blacklist( 'wmfo_black_list_emails', $prev_blacklisted_data['prev_black_list_emails'], $customer['billing_email'], $action );
-			// If billing and shipping address are the same, only save one.
-			$addresses = implode( PHP_EOL, array_unique( array(
-				implode( ',', $customer['billing_address'] ),
-				implode( ',', $customer['shipping_address'] )
-			) ) );
 
-			self::update_blacklist( 'wmfo_black_list_addresses', $prev_blacklisted_data['prev_black_list_addresses'], $addresses, $action );
+
+			if ( 'no' != $wmfo_allow_blacklist_by_address ) {
+				// If billing and shipping address are the same, only save one.
+				$addresses = implode( PHP_EOL, array_unique( array(
+					implode( ',', $customer['billing_address'] ),
+					implode( ',', $customer['shipping_address'] )
+				) ) );
+
+				self::update_blacklist( 'wmfo_black_list_addresses', $prev_blacklisted_data['prev_black_list_addresses'], $addresses, $action );
+
+			}
 
 			if ( 'front' === $context ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Max Fraud Attempts exceeded', 'woo-manage-fraud-orders' );
@@ -243,7 +254,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 
 			if ( in_array( $customer_details['payment_method'], $wmfo_white_listed_payment_gateways, true ) ) {
 				return true;
-			} elseif ( in_array( (string)get_current_user_id(), $wmfo_white_listed_customers, true ) ) {
+			} elseif ( in_array( (string) get_current_user_id(), $wmfo_white_listed_customers, true ) ) {
 				return true;
 			}
 
@@ -261,13 +272,14 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 */
 		public static function is_blacklisted( $customer_details ): bool {
 			// Check for ony by one, return TRUE as soon as first matching.
-			$allow_blacklist_by_name    = get_option( 'wmfo_allow_blacklist_by_name', 'no' );
-			$blacklisted_customer_names = get_option( 'wmfo_black_list_names' );
-			$blacklisted_ips            = get_option( 'wmfo_black_list_ips' );
-			$blacklisted_emails         = get_option( 'wmfo_black_list_emails' );
-			$blacklisted_email_domains  = get_option( 'wmfo_black_list_email_domains' );
-			$blacklisted_phones         = get_option( 'wmfo_black_list_phones' );
-			$blacklisted_addresses      = get_option( 'wmfo_black_list_addresses' );
+			$allow_blacklist_by_name         = get_option( 'wmfo_allow_blacklist_by_name', 'no' );
+			$wmfo_allow_blacklist_by_address = get_option( 'wmfo_allow_blacklist_by_address', 'yes' );
+			$blacklisted_customer_names      = get_option( 'wmfo_black_list_names' );
+			$blacklisted_ips                 = get_option( 'wmfo_black_list_ips' );
+			$blacklisted_emails              = get_option( 'wmfo_black_list_emails' );
+			$blacklisted_email_domains       = get_option( 'wmfo_black_list_email_domains' );
+			$blacklisted_phones              = get_option( 'wmfo_black_list_phones' );
+			$blacklisted_addresses           = get_option( 'wmfo_black_list_addresses' );
 
 			$email  = $customer_details['billing_email'];
 			$domain = substr( $email, strpos( $email, '@' ) + 1 );
@@ -294,6 +306,11 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 				return true;
 			}
 
+
+			if ( 'no' == $wmfo_allow_blacklist_by_address ) {
+
+				return false;
+			}
 			// Map country name to country code.
 			// AF => Afghanistan.
 			$countries_list = WC()->countries->get_countries();
