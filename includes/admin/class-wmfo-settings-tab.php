@@ -235,7 +235,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'name'     => esc_html__( 'Blacklisted Emails', 'woo-manage-fraud-orders' ),
 					'css'      => 'width:600px;height:200px',
 					'type'     => 'textarea',
-					'desc'     => esc_html__( 'Enter Emails in new line. You can enter the wildcard entry without asterisk (*). Eg. If you put "john", It will block orders from every emails containing the string "john", john@gmail.com, john@yahoo.com, johndoe@anyhting.com, avfjohndev@anything.com and so on.', 'woo-manage-fraud-orders' ),
+					'desc'     => esc_html__( 'Enter Emails in new line. You can enter the wildcard entry without an asterisk (*). Eg. If you put "john", It will block orders from every email containing the string "john", john@gmail.com, john@yahoo.com, johndoe@anyhting.com, avfjohndev@anything.com and so on.', 'woo-manage-fraud-orders' ),
 					'id'       => 'wmfo_black_list_emails',
 					'desc_tip' => false,
 				),
