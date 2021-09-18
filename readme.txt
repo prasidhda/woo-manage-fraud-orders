@@ -31,7 +31,7 @@ Blacklist the customer, <a href="https://prasidhda.com.np/how-to-blacklist-custo
 Yes. This feature is available from version 2.1.0.
 
 = Can I use email wildcard for blacklisting?
-Yes, absolutely. This feature is available from version 2.4.0. You can enter the wildcard entry without asterisk (*). E.g. If you put "john", It will block orders from every emails containing the string "john", john@gmail.com, john@yahoo.com, johndoe@anyhting.com, avfjohndev@anything.com and so on.
+Yes, absolutely. This feature is available from version 2.4.0. You can enter the wildcard entry without an asterisk (*). E.g. If you put "john", It will block orders from every email containing the string "john", john@gmail.com, john@yahoo.com, johndoe@anyhting.com, avfjohndev@anything.com and so on.
 
 = What is the basic rule for address blacklisting? =
 The full syntax for block by address is,
