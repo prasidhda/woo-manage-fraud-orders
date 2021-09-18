@@ -28,16 +28,36 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 * WMFO_Track_Fraud_Attempts constructor.
 		 */
 		protected function __construct() {
-			add_action( 'woocommerce_after_checkout_validation', array( $this, 'manage_blacklisted_customers_checkout' ), 10, 2 );
+			add_action( 'woocommerce_after_checkout_validation', array(
+				$this,
+				'manage_blacklisted_customers_checkout'
+			), 10, 2 );
 
-			add_action( 'woocommerce_before_pay_action', array( $this, 'manage_blacklisted_customers_order_pay' ), 99, 1 );
+			add_action( 'woocommerce_before_pay_action', array(
+				$this,
+				'manage_blacklisted_customers_order_pay'
+			), 99, 1 );
 
-			add_action( 'woocommerce_after_pay_action', array( $this, 'manage_multiple_failed_attempts_order_pay' ), 99, 1 );
+			add_action( 'woocommerce_after_pay_action', array(
+				$this,
+				'manage_multiple_failed_attempts_order_pay'
+			), 99, 1 );
 
 			// Not part of WooCommerce core.
-			add_action( 'woocommerce_api_wc_gateway_eway_payment_failed', array( $this, 'manage_multiple_failed_attempts_eway' ), 100, 4 );
+			add_action( 'woocommerce_api_wc_gateway_eway_payment_failed', array(
+				$this,
+				'manage_multiple_failed_attempts_eway'
+			), 100, 4 );
 
-			add_action( 'woocommerce_checkout_order_processed', array( $this, 'manage_multiple_failed_attempts_checkout' ), 100, 3 );
+			add_action( 'woocommerce_checkout_order_processed', array(
+				$this,
+				'manage_multiple_failed_attempts_checkout'
+			), 100, 3 );
+
+			add_action( 'woocommerce_order_status_failed', array(
+				$this,
+				'manage_multiple_failed_attempts_default'
+			), 100, 2 );
 
 		}
 
@@ -57,12 +77,14 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		/**
 		 *
 		 * @hooked woocommerce_after_checkout_validation
+		 *
+		 * @param array<string, mixed> $data An array of posted data.
+		 * @param WP_Error $errors A WP Error object to add errors to.
+		 *
 		 * @see WC_Checkout::validate_checkout()
 		 *
 		 * @see WC_Checkout::get_posted_data()
 		 *
-		 * @param array<string, mixed> $data An array of posted data.
-		 * @param WP_Error             $errors A WP Error object to add errors to.
 		 */
 		public static function manage_blacklisted_customers_checkout( $data, $errors ) {
 			// Check if there are any other errors first.
@@ -72,7 +94,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 			}
 
 			// Woo/Payment method saves the payment method validation errors in session.
-			// If there such errors, skip.
+			// If there are such errors, skip.
 			if ( ! isset( WC()->session->reload_checkout ) ) {
 				$error_notices = wc_get_notices( 'error' );
 			}
@@ -81,7 +103,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 				return;
 			}
 
-			// This is check for the woocommerce subscription.
+			// This is checked for the woocommerce subscription.
 			// If allowed to skip the blacklisting for subscription renewal order payment, return.
 			if ( function_exists( 'wcs_cart_contains_renewal' ) ) {
 				$cart_item = wcs_cart_contains_renewal();
@@ -104,8 +126,8 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 			$last_name                     = $data['billing_last_name'] ?? '';
 			$customer_details['full_name'] = $first_name . ' ' . $last_name;
 
-			$customer_details['billing_email'] = $data['billing_email'] ?? '';
-			$customer_details['billing_phone'] = $data['billing_phone'] ?? '';
+			$customer_details['billing_email']  = $data['billing_email'] ?? '';
+			$customer_details['billing_phone']  = $data['billing_phone'] ?? '';
 			$customer_details['payment_method'] = $data['payment_method'] ?? '';
 
 			$customer_details['billing_address'] = array(
@@ -140,9 +162,11 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 * Before the order is paid, check should the customer be blocked.
 		 *
 		 * @hooked woocommerce_before_pay_action
-		 * @see WC_Form_Handler::pay_action()
 		 *
 		 * @param WC_Order $order The WooCommerce order object.
+		 *
+		 * @see WC_Form_Handler::pay_action()
+		 *
 		 */
 		public static function manage_blacklisted_customers_order_pay( $order ) {
 
@@ -167,11 +191,12 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 *
 		 * Returns early if the order has been marked to skip the blacklist.
 		 *
+		 * @param array<string,string|array> $customer_details The customer details that might be blacklisted.
+		 * @param int[] $product_items The product ids in the order.
+		 * @param ?WC_Order $order The WooCommerce order.
+		 *
 		 * @see wmfo_get_customer_details_of_order()
 		 *
-		 * @param array<string,string|array> $customer_details The customer details that might be blacklisted.
-		 * @param int[]                      $product_items The product ids in the order.
-		 * @param ?WC_Order                  $order The WooCommerce order.
 		 */
 		public static function manage_blacklisted_customers( $customer_details, $product_items, $order = null ) {
 			//White list check
@@ -197,13 +222,26 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 
 			$customer_details['ip_address'] = method_exists( 'WC_Geolocation', 'get_ip_address' ) ? WC_Geolocation::get_ip_address() : wmfo_get_ip_address();
 
-			// Block this checkout if this customers details are already blacklisted.
+			// Block this checkout if this customer details are already blacklisted.
 			if ( WMFO_Blacklist_Handler::is_blacklisted( $customer_details ) ) {
 				if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
 					WMFO_Blacklist_Handler::show_blocked_message();
-					WMFO_Blacklist_Handler::add_to_log($customer_details);
+					WMFO_Blacklist_Handler::add_to_log( $customer_details );
 				}
+
 				return;
+			}
+
+			// Check if there are matching records in DB for possible fraud attempts
+			$fraud_limit = get_option( 'wmfo_black_list_allowed_fraud_attempts', 5 );
+			if ( self::is_possible_fraud_attempts( $fraud_limit, $customer_details ) ) {
+				if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
+					WMFO_Blacklist_Handler::show_blocked_message();
+					WMFO_Blacklist_Handler::add_to_log( $customer_details );
+				}
+
+				return;
+
 			}
 
 			/**
@@ -250,9 +288,9 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 
 					if ( in_array( $prev_order->post_status, $blacklists_order_status, true ) ) {
 						if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
-							$GLOBALS['first_caught_blacklisted_reason'] = __('Order Status', 'woo-manage-fraud-orders');
+							$GLOBALS['first_caught_blacklisted_reason'] = __( 'Order Status', 'woo-manage-fraud-orders' );
 							WMFO_Blacklist_Handler::show_blocked_message();
-							WMFO_Blacklist_Handler::add_to_log($customer_details);
+							WMFO_Blacklist_Handler::add_to_log( $customer_details );
 						}
 						break;
 					}
@@ -263,15 +301,16 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		/**
 		 *
 		 * @hooked woocommerce_checkout_order_processed
+		 *
+		 * @param int $_order_id The order id.
+		 * @param array<string, mixed> $_posted_data The checkout data.
+		 * @param WC_Order $order The WooCommerce order.
+		 *
+		 * @throws Exception
 		 * @see WC_Checkout::process_checkout()
 		 *
 		 * @see WC_Checkout::get_posted_data()
 		 *
-		 * @param int                  $_order_id The order id.
-		 * @param array<string, mixed> $_posted_data The checkout data.
-		 * @param WC_Order             $order The WooCommerce order.
-		 *
-		 * @throws Exception
 		 */
 		public static function manage_multiple_failed_attempts_checkout( $_order_id, $_posted_data, $order ) {
 			self::manage_multiple_failed_attempts( $order );
@@ -280,11 +319,12 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		/**
 		 *
 		 * @hooked woocommerce_after_pay_action
-		 * @see WC_Form_Handler::pay_action()
 		 *
 		 * @param WC_Order $order The WooCommerce order object.
 		 *
 		 * @throws Exception
+		 * @see WC_Form_Handler::pay_action()
+		 *
 		 */
 		public static function manage_multiple_failed_attempts_order_pay( $order ) {
 			self::manage_multiple_failed_attempts( $order, 'order-pay' );
@@ -301,8 +341,18 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 * @throws Exception
 		 */
 		public static function manage_multiple_failed_attempts_eway( $order, $_result, $_error, $_gateway ) {
-
 			self::manage_multiple_failed_attempts( $order, 'order-pay-eway' );
+		}
+
+
+		/**
+		 * @param $order_id
+		 * @param $order
+		 *
+		 * @throws Exception
+		 */
+		public static function manage_multiple_failed_attempts_default( $order_id, $order ) {
+			self::manage_multiple_failed_attempts( $order, 'failed' );
 		}
 
 		/**
@@ -312,11 +362,11 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 * couldn't authorize the payment. Typical example will be Electronic check, CC processing.
 		 *
 		 * @param WC_Order $order The WooCommerce order object.
-		 * @param string   $context "front"|"order-pay"|"order-pay-eway".
+		 * @param string $context "front"|"order-pay"|"order-pay-eway".
 		 *
 		 * @throws Exception
 		 */
-		protected static function manage_multiple_failed_attempts( $order, $context = 'front' ) {
+		protected static function manage_multiple_failed_attempts( WC_Order $order, string $context = 'front' ) {
 			// As very first step, check if there is product type blacklist.
 			// If there are values set to this, we should handle the blacklisting only if customer has such products in cart.
 			$product_items = array();
@@ -332,27 +382,64 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 			// If the product type blacklist is configured but none of the order's products are relevant, return.
 			$blacklist_product_types = get_option( 'wmfo_black_list_product_types', array() );
 			if ( ! empty( $blacklist_product_types ) && ! self::check_products_in_product_type_blacklist( $product_items ) ) {
-				return;
+				return false;
 			}
 
-			if ( $order->get_status() === 'failed' ) {
-				// MD5 the name of the cookie for fraud_attempts.
-				$fraud_attempts_md5 = md5( 'fraud_attempts' );
-				$fraud_attempts     = ! isset( $_COOKIE[ $fraud_attempts_md5 ] ) || empty( $_COOKIE[ $fraud_attempts_md5 ] ) ? 1 : intval( wp_unslash( $_COOKIE[ $fraud_attempts_md5 ] ) );
-
-				$cookie_value = (int) $fraud_attempts + 1;
-				setcookie( $fraud_attempts_md5, "{$cookie_value}", time() + ( 60 * 60 * 30 ), '/' ); // 30 days
+			if ( $order->get_status() === 'failed' || 'failed' === $context ) {
 				// Get the allowed failed order limit, default to 5.
 				$fraud_limit = get_option( 'wmfo_black_list_allowed_fraud_attempts', 5 );
 
-				if ( (int) $fraud_attempts >= (int) $fraud_limit ) {
+				// Get customer details
+				$customer                             = wmfo_get_customer_details_of_order( $order );
+				$fraudulent_details                   = $customer;
+				$fraudulent_details['payment_method'] = $order->get_payment_method();
+
+				// Save to the fraud attempt DB table
+				self::save_fraud_attempt_record( $fraudulent_details );
+
+				// Save to the order meta
+				$pre_fraud_attempt = (int) $order->get_meta( '_wmfo_fraud_attempts', true );
+
+				$order->update_meta_data( '_wmfo_fraud_attempts', $pre_fraud_attempt + 1 );
+				$order->save();
+
+
+				// Client side fraud attempt check (The highest priority)
+				// MD5 the name of the cookie for fraud_attempts.
+				$fraud_attempts_md5    = md5( 'fraud_attempts' );
+				$cookie_fraud_attempts = ! isset( $_COOKIE[ $fraud_attempts_md5 ] ) || empty( $_COOKIE[ $fraud_attempts_md5 ] ) ? 1 : intval( wp_unslash( $_COOKIE[ $fraud_attempts_md5 ] ) );
+
+				$cookie_value = $cookie_fraud_attempts + 1;
+				setcookie( $fraud_attempts_md5, "{$cookie_value}", time() + ( 60 * 60 * 30 ), '/' ); // 30 days
+
+				$cookie_fraud_status = $cookie_fraud_attempts >= (int) $fraud_limit;
+
+				if ( $cookie_fraud_status ) {
 					// Block this customer for future sessions as well.
 					// And cancel the order.
-					$customer = wmfo_get_customer_details_of_order( $order );
 					if ( false !== $customer && method_exists( 'WMFO_Blacklist_Handler', 'init' ) ) {
 						WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
 					}
 				}
+
+				//SERVER side fraud attempts check
+
+				// Check in the order meta
+				$order_meta_fraud_status = $pre_fraud_attempt > (int) $fraud_limit;
+				if ( $order_meta_fraud_status ) {
+					// Block this customer for future sessions as well.
+					// And cancel the order.
+					if ( false !== $customer && method_exists( 'WMFO_Blacklist_Handler', 'init' ) ) {
+						return WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
+
+					}
+				}
+
+				// check in the DB
+				if ( self::is_possible_fraud_attempts( $fraud_limit, $customer ) ) {
+					return WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
+				}
+
 			}
 		}
 
@@ -384,6 +471,48 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 			}
 
 			return $blacklisted_product_type_found;
+		}
+
+		/**
+		 * @param $customer_details
+		 */
+		protected static function save_fraud_attempt_record( $customer_details ) {
+			$fraud_log_data = array(
+				'full_name'        => $customer_details['full_name'],
+				'billing_phone'    => $customer_details['billing_phone'],
+				'ip'               => $customer_details['ip_address'],
+				'billing_email'    => $customer_details['billing_email'],
+				'billing_address'  => implode( ',', $customer_details['billing_address'] ),
+				'shipping_address' => isset( $customer_details['shipping_address'] ) ? implode( ',', $customer_details['shipping_address'] ) : '',
+				'payment_method'   => $customer_details['payment_method'],
+				'timestamp'        => current_time( 'mysql' ),
+			);
+
+			$logs_handler = new WMFO_Fraud_Attempts_DB_Handler();
+			$logs_handler->add_fraud_record( $fraud_log_data );
+		}
+
+		/**
+		 * Check the previous fraud attempts from the DB
+		 * @param $fraud_limit
+		 * @param $customer
+		 *
+		 * @return bool
+		 */
+		protected static function is_possible_fraud_attempts( $fraud_limit, $customer ): bool {
+			//Check in the DB table
+			global $wpdb;
+
+			$matching_fraud_attempts = $wpdb->get_results(
+				$wpdb->prepare(
+					"SELECT * FROM {$wpdb->prefix}wmfo_fraud_attempts WHERE ip=%s OR billing_email=%s OR billing_phone=%s",
+					$customer['ip_address'],
+					$customer['billing_email'],
+					$customer['billing_phone']
+				),
+				ARRAY_A );
+
+			return count( $matching_fraud_attempts ) > (int) $fraud_limit;
 		}
 	}
 }
