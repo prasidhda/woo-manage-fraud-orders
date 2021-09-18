@@ -105,13 +105,16 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			self::update_blacklist( 'wmfo_black_list_phones', $prev_blacklisted_data['prev_black_list_phones'], $customer['billing_phone'], $action );
 			self::update_blacklist( 'wmfo_black_list_emails', $prev_blacklisted_data['prev_black_list_emails'], $customer['billing_email'], $action );
 
-
 			if ( 'no' != $wmfo_allow_blacklist_by_address ) {
 				// If billing and shipping address are the same, only save one.
-				$addresses = implode( PHP_EOL, array_unique( array(
-					implode( ',', $customer['billing_address'] ),
-					implode( ',', $customer['shipping_address'] )
-				) ) );
+				if ( null == $customer['shipping_address'] ) {
+					$addresses = implode( ',', $customer['billing_address'] );
+				} else {
+					$addresses = implode( PHP_EOL, array_unique( array(
+						implode( ',', $customer['billing_address'] ),
+						implode( ',', $customer['shipping_address'] ),
+					) ) );
+				}
 
 				self::update_blacklist( 'wmfo_black_list_addresses', $prev_blacklisted_data['prev_black_list_addresses'], $addresses, $action );
 
@@ -222,13 +225,13 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 
 			if ( 'no' !== $wmfo_enable_db_log ) {
 				$log_data = array(
-					'full_name'          => $customer_details['full_name'],
-					'phone'              => $customer_details['billing_phone'],
-					'ip'                 => $customer_details['ip_address'],
-					'email'              => $customer_details['billing_email'],
-					'billing_address'    => implode( ',', $customer_details['billing_address'] ),
+					'full_name'          => $customer_details['full_name'] ?? 'N/A',
+					'phone'              => $customer_details['billing_phone'] ?? 'N/A',
+					'ip'                 => $customer_details['ip_address'] ?? 'N/A',
+					'email'              => $customer_details['billing_email'] ?? 'NA',
+					'billing_address'    => isset( $customer_details['billing_address'] ) ? implode( ',', $customer_details['billing_address'] ) : '',
 					'shipping_address'   => isset( $customer_details['shipping_address'] ) ? implode( ',', $customer_details['shipping_address'] ) : '',
-					'blacklisted_reason' => $first_caught_blacklisted_reason,
+					'blacklisted_reason' => $first_caught_blacklisted_reason ?? 'N/A',
 					'timestamp'          => current_time( 'mysql' ),
 				);
 
@@ -284,23 +287,83 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			$email  = $customer_details['billing_email'];
 			$domain = substr( $email, strpos( $email, '@' ) + 1 );
 
-			if ( 'yes' === $allow_blacklist_by_name && ! empty( $blacklisted_customer_names ) && in_array( $customer_details['full_name'], array_map( 'trim', explode( PHP_EOL, $blacklisted_customer_names ) ), true ) ) {
+			// Check blacklist by names
+			if ( 'yes' === $allow_blacklist_by_name &&
+			     ! empty( $blacklisted_customer_names ) &&
+			     in_array(
+				     strtolower( $customer_details['full_name'] ),
+				     array_map( 'strtolower',
+					     array_map( 'trim',
+						     explode( PHP_EOL, $blacklisted_customer_names )
+					     )
+				     ),
+				     true
+			     ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Full Name', 'woo-manage-fraud-orders' );
 
 				return true;
-			} elseif ( ! empty( $blacklisted_ips ) && in_array( $customer_details['ip_address'], array_map( 'trim', explode( PHP_EOL, $blacklisted_ips ) ), true ) ) {
+			} elseif ( ! empty( $blacklisted_ips ) &&
+			           in_array(
+				           strtolower( $customer_details['ip_address'] ),
+				           array_map( 'strtolower',
+					           array_map( 'trim',
+						           explode( PHP_EOL, $blacklisted_ips )
+					           )
+				           ),
+				           true
+			           ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __( 'IP Address', 'woo-manage-fraud-orders' );
 
 				return true;
-			} elseif ( ! empty( $blacklisted_emails ) && in_array( $customer_details['billing_email'], array_map( 'trim', explode( PHP_EOL, $blacklisted_emails ) ), true ) ) {
+			} elseif ( ! empty( $blacklisted_emails ) &&
+			           in_array(
+				           strtolower( $customer_details['billing_email'] ),
+				           array_map( 'strtolower',
+					           array_map( 'trim',
+						           explode( PHP_EOL, $blacklisted_emails )
+					           )
+				           ),
+				           true
+			           ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Email', 'woo-manage-fraud-orders' );
 
 				return true;
-			} elseif ( ! empty( $blacklisted_email_domains ) && in_array( $domain, array_map( 'trim', explode( PHP_EOL, $blacklisted_email_domains ) ), true ) ) {
+			} elseif ( ! empty( $blacklisted_emails ) &&
+			           strpos(
+				           strtolower( $customer_details['billing_email'] ),
+				           implode( ',',
+					           array_map( 'strtolower',
+						           array_map( 'trim',
+							           explode( PHP_EOL, $blacklisted_emails )
+						           )
+					           )
+				           )
+			           ) !== false ) {
+				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Email Wildcard match', 'woo-manage-fraud-orders' );
+
+				return true;
+			} elseif ( ! empty( $blacklisted_email_domains ) &&
+			           in_array(
+				           strtolower( $domain ),
+				           array_map( 'strtolower',
+					           array_map(
+						           'trim',
+						           explode( PHP_EOL, $blacklisted_email_domains )
+					           )
+				           ),
+				           true ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Email Domain', 'woo-manage-fraud-orders' );
 
 				return true;
-			} elseif ( ! empty( $blacklisted_phones ) && in_array( $customer_details['billing_phone'], array_map( 'trim', explode( PHP_EOL, $blacklisted_phones ) ), true ) ) {
+			} elseif ( ! empty( $blacklisted_phones ) &&
+			           in_array(
+				           strtolower( $customer_details['billing_phone'] ),
+				           array_map( 'strtolower',
+					           array_map( 'trim',
+						           explode( PHP_EOL, $blacklisted_phones )
+					           )
+				           ),
+				           true ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Phone', 'woo-manage-fraud-orders' );
 
 				return true;

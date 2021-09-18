@@ -3,7 +3,7 @@ Contributors: prasidhda, sranzan, BrianHenryIE
 Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers
 Requires at least: 4.6
 Tested up to: 5.8
-Stable tag: 2.3.2
+Stable tag: 2.4.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -28,7 +28,10 @@ Blacklist the customer, <a href="https://prasidhda.com.np/how-to-blacklist-custo
 == Frequently Asked Questions ==
 
 = Can I add zipcode or city Address in the blacklist? =
-Yes. This feature is available from version 2.1.0
+Yes. This feature is available from version 2.1.0.
+
+= Can I use email wildcard for blacklisting?
+Yes, absolutely. This feature is available from version 2.4.0. You can enter the wildcard entry without asterisk (*). E.g. If you put "john", It will block orders from every emails containing the string "john", john@gmail.com, john@yahoo.com, johndoe@anyhting.com, avfjohndev@anything.com and so on.
 
 = What is the basic rule for address blacklisting? =
 The full syntax for block by address is,
@@ -70,6 +73,10 @@ Yes. From version 2.3.0, you can whitelist the payment gateways and white list s
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+= 2.4.0=
+* feat: email blacklisting wildcard
+* feat: fraud attempt tracked from SERVER
+
 = 2.3.2=
 * feat: enable/disable option for blacklisted by address
 
@@ -198,6 +205,9 @@ Yes. From version 2.3.0, you can whitelist the payment gateways and white list s
 * First Version
 
 == Upgrade Notice ==
+= 2.3.0 =
+Version 2.4.0 supports email wildcard blacklisting and fraud attempts tracking from SERVER.
+
 = 2.3.0 =
 Version 2.3.0 supports whitelisting features by payment gateways and the specific users.
 

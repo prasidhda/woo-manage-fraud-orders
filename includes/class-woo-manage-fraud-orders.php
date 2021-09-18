@@ -23,7 +23,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		 *
 		 * @var string $version
 		 */
-		public $version = '2.3.2';
+		public $version = '2.4.0';
 
 		/**
 		 * Store the class singleton.
@@ -178,6 +178,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 			require_once WMFO_ABSPATH . 'includes/class-wmfo-debug-log.php';
 			require_once WMFO_ABSPATH . 'includes/class-wmfo-track-fraud-attempts.php';
 			require_once WMFO_ABSPATH . 'includes/class-wmfo-logs-handler.php';
+			require_once WMFO_ABSPATH . 'includes/class-wmfo-fraud-attempts-db-handler.php';
 			if ( is_admin() ) {
 				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-settings-tab.php';
 				require_once WMFO_ABSPATH . 'includes/admin/class-wmfo-order-metabox.php';
@@ -186,12 +187,22 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 			}
 		}
 
+		/**
+		 * Plugin submenus
+		 */
 		public function init_sub_menu(){
 			add_submenu_page( 'woocommerce', __( 'WMFO Logs', 'woo-manage-fraud-orders' ), __( 'WMFO Logs', 'woo-manage-fraud-orders' ),
-				'manage_options', 'wmfo-logs', array( $this, 'render_logs' ), 99999 );
+				'manage_options', 'wmfo-logs', array( $this, 'render_wmfo_logs' ), 99999 );
+
+			add_submenu_page( 'woocommerce', __( 'WMFO Fraud Attempt Logs', 'woo-manage-fraud-orders' ), __( 'WMFO Fraud Attempt Logs', 'woo-manage-fraud-orders' ),
+				'manage_options', 'wmfo-fraud-attempts-logs', array( $this, 'render_fraud_attempts_logs' ), 99999 );
 		}
 
-		public function render_logs() {
+		/**
+		 * This is not the blacklisted customer details.
+         * Rather, It is the list of customers who could not manage to place order due to blacklisting.
+		 */
+		public function render_wmfo_logs() {
 			require_once plugin_dir_path(WMFO_PLUGIN_FILE) . 'includes/admin/class-wmfo-logs-table.php';
 			$logs = new WMFO_Logs_Table();
 			$logs->prepare_items();
@@ -199,12 +210,30 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 			<div class="wrap">
 				<form method="post">
 					<h2><?php _e( 'Logs of Blacklisted attempts.', 'woo-manage-fraud-orders' ) ?></h2>
-                    <p><?php _e('This is not the blacklisted customer details. Rather,  It is the list of customers who could not manage to place order due to blacklisting.', 'woo-manage-fraud-orders'); ?></p>
+                    <p><?php _e('This is not the blacklisted customer details. Rather,  It is the list of customers who could not manage to place an order due to blacklisting.', 'woo-manage-fraud-orders'); ?></p>
 					<?php $logs->display(); ?>
 				</form>
 			</div>
 			<?php
 		}
 
+		/**
+		 * Fraud attempts logs
+         * Will be useful for handling SERVER side checking of fraud attempts
+		 */
+		public function render_fraud_attempts_logs() {
+			require_once plugin_dir_path(WMFO_PLUGIN_FILE) . 'includes/admin/class-wmfo-fraud-attempts-table.php';
+			$logs = new WMFO_Fraud_Attempts_Table();
+			$logs->prepare_items();
+			?>
+			<div class="wrap">
+				<form method="post">
+					<h2><?php _e( 'Logs of Fraud Order Attempts.', 'woo-manage-fraud-orders' ) ?></h2>
+                    <p><?php _e('Every time there is failed order creation, the customer details will be recorded here.', 'woo-manage-fraud-orders'); ?></p>
+					<?php $logs->display(); ?>
+				</form>
+			</div>
+			<?php
+		}
 	}
 }
