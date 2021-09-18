@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woo Manage Fraud Orders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-04 04:56+0000\n"
+"POT-Creation-Date: 2021-09-18 06:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -32,19 +32,24 @@ msgstr ""
 msgid "Allow blacklist by Name ?"
 msgstr ""
 
+#: includes/admin/class-wmfo-fraud-attempts-table.php:190
 #: includes/admin/class-wmfo-logs-table.php:190
 msgid "Billing Address"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:296
+#: includes/class-wmfo-blacklist-handler.php:328
 msgid "Billing Email"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:304
+#: includes/class-wmfo-blacklist-handler.php:342
+msgid "Billing Email Wildcard match"
+msgstr ""
+
+#: includes/class-wmfo-blacklist-handler.php:367
 msgid "Billing Phone"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:371
+#: includes/class-wmfo-blacklist-handler.php:434
 msgid "Billing/Shipping Address"
 msgstr ""
 
@@ -131,20 +136,24 @@ msgid ""
 "content/uploads/wmfo-logs/ . "
 msgstr ""
 
+#: includes/admin/class-wmfo-fraud-attempts-table.php:193
 #: includes/admin/class-wmfo-logs-table.php:193
 msgid "Date"
 msgstr ""
 
+#: includes/admin/class-wmfo-fraud-attempts-table.php:108
+#: includes/admin/class-wmfo-fraud-attempts-table.php:122
 #: includes/admin/class-wmfo-logs-table.php:108
 #: includes/admin/class-wmfo-logs-table.php:122
 msgid "Delete"
 msgstr ""
 
+#: includes/admin/class-wmfo-fraud-attempts-table.php:189
 #: includes/admin/class-wmfo-logs-table.php:189
 msgid "Email"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:300
+#: includes/class-wmfo-blacklist-handler.php:355
 msgid "Email Domain"
 msgstr ""
 
@@ -165,7 +174,11 @@ msgid "Enter email domain in new line. Example \"mailnator.com\""
 msgstr ""
 
 #: includes/admin/class-wmfo-settings-tab.php:238
-msgid "Enter Emails in new line"
+msgid ""
+"Enter Emails in new line. You can enter the wildcard entry without asterisk "
+"(*). Eg. If you put \"john\", It will block orders from every emails "
+"containing the string \"john\", john@gmail.com, john@yahoo.com, "
+"johndoe@anyhting.com, avfjohndev@anything.com and so on."
 msgstr ""
 
 #: includes/admin/class-wmfo-settings-tab.php:254
@@ -194,7 +207,14 @@ msgid ""
 "counts increases only if order status changes to failed on order placement."
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:288
+#: includes/class-woo-manage-fraud-orders.php:232
+msgid ""
+"Every time there is failed order creation, the customer details will be "
+"recorded here."
+msgstr ""
+
+#: includes/class-wmfo-blacklist-handler.php:302
+#: includes/admin/class-wmfo-fraud-attempts-table.php:186
 #: includes/admin/class-wmfo-logs-table.php:186
 msgid "Full Name"
 msgstr ""
@@ -215,20 +235,29 @@ msgid ""
 "one selected product types in the cart."
 msgstr ""
 
+#: includes/admin/class-wmfo-fraud-attempts-table.php:188
 #: includes/admin/class-wmfo-logs-table.php:188
 msgid "IP"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:292
+#: includes/class-wmfo-blacklist-handler.php:315
 msgid "IP Address"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:201
+#: includes/class-woo-manage-fraud-orders.php:212
 msgid "Logs of Blacklisted attempts."
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:121
+#: includes/class-woo-manage-fraud-orders.php:231
+msgid "Logs of Fraud Order Attempts."
+msgstr ""
+
+#: includes/class-wmfo-blacklist-handler.php:124
 msgid "Max Fraud Attempts exceeded"
+msgstr ""
+
+#: includes/admin/class-wmfo-fraud-attempts-table.php:29
+msgid "No fraud attempts records available."
 msgstr ""
 
 #: includes/admin/class-wmfo-logs-table.php:29
@@ -239,18 +268,23 @@ msgstr ""
 msgid "Number of allowed Fraud Attempts"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:172
+#: includes/class-wmfo-blacklist-handler.php:175
 msgid "Order details blacklisted for future checkout."
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:168
+#: includes/class-wmfo-blacklist-handler.php:171
 msgid "Order details removed from blacklist."
 msgstr ""
 
-#: includes/class-wmfo-track-fraud-attempts.php:253
+#: includes/class-wmfo-track-fraud-attempts.php:297
 msgid "Order Status"
 msgstr ""
 
+#: includes/admin/class-wmfo-fraud-attempts-table.php:192
+msgid "Payment Method"
+msgstr ""
+
+#: includes/admin/class-wmfo-fraud-attempts-table.php:187
 #: includes/admin/class-wmfo-logs-table.php:187
 msgid "Phone"
 msgstr ""
@@ -267,20 +301,21 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: includes/admin/class-wmfo-fraud-attempts-table.php:191
 #: includes/admin/class-wmfo-logs-table.php:191
 msgid "Shipping Address"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:127
-#: includes/class-wmfo-blacklist-handler.php:187
+#: includes/class-wmfo-blacklist-handler.php:130
+#: includes/class-wmfo-blacklist-handler.php:190
 #: includes/admin/class-wmfo-settings-tab.php:124
 msgid "Sorry, You are being restricted from placing orders."
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:202
+#: includes/class-woo-manage-fraud-orders.php:213
 msgid ""
 "This is not the blacklisted customer details. Rather,  It is the list of "
-"customers who could not manage to place order due to blacklisting."
+"customers who could not manage to place an order due to blacklisting."
 msgstr ""
 
 #: includes/admin/class-wmfo-settings-tab.php:140
@@ -305,7 +340,11 @@ msgstr ""
 msgid "WMFO"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:190
+#: includes/class-woo-manage-fraud-orders.php:197
+msgid "WMFO Fraud Attempt Logs"
+msgstr ""
+
+#: includes/class-woo-manage-fraud-orders.php:194
 msgid "WMFO Logs"
 msgstr ""
 
