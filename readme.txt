@@ -205,7 +205,7 @@ Yes. From version 2.3.0, you can whitelist the payment gateways and white list s
 * First Version
 
 == Upgrade Notice ==
-= 2.3.0 =
+= 2.4.0 =
 Version 2.4.0 supports email wildcard blacklisting and fraud attempts tracking from SERVER.
 
 = 2.3.0 =
