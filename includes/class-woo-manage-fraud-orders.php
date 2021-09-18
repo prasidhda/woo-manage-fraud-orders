@@ -210,7 +210,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 			<div class="wrap">
 				<form method="post">
 					<h2><?php _e( 'Logs of Blacklisted attempts.', 'woo-manage-fraud-orders' ) ?></h2>
-                    <p><?php _e('This is not the blacklisted customer details. Rather,  It is the list of customers who could not manage to place order due to blacklisting.', 'woo-manage-fraud-orders'); ?></p>
+                    <p><?php _e('This is not the blacklisted customer details. Rather,  It is the list of customers who could not manage to place an order due to blacklisting.', 'woo-manage-fraud-orders'); ?></p>
 					<?php $logs->display(); ?>
 				</form>
 			</div>
@@ -228,13 +228,12 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 			?>
 			<div class="wrap">
 				<form method="post">
-					<h2><?php _e( 'Logs of Blacklisted attempts.', 'woo-manage-fraud-orders' ) ?></h2>
-                    <p><?php _e('This is not the blacklisted customer details. Rather,  It is the list of customers who could not manage to place order due to blacklisting.', 'woo-manage-fraud-orders'); ?></p>
+					<h2><?php _e( 'Logs of Fraud Order Attempts.', 'woo-manage-fraud-orders' ) ?></h2>
+                    <p><?php _e('Every time there is failed order creation, the customer details will be recorded here.', 'woo-manage-fraud-orders'); ?></p>
 					<?php $logs->display(); ?>
 				</form>
 			</div>
 			<?php
 		}
-
 	}
 }

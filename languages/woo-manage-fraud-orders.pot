@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woo Manage Fraud Orders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-18 06:16+0000\n"
+"POT-Creation-Date: 2021-09-18 06:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -207,6 +207,12 @@ msgid ""
 "counts increases only if order status changes to failed on order placement."
 msgstr ""
 
+#: includes/class-woo-manage-fraud-orders.php:232
+msgid ""
+"Every time there is failed order creation, the customer details will be "
+"recorded here."
+msgstr ""
+
 #: includes/class-wmfo-blacklist-handler.php:302
 #: includes/admin/class-wmfo-fraud-attempts-table.php:186
 #: includes/admin/class-wmfo-logs-table.php:186
@@ -239,8 +245,11 @@ msgid "IP Address"
 msgstr ""
 
 #: includes/class-woo-manage-fraud-orders.php:212
-#: includes/class-woo-manage-fraud-orders.php:231
 msgid "Logs of Blacklisted attempts."
+msgstr ""
+
+#: includes/class-woo-manage-fraud-orders.php:231
+msgid "Logs of Fraud Order Attempts."
 msgstr ""
 
 #: includes/class-wmfo-blacklist-handler.php:124
@@ -304,10 +313,9 @@ msgid "Sorry, You are being restricted from placing orders."
 msgstr ""
 
 #: includes/class-woo-manage-fraud-orders.php:213
-#: includes/class-woo-manage-fraud-orders.php:232
 msgid ""
 "This is not the blacklisted customer details. Rather,  It is the list of "
-"customers who could not manage to place order due to blacklisting."
+"customers who could not manage to place an order due to blacklisting."
 msgstr ""
 
 #: includes/admin/class-wmfo-settings-tab.php:140
