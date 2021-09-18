@@ -149,7 +149,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'id'       => 'wmfo_white_listed_payment_gateways',
 					'desc_tip' => true,
 				),
-				'whitelisted_customers'      => array(
+				'whitelisted_customers'             => array(
 					'name'     => esc_html__( 'Whitelisted Customers', 'woo-manage-fraud-orders' ),
 					'css'      => 'width:600px;height:auto',
 					'type'     => 'multiselect',
@@ -188,7 +188,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'id'       => 'wmfo_allow_blacklist_by_name',
 					'desc_tip' => false,
 				),
-				'allow_blacklist_by_address'           => array(
+				'allow_blacklist_by_address'        => array(
 					'name'     => esc_html__( 'Allow blacklist by Address ?', 'woo-manage-fraud-orders' ),
 					'css'      => 'width:600px;height:200px',
 					'type'     => 'checkbox',
@@ -235,7 +235,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'name'     => esc_html__( 'Blacklisted Emails', 'woo-manage-fraud-orders' ),
 					'css'      => 'width:600px;height:200px',
 					'type'     => 'textarea',
-					'desc'     => esc_html__( 'Enter Emails in new line', 'woo-manage-fraud-orders' ),
+					'desc'     => esc_html__( 'Enter Emails in new line. You can enter the wildcard entry without asterisk (*). Eg. If you put "john", It will block orders from every emails containing the string "john", john@gmail.com, john@yahoo.com, johndoe@anyhting.com, avfjohndev@anything.com and so on.', 'woo-manage-fraud-orders' ),
 					'id'       => 'wmfo_black_list_emails',
 					'desc_tip' => false,
 				),

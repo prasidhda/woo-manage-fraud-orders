@@ -103,6 +103,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 				return;
 			}
 
+
 			// This is checked for the woocommerce subscription.
 			// If allowed to skip the blacklisting for subscription renewal order payment, return.
 			if ( function_exists( 'wcs_cart_contains_renewal' ) ) {
@@ -195,6 +196,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 * @param int[] $product_items The product ids in the order.
 		 * @param ?WC_Order $order The WooCommerce order.
 		 *
+		 * @throws Exception
 		 * @see wmfo_get_customer_details_of_order()
 		 *
 		 */
@@ -235,6 +237,10 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 			// Check if there are matching records in DB for possible fraud attempts
 			$fraud_limit = get_option( 'wmfo_black_list_allowed_fraud_attempts', 5 );
 			if ( self::is_possible_fraud_attempts( $fraud_limit, $customer_details ) ) {
+				if ( false !== $customer_details && method_exists( 'WMFO_Blacklist_Handler', 'init' ) ) {
+					WMFO_Blacklist_Handler::init( $customer_details, $order, 'add', 'front' );
+				}
+
 				if ( method_exists( 'WMFO_Blacklist_Handler', 'show_blocked_message' ) ) {
 					WMFO_Blacklist_Handler::show_blocked_message();
 					WMFO_Blacklist_Handler::add_to_log( $customer_details );
@@ -419,6 +425,10 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 					// And cancel the order.
 					if ( false !== $customer && method_exists( 'WMFO_Blacklist_Handler', 'init' ) ) {
 						WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
+						WMFO_Blacklist_Handler::show_blocked_message();
+						WMFO_Blacklist_Handler::add_to_log( $customer );
+
+						return false;
 					}
 				}
 
@@ -430,14 +440,23 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 					// Block this customer for future sessions as well.
 					// And cancel the order.
 					if ( false !== $customer && method_exists( 'WMFO_Blacklist_Handler', 'init' ) ) {
-						return WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
+						WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
+
+						WMFO_Blacklist_Handler::show_blocked_message();
+						WMFO_Blacklist_Handler::add_to_log( $customer );
+
+						return false;
 
 					}
 				}
 
 				// check in the DB
 				if ( self::is_possible_fraud_attempts( $fraud_limit, $customer ) ) {
-					return WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
+					WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
+
+					WMFO_Blacklist_Handler::show_blocked_message();
+					WMFO_Blacklist_Handler::add_to_log( $customer );
+
 				}
 
 			}
@@ -450,7 +469,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 *
 		 * @return bool
 		 */
-		public static function check_products_in_product_type_blacklist( $product_items = array() ): bool {
+		public static function check_products_in_product_type_blacklist( array $product_items = array() ): bool {
 			$blacklist_product_types = get_option( 'wmfo_black_list_product_types', array() );
 
 			if ( empty( $blacklist_product_types ) ) {
@@ -494,6 +513,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 
 		/**
 		 * Check the previous fraud attempts from the DB
+		 *
 		 * @param $fraud_limit
 		 * @param $customer
 		 *
