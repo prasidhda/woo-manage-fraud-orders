@@ -155,7 +155,8 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		public static function action_links( $actions ): array {
 
 			$new_actions = array(
-				'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=settings_tab_blacklists' ) . '">' . __( 'Settings', 'woo-manage-fraud-orders' ) . '</a>',
+				'settings' => '<a href="' . admin_url( 'admin.php?page=wc-settings&tab=settings_tab_wmfo' ) . '">' . __( 'Settings', 'woo-manage-fraud-orders' ) . '</a>',
+				'logs' => '<a href="' . admin_url( 'admin.php?page=wmfo' ) . '">' . __( 'Logs', 'woo-manage-fraud-orders' ) . '</a>',
 			);
 
 			return array_merge( $new_actions, $actions );
@@ -196,7 +197,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		 * Plugin submenus
 		 */
 		public function init_sub_menu() {
-			add_menu_page( __( 'WMFO', 'honeypot-for-wp-comment' ), __( 'WMFO', 'honeypot-for-wp-comment' ), 'manage_options', 'wmfo', '', 'dashicons-welcome-write-blog', 59 );
+			add_menu_page( __( 'WMFO', 'woo-manage-fraud-orders' ), __( 'WMFO', 'woo-manage-fraud-orders' ), 'manage_options', 'wmfo', '', 'dashicons-welcome-write-blog', 59 );
 
 			add_submenu_page( 'wmfo', __( 'Blocked Logs', 'woo-manage-fraud-orders' ), __( 'Blocked Logs', 'woo-manage-fraud-orders' ),
 				'manage_options', 'wmfo', array( $this, 'render_wmfo_logs' ), 1 );
