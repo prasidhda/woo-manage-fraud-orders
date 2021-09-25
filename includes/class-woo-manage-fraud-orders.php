@@ -217,7 +217,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 			?>
             <div class="wrap">
                 <form method="post">
-                    <h2><?php _e( 'Logs of Blacklisted attempts.', 'woo-manage-fraud-orders' ) ?></h2>
+                    <h2><?php _e( 'Blacklisted Log records.', 'woo-manage-fraud-orders' ) ?></h2>
                     <p><?php _e( 'This is not the blacklisted customer details. Rather,  It is the list of customers who could not manage to place an order due to blacklisting.', 'woo-manage-fraud-orders' ); ?></p>
 					<?php $logs->display(); ?>
                 </form>
@@ -236,7 +236,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 			?>
             <div class="wrap">
                 <form method="post">
-                    <h2><?php _e( 'Logs of Fraud Order Attempts.', 'woo-manage-fraud-orders' ) ?></h2>
+                    <h2><?php _e( 'Fraud Order Attempts Log Records.', 'woo-manage-fraud-orders' ) ?></h2>
                     <p><?php _e( 'Every time there is failed order creation, the customer details will be recorded here.', 'woo-manage-fraud-orders' ); ?></p>
 					<?php $logs->display(); ?>
                 </form>
