@@ -81,9 +81,10 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 * @param array<string, mixed> $data An array of posted data.
 		 * @param WP_Error $errors A WP Error object to add errors to.
 		 *
-		 * @see WC_Checkout::validate_checkout()
-		 *
+		 * @throws Exception
 		 * @see WC_Checkout::get_posted_data()
+		 *
+		 * @see WC_Checkout::validate_checkout()
 		 *
 		 */
 		public static function manage_blacklisted_customers_checkout( $data, $errors ) {
@@ -131,23 +132,50 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 			$customer_details['billing_phone']  = $data['billing_phone'] ?? '';
 			$customer_details['payment_method'] = $data['payment_method'] ?? '';
 
-			$customer_details['billing_address'] = array(
-				$data['billing_address_1'],
-				$data['billing_address_2'],
-				$data['billing_city'],
-				$data['billing_state'],
-				$data['billing_postcode'],
-				$data['billing_country'],
-			);
+			//customer billing address in single array
+			$customer_details['billing_address'] = array();
+			if ( isset( $data['billing_address_1'] ) ) {
+				$customer_details['billing_address'][] = $data['billing_address_1'];
+			}
+			if ( isset( $data['billing_address_2'] ) ) {
+				$customer_details['billing_address'][] = $data['billing_address_2'];
+			}
+			if ( isset( $data['billing_city'] ) ) {
+				$customer_details['billing_address'][] = $data['billing_city'];
+			}
+			if ( isset( $data['billing_state'] ) ) {
+				$customer_details['billing_address'][] = $data['billing_state'];
+			}
+			if ( isset( $data['billing_postcode'] ) ) {
+				$customer_details['billing_address'][] = $data['billing_postcode'];
+			}
+			if ( isset( $data['billing_country'] ) ) {
+				$customer_details['billing_address'][] = $data['billing_country'];
+			}
+
+			//customer shipping address in single array
+			$customer_details['shipping_address'] = array();
+			if ( isset( $data['shipping_address_1'] ) ) {
+				$customer_details['shipping_address'][] = $data['shipping_address_1'];
+			}
+			if ( isset( $data['shipping_address_2'] ) ) {
+				$customer_details['shipping_address'][] = $data['shipping_address_2'];
+			}
+			if ( isset( $data['shipping_city'] ) ) {
+				$customer_details['shipping_address'][] = $data['shipping_city'];
+			}
+			if ( isset( $data['shipping_state'] ) ) {
+				$customer_details['shipping_address'][] = $data['shipping_state'];
+			}
+			if ( isset( $data['shipping_postcode'] ) ) {
+				$customer_details['shipping_address'][] = $data['shipping_postcode'];
+			}
 			if ( isset( $data['shipping_country'] ) ) {
-				$customer_details['shipping_address'] = array(
-					$data['shipping_address_1'],
-					$data['shipping_address_2'],
-					$data['shipping_city'],
-					$data['shipping_state'],
-					$data['shipping_postcode'],
-					$data['shipping_country'],
-				);
+				$customer_details['shipping_address'][] = $data['shipping_country'];
+			}
+
+			if ( count( $customer_details['shipping_address'] ) < 1 ) {
+				unset( $customer_details['shipping_address'] );
 			}
 
 			$cart_items = WC()->cart->get_cart();
@@ -358,6 +386,9 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 * @throws Exception
 		 */
 		public static function manage_multiple_failed_attempts_default( $order_id, $order ) {
+			if ( is_admin() ) {
+				return;
+			}
 			self::manage_multiple_failed_attempts( $order, 'failed' );
 		}
 
@@ -426,7 +457,6 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 					if ( false !== $customer && method_exists( 'WMFO_Blacklist_Handler', 'init' ) ) {
 						WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
 						WMFO_Blacklist_Handler::show_blocked_message();
-						WMFO_Blacklist_Handler::add_to_log( $customer );
 
 						return false;
 					}
@@ -441,9 +471,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 					// And cancel the order.
 					if ( false !== $customer && method_exists( 'WMFO_Blacklist_Handler', 'init' ) ) {
 						WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
-
 						WMFO_Blacklist_Handler::show_blocked_message();
-						WMFO_Blacklist_Handler::add_to_log( $customer );
 
 						return false;
 
@@ -453,10 +481,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 				// check in the DB
 				if ( self::is_possible_fraud_attempts( $fraud_limit, $customer ) ) {
 					WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
-
 					WMFO_Blacklist_Handler::show_blocked_message();
-					WMFO_Blacklist_Handler::add_to_log( $customer );
-
 				}
 
 			}

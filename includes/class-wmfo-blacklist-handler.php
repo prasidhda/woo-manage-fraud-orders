@@ -45,27 +45,34 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 */
 		public static function update_blacklist( $key, $pre_values, $to_add, $action = 'add' ) {
 			$new_values = null;
-			$to_add     = str_replace( PHP_EOL, '', $to_add );
+			if ( 'wmfo_black_list_addresses' !== $key ) {
+				$to_add = str_replace( PHP_EOL, '', $to_add );
+			}
+
 			if ( 'add' === $action ) {
 				if ( empty( $pre_values ) ) {
 					$new_values = $to_add;
 				} else {
 					$to_add_entries = explode( PHP_EOL, $to_add );
+
 					foreach ( $to_add_entries as $to_add_entry ) {
 						$new_values = ! in_array( $to_add_entry, explode( PHP_EOL, $pre_values ), true ) ? $pre_values . PHP_EOL . $to_add_entry : $pre_values;
 					}
 				}
 			} elseif ( 'remove' === $action ) {
-				$in_array_value = explode( PHP_EOL, $pre_values );
-				$to_add_entries = explode( PHP_EOL, $to_add );
-				foreach ( $to_add_entries as $to_add_entry ) {
-					if ( in_array( $to_add_entry, $in_array_value, true ) ) {
-						$array_key = array_search( $to_add_entry, $in_array_value, true );
+
+				$in_array_value    = explode( PHP_EOL, $pre_values );
+				$to_remove_entries = explode( PHP_EOL, $to_add );
+
+				foreach ( $to_remove_entries as $to_remove_entry ) {
+					if ( in_array( $to_remove_entry, $in_array_value, true ) ) {
+						$array_key = array_search( $to_remove_entry, $in_array_value, true );
 						if ( false !== $array_key ) {
 							unset( $in_array_value[ $array_key ] );
 						}
 					}
 				}
+
 				$new_values = implode( PHP_EOL, $in_array_value );
 			}
 
@@ -116,11 +123,12 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 					) ) );
 				}
 
+
 				self::update_blacklist( 'wmfo_black_list_addresses', $prev_blacklisted_data['prev_black_list_addresses'], $addresses, $action );
 
 			}
 
-			if ( 'front' === $context ) {
+			if ( in_array( $context, array( 'front', 'failed' ), true ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Max Fraud Attempts exceeded', 'woo-manage-fraud-orders' );
 				WMFO_Blacklist_Handler::add_to_log( $customer );
 			}
@@ -192,7 +200,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 
 			// with some reason, get_option with default value not working.
 
-			if ( ! wc_has_notice( $wmfo_black_list_message ) ) {
+			if ( function_exists( 'wc_has_notice' ) && ! wc_has_notice( $wmfo_black_list_message ) ) {
 				wc_add_notice( $wmfo_black_list_message, 'error' );
 			}
 		}
