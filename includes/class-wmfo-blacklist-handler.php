@@ -114,7 +114,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 
 			if ( 'no' != $wmfo_allow_blacklist_by_address ) {
 				// If billing and shipping address are the same, only save one.
-				if ( null == $customer['shipping_address'] ) {
+				if ( ! isset( $customer['shipping_address'] ) ) {
 					$addresses = implode( ',', $customer['billing_address'] );
 				} else {
 					$addresses = implode( PHP_EOL, array_unique( array(
