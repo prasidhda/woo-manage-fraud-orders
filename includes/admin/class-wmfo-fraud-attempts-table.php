@@ -134,7 +134,7 @@ class WMFO_Fraud_Attempts_Table extends WP_List_Table {
 	public function process_bulk_action() {
 		if ( 'delete' === $this->current_action() ) {
 			$this->delete_fraud_record( absint( $_GET['log'] ) );
-			wp_redirect( admin_url( 'admin.php?page=wmfo-logs' ) );
+			wp_redirect( admin_url( 'admin.php?page=wmfo-fraud-attempts-logs' ) );
 		}
 
 		// If the delete bulk action is triggered
