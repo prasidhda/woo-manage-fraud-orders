@@ -265,7 +265,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 			// Check if there are matching records in DB for possible fraud attempts
 			$fraud_limit = get_option( 'wmfo_black_list_allowed_fraud_attempts', 5 );
 
-			if ( self::is_possible_fraud_attempts( ($fraud_limit + 1), $customer_details ) ) {
+			if ( self::is_possible_fraud_attempts( ($fraud_limit - 1), $customer_details ) ) {
 				WMFO_Blacklist_Handler::init( $customer_details, $order );
 				WMFO_Blacklist_Handler::show_blocked_message();
 
