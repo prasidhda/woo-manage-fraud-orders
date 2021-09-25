@@ -70,7 +70,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		 * Define a constant if it has not already been defined.
 		 *
 		 * @param string $name The name of the constant to define.
-		 * @param mixed  $value The value of the constant.
+		 * @param mixed $value The value of the constant.
 		 */
 		private function define( $name, $value ) {
 			if ( ! defined( $name ) ) {
@@ -84,10 +84,13 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		private function init_hooks() {
 			register_activation_hook( WMFO_PLUGIN_FILE, array( $this, 'install' ) );
 
-			add_filter( 'plugin_action_links_' . plugin_basename( WMFO_PLUGIN_FILE ), array( $this, 'action_links' ), 99, 1 );
+			add_filter( 'plugin_action_links_' . plugin_basename( WMFO_PLUGIN_FILE ), array(
+				$this,
+				'action_links'
+			), 99, 1 );
 			add_action( 'plugins_loaded', array( $this, 'load_text_domain' ) );
-			add_action('init', array($this, 'may_be_create_log_dir_db_table'));
-			add_action('admin_menu', array($this, 'init_sub_menu'), 9999);
+			add_action( 'init', array( $this, 'may_be_create_log_dir_db_table' ) );
+			add_action( 'admin_menu', array( $this, 'init_sub_menu' ), 9999 );
 		}
 
 		/**
@@ -104,7 +107,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 			// multisite
 			if ( is_multisite() ) {
 				// this plugin is network activated - Woo must be network activated
-				if ( is_plugin_active_for_network( plugin_basename(__FILE__) ) ) {
+				if ( is_plugin_active_for_network( plugin_basename( __FILE__ ) ) ) {
 					$need = ! is_plugin_active_for_network( 'woocommerce/woocommerce.php' );
 					// this plugin is locally activated - Woo can be network or locally activated
 				} else {
@@ -112,7 +115,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 				}
 				// this plugin runs on a single site
 			} else {
-				$need =  ! is_plugin_active( 'woocommerce/woocommerce.php');
+				$need = ! is_plugin_active( 'woocommerce/woocommerce.php' );
 			}
 
 			if ( $need ) {
@@ -129,8 +132,8 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		/**
 		 * Function to handle the creation of debug folder and DB table
 		 */
-		public function may_be_create_log_dir_db_table(){
-			require_once plugin_dir_path(WMFO_PLUGIN_FILE) . 'includes/class-wmfo-activator.php';
+		public function may_be_create_log_dir_db_table() {
+			require_once plugin_dir_path( WMFO_PLUGIN_FILE ) . 'includes/class-wmfo-activator.php';
 
 			WMFO_Activator::create_db_table();
 
@@ -142,10 +145,12 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		 * Add the `Settings` link under the plugin name on plugins.php.
 		 *
 		 * @hooked plugin_action_links_{plugin_basename}
-		 * @see WP_Plugins_List_Table::single_row()
 		 *
 		 * @param array<string, string> $actions The existing registered links.
+		 *
 		 * @return array<string, string>
+		 * @see WP_Plugins_List_Table::single_row()
+		 *
 		 */
 		public static function action_links( $actions ): array {
 
@@ -190,49 +195,51 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		/**
 		 * Plugin submenus
 		 */
-		public function init_sub_menu(){
-			add_submenu_page( 'woocommerce', __( 'WMFO Logs', 'woo-manage-fraud-orders' ), __( 'WMFO Logs', 'woo-manage-fraud-orders' ),
-				'manage_options', 'wmfo-logs', array( $this, 'render_wmfo_logs' ), 99999 );
+		public function init_sub_menu() {
+			add_menu_page( __( 'WMFO', 'honeypot-for-wp-comment' ), __( 'WMFO', 'honeypot-for-wp-comment' ), 'manage_options', 'wmfo', '', 'dashicons-welcome-write-blog', 59 );
 
-			add_submenu_page( 'woocommerce', __( 'WMFO Fraud Attempt Logs', 'woo-manage-fraud-orders' ), __( 'WMFO Fraud Attempt Logs', 'woo-manage-fraud-orders' ),
-				'manage_options', 'wmfo-fraud-attempts-logs', array( $this, 'render_fraud_attempts_logs' ), 99999 );
+			add_submenu_page( 'wmfo', __( 'Blocked Logs', 'woo-manage-fraud-orders' ), __( 'Blocked Logs', 'woo-manage-fraud-orders' ),
+				'manage_options', 'wmfo', array( $this, 'render_wmfo_logs' ), 1 );
+
+			add_submenu_page( 'wmfo', __( 'Fraud Attempt Logs', 'woo-manage-fraud-orders' ), __( 'Fraud Attempt Logs', 'woo-manage-fraud-orders' ),
+				'manage_options', 'wmfo-fraud-attempts-logs', array( $this, 'render_fraud_attempts_logs' ), 2 );
 		}
 
 		/**
 		 * This is not the blacklisted customer details.
-         * Rather, It is the list of customers who could not manage to place order due to blacklisting.
+		 * Rather, It is the list of customers who could not manage to place order due to blacklisting.
 		 */
 		public function render_wmfo_logs() {
-			require_once plugin_dir_path(WMFO_PLUGIN_FILE) . 'includes/admin/class-wmfo-logs-table.php';
+			require_once plugin_dir_path( WMFO_PLUGIN_FILE ) . 'includes/admin/class-wmfo-logs-table.php';
 			$logs = new WMFO_Logs_Table();
 			$logs->prepare_items();
 			?>
-			<div class="wrap">
-				<form method="post">
-					<h2><?php _e( 'Logs of Blacklisted attempts.', 'woo-manage-fraud-orders' ) ?></h2>
-                    <p><?php _e('This is not the blacklisted customer details. Rather,  It is the list of customers who could not manage to place an order due to blacklisting.', 'woo-manage-fraud-orders'); ?></p>
+            <div class="wrap">
+                <form method="post">
+                    <h2><?php _e( 'Logs of Blacklisted attempts.', 'woo-manage-fraud-orders' ) ?></h2>
+                    <p><?php _e( 'This is not the blacklisted customer details. Rather,  It is the list of customers who could not manage to place an order due to blacklisting.', 'woo-manage-fraud-orders' ); ?></p>
 					<?php $logs->display(); ?>
-				</form>
-			</div>
+                </form>
+            </div>
 			<?php
 		}
 
 		/**
 		 * Fraud attempts logs
-         * Will be useful for handling SERVER side checking of fraud attempts
+		 * Will be useful for handling SERVER side checking of fraud attempts
 		 */
 		public function render_fraud_attempts_logs() {
-			require_once plugin_dir_path(WMFO_PLUGIN_FILE) . 'includes/admin/class-wmfo-fraud-attempts-table.php';
+			require_once plugin_dir_path( WMFO_PLUGIN_FILE ) . 'includes/admin/class-wmfo-fraud-attempts-table.php';
 			$logs = new WMFO_Fraud_Attempts_Table();
 			$logs->prepare_items();
 			?>
-			<div class="wrap">
-				<form method="post">
-					<h2><?php _e( 'Logs of Fraud Order Attempts.', 'woo-manage-fraud-orders' ) ?></h2>
-                    <p><?php _e('Every time there is failed order creation, the customer details will be recorded here.', 'woo-manage-fraud-orders'); ?></p>
+            <div class="wrap">
+                <form method="post">
+                    <h2><?php _e( 'Logs of Fraud Order Attempts.', 'woo-manage-fraud-orders' ) ?></h2>
+                    <p><?php _e( 'Every time there is failed order creation, the customer details will be recorded here.', 'woo-manage-fraud-orders' ); ?></p>
 					<?php $logs->display(); ?>
-				</form>
-			</div>
+                </form>
+            </div>
 			<?php
 		}
 	}

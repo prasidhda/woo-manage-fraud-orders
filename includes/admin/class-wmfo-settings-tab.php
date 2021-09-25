@@ -17,8 +17,8 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 		 */
 		public static function init() {
 			add_filter( 'woocommerce_settings_tabs_array', array( self::class, 'add_settings_tab' ), 50 );
-			add_action( 'woocommerce_settings_tabs_settings_tab_blacklists', array( self::class, 'settings_tab' ) );
-			add_action( 'woocommerce_update_options_settings_tab_blacklists', array( self::class, 'update_settings' ) );
+			add_action( 'woocommerce_settings_tabs_settings_tab_wmfo', array( self::class, 'settings_tab' ) );
+			add_action( 'woocommerce_update_options_settings_tab_wmfo', array( self::class, 'update_settings' ) );
 			add_filter( 'woocommerce_admin_settings_sanitize_option', array(
 				self::class,
 				'update_setting_filter'
@@ -38,7 +38,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 		 *
 		 */
 		public static function add_settings_tab( array $settings_tabs ): array {
-			$settings_tabs['settings_tab_blacklists'] = esc_html__( 'Blacklisted Customers', 'woo-manage-fraud-orders' );
+			$settings_tabs['settings_tab_wmfo'] = esc_html__( 'WMFO', 'woo-manage-fraud-orders' );
 
 			return $settings_tabs;
 		}
@@ -46,7 +46,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 		/**
 		 * Uses the WooCommerce admin fields API to output settings via the @see woocommerce_admin_fields() function.
 		 *
-		 * @hooked woocommerce_settings_tabs_settings_tab_blacklists
+		 * @hooked woocommerce_settings_tabs_settings_tab_wmfo
 		 *
 		 * @uses woocommerce_admin_fields()
 		 * @uses self::get_settings()
@@ -58,7 +58,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 		/**
 		 * Uses the WooCommerce options API to save settings via the @see woocommerce_update_options() function.
 		 *
-		 * @hooked woocommerce_update_options_settings_tab_blacklists
+		 * @hooked woocommerce_update_options_settings_tab_wmfo
 		 *
 		 * @uses woocommerce_update_options()
 		 * @uses self::get_settings()
@@ -283,7 +283,7 @@ add_action(
 	'admin_head',
 	function () {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( isset( $_GET['tab'] ) && 'settings_tab_blacklists' === $_GET['tab'] ) : ?>
+		if ( isset( $_GET['tab'] ) && 'settings_tab_wmfo' === $_GET['tab'] ) : ?>
             <style>
                 .wrap.woocommerce .forminp.forminp-multiselect span.description {
                     display: block;
