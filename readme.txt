@@ -74,7 +74,7 @@ Yes. From version 2.3.0, you can whitelist the payment gateways and white list s
 
 == Changelog ==
 = 2.4.1=
-* fix: fatal error related to wc_add_notice
+* fix: fatal error on order status change to "failed"
 * fix: undefined checkout fields
 
 = 2.4.0=
