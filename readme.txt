@@ -25,6 +25,12 @@ Blacklist the customer, <a href="https://prasidhda.com.np/how-to-blacklist-custo
 4. Then, you are done. It will block all the blacklisted customers from checking out.
 
 
+Unordered WHAT IF REGULAR CUSTOMER COMPLAINS ABOUT BLOCKING:
+
+* Navigate to WP-Admin >> WooCommerce >> WMFO Tab, remove the customer details from blacklisting.
+* Navigate to WP-Admin >> WMFO >> Fraud attempt logs, and remove the customer details from fraud attempts logs.
+* White list the customer from Navigate to WP-Admin >> WooCommerce >> WMFO Tab
+
 == Frequently Asked Questions ==
 
 = Can I add zipcode or city Address in the blacklist? =
@@ -50,6 +56,9 @@ So, the very simple rule is, you can create any combination of address fields â€
 
 = How do we blacklist the customer's detail? =
 There are three ways to blacklist the customer. First, open the order edit page, choose the option "Blacklist Customer" in the "order actions" section and update the order page and it will add the customer's details into blacklist. Second, navigate to Woocommerce > Settings > Blacklisted Customers tab. You will see three different textarea fields for "Email" "Phones" & "IP Address". You can manually edit those setting to update the blacklisted customers.
+
+= Is there wildcard rule for address blacklisting? =
+Yes, There is. Wildcard must be in the format of "%address%"; enclosed by "%". For example; If you put the "%Springfield%" as a wildcard rule for address, It will block the order if there is any match of "Springfield" within any of customer\'s address(Street address, address line 2, city etc.)
 
 = Is there auto blacklisting system as well? =
 Yes, there is. But this auto system will be in action only for those payment gateways which authorizes the payment details and charge instantly (Electronic Check, Credit Card) etc.
