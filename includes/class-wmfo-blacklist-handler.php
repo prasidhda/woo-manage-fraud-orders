@@ -137,7 +137,6 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			if ( null !== $order ) {
 				$default_notice          = esc_html__( 'Sorry, You are being restricted from placing orders.', 'woo-manage-fraud-orders' );
 				$wmfo_black_list_message = get_option( 'wmfo_black_list_message', $default_notice );
-
 				self::cancel_order( $order, $action );
 
 				if ( 'front' === $context ) {
@@ -175,18 +174,26 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 * @return bool Always returns true.
 		 */
 		public static function cancel_order( $order, $action = 'add' ): bool {
+			echo 'here 1';
 			if ( 'remove' === $action ) {
 				$order->add_order_note( apply_filters( 'wmfo_remove_blacklisted_order_note', esc_html__( 'Order details removed from blacklist.', 'woo-manage-fraud-orders' ) ) );
 
 				return true;
 			}
+			echo 'here 2';
 			$blacklisted_order_note = apply_filters( 'wmfo_blacklisted_order_note', esc_html__( 'Order details blacklisted for future checkout.', 'woo-manage-fraud-orders' ), $order );
 
 			// Set the order status to "Cancelled".
 			if ( ! $order->has_status( 'cancelled' ) && $order->get_type() === 'shop_order' ) {
 				$order->update_status( 'cancelled', $blacklisted_order_note );
 			}
+
+			echo 'here 3';
+
 			$order->add_order_note( $blacklisted_order_note );
+
+			$order->update_meta_data( '_wmfo_cancelled', 'yes' );
+			$order->save();
 
 			return true;
 		}
