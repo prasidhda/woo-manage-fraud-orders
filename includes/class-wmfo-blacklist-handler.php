@@ -437,6 +437,37 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 					},
 					$blacklisted_address_parts
 				);
+
+				/**
+				 * Check address by wildcard
+				 * It has to be in %address% format
+				 */
+				if ( count( $blacklisted_address_parts ) === 1 ) {
+					if ( substr_compare( $blacklisted_address_parts[0], '%', 0, strlen( '%' ) ) === 0 &&
+					     substr_compare( $blacklisted_address_parts[0], '%', - strlen( '%' ) ) === 0
+					) {
+						$wild_card_val = strtolower( trim( $blacklisted_address_parts[0], '%' ) );
+						if ( $wild_card_val != '' ) {
+
+							// check by array
+							if ( in_array( $wild_card_val, $customer_billing_address_parts ) ||
+							     in_array( $wild_card_val, $customer_shipping_address_parts )
+							) {
+								$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing/Shipping Address', 'woo-manage-fraud-orders' );
+								return true;
+							}
+
+							// check by string
+							if ( strpos( implode( ' ', $customer_billing_address_parts ), $wild_card_val ) !== false ||
+							     strpos( implode( ' ', $customer_shipping_address_parts ), $wild_card_val ) !== false
+							) {
+								$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing/Shipping Address', 'woo-manage-fraud-orders' );
+								return true;
+							}
+						}
+
+					}
+				}
 				/**
 				 * If all the parts of the blacklisted address are in the customer's address
 				 *

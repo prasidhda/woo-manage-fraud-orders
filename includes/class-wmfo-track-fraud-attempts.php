@@ -262,6 +262,17 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 				return;
 			}
 
+			// Check if there are matching records in DB for possible fraud attempts
+			$fraud_limit = get_option( 'wmfo_black_list_allowed_fraud_attempts', 5 );
+
+			if ( self::is_possible_fraud_attempts( ($fraud_limit - 1), $customer_details ) ) {
+				WMFO_Blacklist_Handler::init( $customer_details, $order );
+				WMFO_Blacklist_Handler::show_blocked_message();
+
+				return;
+
+			}
+
 			/**
 			 * Block the customer if there is setting for order_status blocking
 			 * If the customer previously has blocked order status in setting, He/She will be blocked from placing
@@ -424,30 +435,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 				$order->update_meta_data( '_wmfo_fraud_attempts', $pre_fraud_attempt + 1 );
 				$order->save();
 
-
-				// Client side fraud attempt check (The highest priority)
-				// MD5 the name of the cookie for fraud_attempts.
-				$fraud_attempts_md5    = md5( 'fraud_attempts' );
-				$cookie_fraud_attempts = ! isset( $_COOKIE[ $fraud_attempts_md5 ] ) || empty( $_COOKIE[ $fraud_attempts_md5 ] ) ? 0 : intval( wp_unslash( $_COOKIE[ $fraud_attempts_md5 ] ) );
-
-				$cookie_value = $cookie_fraud_attempts + 1;
-				setcookie( $fraud_attempts_md5, "{$cookie_value}", time() + ( 60 * 60 * 30 ), '/' ); // 30 days
-
-				$cookie_fraud_status = $cookie_fraud_attempts > (int) $fraud_limit;
-
-				if ( $cookie_fraud_status ) {
-					// Block this customer for future sessions as well.
-					// And cancel the order.
-					if ( false !== $customer && method_exists( 'WMFO_Blacklist_Handler', 'init' ) ) {
-						WMFO_Blacklist_Handler::init( $customer, $order, 'add', $context );
-						WMFO_Blacklist_Handler::show_blocked_message();
-
-						return false;
-					}
-				}
-
 				//SERVER side fraud attempts check
-
 				// Check in the order meta
 				$order_meta_fraud_status = $pre_fraud_attempt > (int) $fraud_limit;
 				if ( $order_meta_fraud_status ) {
