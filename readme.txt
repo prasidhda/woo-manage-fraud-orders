@@ -3,7 +3,7 @@ Contributors: prasidhda, sranzan, BrianHenryIE
 Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers
 Requires at least: 4.6
 Tested up to: 5.8
-Stable tag: 2.4.1
+Stable tag: 2.5.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,6 +24,12 @@ Blacklist the customer, <a href="https://prasidhda.com.np/how-to-blacklist-custo
 3. Use the WooCommerce>Setting>Blacklisted Customers for the plugin setting and update the settings or you can go to the order edit page and choose the action "Blacklist order" for adding customer details into blacklists.
 4. Then, you are done. It will block all the blacklisted customers from checking out.
 
+
+Unordered WHAT IF REGULAR CUSTOMER COMPLAINS ABOUT BLOCKING:
+
+* Navigate to WP-Admin >> WooCommerce >> WMFO Tab, remove the customer details from blacklisting.
+* Navigate to WP-Admin >> WMFO >> Fraud attempt logs, and remove the customer details from fraud attempts logs.
+* White list the customer from Navigate to WP-Admin >> WooCommerce >> WMFO Tab
 
 == Frequently Asked Questions ==
 
@@ -51,6 +57,9 @@ So, the very simple rule is, you can create any combination of address fields â€
 = How do we blacklist the customer's detail? =
 There are three ways to blacklist the customer. First, open the order edit page, choose the option "Blacklist Customer" in the "order actions" section and update the order page and it will add the customer's details into blacklist. Second, navigate to Woocommerce > Settings > Blacklisted Customers tab. You will see three different textarea fields for "Email" "Phones" & "IP Address". You can manually edit those setting to update the blacklisted customers.
 
+= Is there wildcard rule for address blacklisting? =
+Yes, There is. Wildcard must be in the format of "%address%"; enclosed by "%". For example; If you put the "%Springfield%" as a wildcard rule for address, It will block the order if there is any match of "Springfield" within any of customer\'s address(Street address, address line 2, city etc.)
+
 = Is there auto blacklisting system as well? =
 Yes, there is. But this auto system will be in action only for those payment gateways which authorizes the payment details and charge instantly (Electronic Check, Credit Card) etc.
 
@@ -73,6 +82,11 @@ Yes. From version 2.3.0, you can whitelist the payment gateways and white list s
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+= 2.5.0=
+* add: wildcard address blocking
+* add: order cancelled metadata
+* remove: cookie based blocking removal
+
 = 2.4.1=
 * fix: fatal error on order status change to "failed"
 * fix: undefined checkout fields

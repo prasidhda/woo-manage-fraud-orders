@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woo Manage Fraud Orders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-25 14:57+0000\n"
+"POT-Creation-Date: 2021-10-28 14:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -37,19 +37,21 @@ msgstr ""
 msgid "Billing Address"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:336
+#: includes/class-wmfo-blacklist-handler.php:343
 msgid "Billing Email"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:350
+#: includes/class-wmfo-blacklist-handler.php:357
 msgid "Billing Email Wildcard match"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:375
+#: includes/class-wmfo-blacklist-handler.php:382
 msgid "Billing Phone"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:442
+#: includes/class-wmfo-blacklist-handler.php:456
+#: includes/class-wmfo-blacklist-handler.php:464
+#: includes/class-wmfo-blacklist-handler.php:480
 msgid "Billing/Shipping Address"
 msgstr ""
 
@@ -160,7 +162,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:363
+#: includes/class-wmfo-blacklist-handler.php:370
 msgid "Email Domain"
 msgstr ""
 
@@ -197,7 +199,11 @@ msgid ""
 "Enter one address per line, with each line of the address itself separated "
 "by a comma. Partial addresses can be used, e.g. \"Springfield, US\" will "
 "block every order in every town named Springfield in the US; \"90210\" will "
-"block all orders to that zip code."
+"block all orders to that zip code. And Wildcard must be in the format of "
+"\"%address%\"; enclosed by \"%\". For example; If you put the "
+"\"%Springfield%\" as a wildcard rule for address, It will block the order if "
+"there is any match of \"Springfield\" within any of customer's "
+"address(Street address, address line 2, city etc.)."
 msgstr ""
 
 #: includes/admin/class-wmfo-settings-tab.php:230
@@ -228,7 +234,7 @@ msgstr ""
 msgid "Fraud Order Attempts Log Records."
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:310
+#: includes/class-wmfo-blacklist-handler.php:317
 #: includes/admin/class-wmfo-fraud-attempts-table.php:186
 #: includes/admin/class-wmfo-logs-table.php:186
 msgid "Full Name"
@@ -255,7 +261,7 @@ msgstr ""
 msgid "IP"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:323
+#: includes/class-wmfo-blacklist-handler.php:330
 msgid "IP Address"
 msgstr ""
 
@@ -279,7 +285,7 @@ msgstr ""
 msgid "Number of allowed Fraud Attempts"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:183
+#: includes/class-wmfo-blacklist-handler.php:184
 msgid "Order details blacklisted for future checkout."
 msgstr ""
 
@@ -318,7 +324,7 @@ msgid "Shipping Address"
 msgstr ""
 
 #: includes/class-wmfo-blacklist-handler.php:138
-#: includes/class-wmfo-blacklist-handler.php:198
+#: includes/class-wmfo-blacklist-handler.php:205
 #: includes/admin/class-wmfo-settings-tab.php:124
 msgid "Sorry, You are being restricted from placing orders."
 msgstr ""
