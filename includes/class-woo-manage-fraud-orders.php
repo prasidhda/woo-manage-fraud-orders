@@ -23,7 +23,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 		 *
 		 * @var string $version
 		 */
-		public $version = '2.5.0';
+		public $version = '2.5.1';
 
 		/**
 		 * Store the class singleton.
