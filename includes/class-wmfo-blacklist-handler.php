@@ -343,20 +343,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Email', 'woo-manage-fraud-orders' );
 
 				return true;
-			} elseif ( ! empty( $blacklisted_emails ) &&
-			           strpos(
-				           strtolower( $customer_details['billing_email'] ),
-				           implode( ',',
-					           array_map( 'strtolower',
-						           array_map( 'trim',
-							           explode( PHP_EOL, $blacklisted_emails )
-						           )
-					           )
-				           )
-			           ) !== false ) {
-				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Email Wildcard match', 'woo-manage-fraud-orders' );
 
-				return true;
 			} elseif ( ! empty( $blacklisted_email_domains ) &&
 			           in_array(
 				           strtolower( $domain ),
@@ -384,6 +371,26 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 				return true;
 			}
 
+			//check for email wildcard
+			$is_wildcard_email_caught = false;
+			foreach (
+				array_map( 'strtolower',
+					array_map( 'trim',
+						explode( PHP_EOL, $blacklisted_emails )
+					)
+				) as $email_wild_card
+			) {
+				if ( strpos( strtolower( $customer_details['billing_email'] ), $email_wild_card ) !== false ) {
+					$is_wildcard_email_caught = true;
+					break;
+				}
+			}
+
+			if ( $is_wildcard_email_caught ) {
+				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Email Wildcard match', 'woo-manage-fraud-orders' );
+
+				return true;
+			}
 
 			if ( 'no' == $wmfo_allow_blacklist_by_address ) {
 
@@ -454,6 +461,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 							     in_array( $wild_card_val, $customer_shipping_address_parts )
 							) {
 								$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing/Shipping Address', 'woo-manage-fraud-orders' );
+
 								return true;
 							}
 
@@ -462,6 +470,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 							     strpos( implode( ' ', $customer_shipping_address_parts ), $wild_card_val ) !== false
 							) {
 								$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing/Shipping Address', 'woo-manage-fraud-orders' );
+
 								return true;
 							}
 						}
