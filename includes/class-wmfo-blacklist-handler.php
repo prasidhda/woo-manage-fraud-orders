@@ -373,18 +373,21 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 
 			//check for email wildcard
 			$is_wildcard_email_caught = false;
-			foreach (
-				array_map( 'strtolower',
-					array_map( 'trim',
-						explode( PHP_EOL, $blacklisted_emails )
-					)
-				) as $email_wild_card
-			) {
-				if ( strpos( strtolower( $customer_details['billing_email'] ), $email_wild_card ) !== false ) {
-					$is_wildcard_email_caught = true;
-					break;
+			if ( ! empty( $blacklisted_emails ) ) {
+				foreach (
+					array_map( 'strtolower',
+						array_map( 'trim',
+							explode( PHP_EOL, $blacklisted_emails )
+						)
+					) as $email_wild_card
+				) {
+					if ( strpos( strtolower( $customer_details['billing_email'] ), $email_wild_card ) !== false ) {
+						$is_wildcard_email_caught = true;
+						break;
+					}
 				}
 			}
+
 
 			if ( $is_wildcard_email_caught ) {
 				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Email Wildcard match', 'woo-manage-fraud-orders' );
