@@ -10,7 +10,7 @@
  * License URI:  https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:  woo-manage-fraud-orders
  * WC requires at least: 2.6
- * WC tested up to: 6.0.o
+ * WC tested up to: 6.0.0
  *
  * @package woo-manage-fraud-orders
  */

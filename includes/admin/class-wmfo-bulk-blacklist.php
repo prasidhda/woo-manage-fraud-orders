@@ -27,10 +27,11 @@ if ( ! class_exists( 'WMFO_Bulk_Blacklist' ) ) {
 		 *
 		 * @hooked bulk_actions-edit-shop_order
 		 *
+		 * @param array<string, string> $bulk_actions The bulk actions for the shop order list table.
+		 *
+		 * @return array<string, string>
 		 * @see WP_List_Table::bulk_actions()
 		 *
-		 * @param array<string, string> $bulk_actions The bulk actions for the shop order list table.
-		 * @return array<string, string>
 		 */
 		public function register_bulk_action( $bulk_actions ): array {
 			$bulk_actions['blacklist-customer'] = __( 'Blacklist Customer', 'woo-manage-fraud-orders' );
@@ -43,17 +44,19 @@ if ( ! class_exists( 'WMFO_Bulk_Blacklist' ) ) {
 		 *
 		 * @hooked handle_bulk_actions-edit-shop_order
 		 *
-		 * @see WP_List_Table::current_action()
-		 *
 		 * @param string $redirect_to The previously set/default redirect URL.
 		 * @param string $action The current action.
-		 * @param int[]  $post_ids The selected post ids (order ids).
+		 * @param int[] $post_ids The selected post ids (order ids).
+		 *
 		 * @return string The URL to redirect to.
 		 * @throws Exception
+		 * @see WP_List_Table::current_action()
+		 *
 		 */
 		public function handle_bulk_blacklisting( string $redirect_to, string $action, array $post_ids ): string {
 			if ( 'blacklist-customer' !== $action ) {
-				return $redirect_to;
+
+                return esc_url_raw( $redirect_to );;
 			}
 			foreach ( $post_ids as $post_id ) {
 				$order = wc_get_order( $post_id );
@@ -81,7 +84,8 @@ if ( ! class_exists( 'WMFO_Bulk_Blacklist' ) ) {
 				'handle_bulk_blacklisting'
 			);
 
-			return $redirect_to;
+			wp_safe_redirect( $redirect_to );
+			exit();
 		}
 
 		/**
@@ -112,22 +116,22 @@ if ( ! class_exists( 'WMFO_Bulk_Blacklist' ) ) {
 
 			$orders_count = isset( $_REQUEST['changed'] ) ? absint( $_REQUEST['changed'] ) : 0;
 			?>
-			<div id="message" class="updated fade">
+            <div id="message" class="updated fade">
 				<?php
-					echo esc_html(
-						sprintf(
-							// translators: a number of orders.
-							_n(
-								'%d order has been affected by bulk blacklisting.',
-								'%d orders have been affected by bulk blacklisting.',
-								$orders_count,
-								'woo-manage-fraud-orders'
-							),
-							$orders_count
-						)
-					);
+				echo esc_html(
+					sprintf(
+					// translators: a number of orders.
+						_n(
+							'%d order has been affected by bulk blacklisting.',
+							'%d orders have been affected by bulk blacklisting.',
+							$orders_count,
+							'woo-manage-fraud-orders'
+						),
+						$orders_count
+					)
+				);
 				?>
-			</div>
+            </div>
 			<?php
 		}
 	}
