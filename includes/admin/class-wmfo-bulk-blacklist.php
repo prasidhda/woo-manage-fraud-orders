@@ -33,7 +33,7 @@ if ( ! class_exists( 'WMFO_Bulk_Blacklist' ) ) {
 		 * @see WP_List_Table::bulk_actions()
 		 *
 		 */
-		public function register_bulk_action( $bulk_actions ): array {
+		public function register_bulk_action( $bulk_actions ) {
 			$bulk_actions['blacklist-customer'] = __( 'Blacklist Customer', 'woo-manage-fraud-orders' );
 
 			return $bulk_actions;
@@ -53,10 +53,10 @@ if ( ! class_exists( 'WMFO_Bulk_Blacklist' ) ) {
 		 * @see WP_List_Table::current_action()
 		 *
 		 */
-		public function handle_bulk_blacklisting( string $redirect_to, string $action, array $post_ids ): string {
+		public function handle_bulk_blacklisting( $redirect_to, $action, $post_ids ) {
 			if ( 'blacklist-customer' !== $action ) {
 
-                return esc_url_raw( $redirect_to );;
+                return esc_url_raw( $redirect_to );
 			}
 			foreach ( $post_ids as $post_id ) {
 				$order = wc_get_order( $post_id );

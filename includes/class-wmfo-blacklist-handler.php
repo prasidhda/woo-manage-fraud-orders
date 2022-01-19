@@ -24,7 +24,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 *
 		 * @return array<string,string|array>
 		 */
-		public static function get_blacklists(): array {
+		public static function get_blacklists() {
 			return array(
 				'prev_black_list_ips'        => get_option( 'wmfo_black_list_ips', '' ),
 				'prev_wmfo_black_list_names' => get_option( 'wmfo_black_list_names', '' ),
@@ -95,7 +95,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 * @see wmfo_get_customer_details_of_order()
 		 *
 		 */
-		public static function init( $customer = array(), $order = null, $action = 'add', $context = 'front' ): bool {
+		public static function init( $customer = array(), $order = null, $action = 'add', $context = 'front' ) {
 			$prev_blacklisted_data = self::get_blacklists();
 			if ( empty( $customer ) ) {
 				return false;
@@ -173,7 +173,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 *
 		 * @return bool Always returns true.
 		 */
-		public static function cancel_order( $order, $action = 'add' ): bool {
+		public static function cancel_order( $order, $action = 'add' ) {
 			if ( 'remove' === $action ) {
 				$order->add_order_note( apply_filters( 'wmfo_remove_blacklisted_order_note', esc_html__( 'Order details removed from blacklist.', 'woo-manage-fraud-orders' ) ) );
 
@@ -261,7 +261,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 *
 		 * @return bool
 		 */
-		public static function is_whitelisted( $customer_details ): bool {
+		public static function is_whitelisted( $customer_details ) {
 
 			$wmfo_white_listed_payment_gateways = get_option( 'wmfo_white_listed_payment_gateways', array() );
 			$wmfo_white_listed_customers        = get_option( 'wmfo_white_listed_customers', array() );
@@ -284,7 +284,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 * @see wmfo_get_customer_details_of_order()
 		 *
 		 */
-		public static function is_blacklisted( $customer_details ): bool {
+		public static function is_blacklisted( $customer_details ) {
 			// Check for ony by one, return TRUE as soon as first matching.
 			$allow_blacklist_by_name         = get_option( 'wmfo_allow_blacklist_by_name', 'no' );
 			$wmfo_allow_blacklist_by_address = get_option( 'wmfo_allow_blacklist_by_address', 'yes' );

@@ -37,7 +37,7 @@ function wmfo_get_customer_details_of_order( $order ) {
  *
  * In case woo commerce changes the function name to get IP address,
  */
-function wmfo_get_ip_address(): string {
+function wmfo_get_ip_address() {
 	if ( isset( $_SERVER['HTTP_X_REAL_IP'] ) ) { // WPCS: input var ok, CSRF ok.
 		return sanitize_text_field( wp_unslash( $_SERVER['HTTP_X_REAL_IP'] ) ); // WPCS: input var ok, CSRF ok.
 	} elseif ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) { // WPCS: input var ok, CSRF ok.

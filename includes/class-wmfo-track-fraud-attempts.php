@@ -373,7 +373,6 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 			self::manage_multiple_failed_attempts( $order, 'order-pay-eway' );
 		}
 
-
 		/**
 		 * @param $order_id
 		 * @param $order
@@ -398,7 +397,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 *
 		 * @throws Exception
 		 */
-		protected static function manage_multiple_failed_attempts( WC_Order $order, string $context = 'front' ) {
+		protected static function manage_multiple_failed_attempts( $order, string $context = 'front' ) {
 			// As very first step, check if there is product type blacklist.
 			// If there are values set to this, we should handle the blacklisting only if customer has such products in cart.
 			$product_items = array();
@@ -466,7 +465,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 *
 		 * @return bool
 		 */
-		public static function check_products_in_product_type_blacklist( array $product_items = array() ): bool {
+		public static function check_products_in_product_type_blacklist( $product_items = array() ) {
 			$blacklist_product_types = get_option( 'wmfo_black_list_product_types', array() );
 
 			if ( empty( $blacklist_product_types ) ) {
@@ -516,7 +515,7 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		 *
 		 * @return bool
 		 */
-		protected static function is_possible_fraud_attempts( $fraud_limit, $customer ): bool {
+		protected static function is_possible_fraud_attempts( $fraud_limit, $customer ) {
 			//Check in the DB table
 			global $wpdb;
 
