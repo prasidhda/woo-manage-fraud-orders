@@ -51,7 +51,7 @@ if ( ! class_exists( 'WMFO_Order_Actions' ) ) {
 		 *
 		 * @return array<string, string>
 		 */
-		public static function add_new_order_action( $order_actions ): array {
+		public static function add_new_order_action( $order_actions ) {
 			// Show this only if customer details of this order is in blacklist.
 
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended

@@ -37,7 +37,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 		 * @see \Automattic\WooCommerce\Admin\Features\Navigation\CoreMenu::get_setting_items()
 		 *
 		 */
-		public static function add_settings_tab( array $settings_tabs ): array {
+		public static function add_settings_tab( array $settings_tabs ) {
 			$settings_tabs['settings_tab_wmfo'] = esc_html__( 'WMFO', 'woo-manage-fraud-orders' );
 
 			return $settings_tabs;
@@ -109,7 +109,7 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 		 * @see woocommerce_admin_fields() function.
 		 *
 		 */
-		public static function get_settings(): array {
+		public static function get_settings() {
 			$settings = array(
 				'section_title'                     => array(
 					'name' => esc_html__( 'Blacklisted Customers', 'woo-manage-fraud-orders' ),
