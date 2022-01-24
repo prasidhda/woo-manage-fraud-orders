@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.3; wp-5.6.1\n"
+"X-Loco-Version: 2.5.4; wp-5.6.1\n"
 "X-Domain: woo-manage-fraud-orders"
 
 #. a number of orders.
