@@ -3,14 +3,14 @@
  * Plugin Name:  Woo Manage Fraud Orders
  * Plugin URI:   https://prasidhda.com.np/how-to-blacklist-customers-from-placing-order-in-woocommerce/
  * Description:  WooCommerce plugin to manage the fraud orders by blacklisting the customer's details.
- * Version:      2.5.5
+ * Version:      2.5.6
  * Author:       Prasidhda Malla
  * Author URI:   https://prasidhda.com.np/
  * License:      GPLv2
  * License URI:  https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:  woo-manage-fraud-orders
  * WC requires at least: 2.6
- * WC tested up to: 6.3.1
+ * WC tested up to: 6.8.2
  *
  * @package woo-manage-fraud-orders
  */
