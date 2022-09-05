@@ -518,16 +518,43 @@ if ( ! class_exists( 'WMFO_Track_Fraud_Attempts' ) ) {
 		protected static function is_possible_fraud_attempts( $fraud_limit, $customer ) {
 			//Check in the DB table
 			global $wpdb;
+			$checkout_fields = WC()->checkout->get_checkout_fields();
+
+			$where_query = "";
+			$args = [];
+
+			if(isset($customer['ip_address'])){
+				$where_query .= "ip = %s";
+				$args = [$customer['ip_address']];
+			}
+
+			if(isset($checkout_fields['billing'])) {
+				if(isset($checkout_fields['billing']['billing_email'])
+				&& $checkout_fields['billing']['billing_email']['required']) {
+					$or_append = $where_query != "" ? " OR " : "";
+					$where_query .= $or_append . "billing_email = %s";
+					$args[] = $customer['billing_email'];
+		 		}
+
+				if(isset($checkout_fields['billing']['billing_phone'])
+				&& $checkout_fields['billing']['billing_phone']['required']) {
+					$or_append = $where_query != "" ? " OR " : "";
+					$where_query .= $or_append . "billing_phone = %s";
+					$args[] = $customer['billing_phone'];
+				  }
+			}
+
+			if($where_query == ""){
+				return false;
+			}
 
 			$matching_fraud_attempts = $wpdb->get_results(
 				$wpdb->prepare(
-					"SELECT * FROM {$wpdb->prefix}wmfo_fraud_attempts WHERE ip=%s OR billing_email=%s OR billing_phone=%s",
-					$customer['ip_address'],
-					$customer['billing_email'],
-					$customer['billing_phone']
+					"SELECT * FROM {$wpdb->prefix}wmfo_fraud_attempts WHERE ".$where_query,
+					$args
 				),
 				ARRAY_A );
-
+		
 			return count( $matching_fraud_attempts ) > (int) $fraud_limit;
 		}
 	}
