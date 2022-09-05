@@ -74,7 +74,11 @@ function wmfp_get_enabled_payment_gateways() {
 	$available_payment_gateways           = WC()->payment_gateways->get_available_payment_gateways();
 	$formatted_available_payment_gateways = array();
 	foreach ( $available_payment_gateways as $key => $available_payment_gateway ) {
-		$formatted_available_payment_gateways[ $key ] = $available_payment_gateway->title;
+		$method_title = $available_payment_gateway->title;
+		if(!$method_title){
+			$method_title = $available_payment_gateway->method_title;
+		}
+		$formatted_available_payment_gateways[ $key ] = $method_title;
 	}
 
 	return $formatted_available_payment_gateways;
