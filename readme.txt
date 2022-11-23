@@ -2,8 +2,8 @@
 Contributors: prasidhda, sranzan, BrianHenryIE
 Tags: Blacklist customers, Anti Fraud orders, Tracking fraud attempts, Prevent fake orders, Blacklist fraud customers
 Requires at least: 4.6
-Tested up to: 6.0.2
-Stable tag: 2.5.6
+Tested up to: 6.1.1
+Stable tag: 2.6.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -73,7 +73,7 @@ Yes, absolutely. You can either edit the setting option in "Woocommerce > Settin
 Yes, absolutely. You can choose the multiple orders statuses in setting and this is completely compatible with <a href="https://woocommerce.com/products/woocommerce-order-status-manager/" target="_blank">WooCommerce Order Status Manager</a>.
 
 = Can I whitelist customer details or anything? =
-Yes. From version 2.3.0, you can whitelist the payment gateways and white list specific users.
+Yes. From version 2.3.0, you can whitelist the payment gateways and white list specific users. You can either user email address or WP user Id. 
 
 == Screenshots ==
 
@@ -82,6 +82,9 @@ Yes. From version 2.3.0, you can whitelist the payment gateways and white list s
 3. Blacklisting customer details via order edit page
 
 == Changelog ==
+= 2.6.0=
+* fix: possible server error in settings page section
+
 = 2.5.6=
 * fix: Optional checkout fields issue with blocking legitimate orders
 
