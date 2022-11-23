@@ -261,19 +261,43 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		 *
 		 * @return bool
 		 */
-		public static function is_whitelisted( $customer_details ) {
+		 public static function is_whitelisted( $customer_details ) {
+	 			$wmfo_white_listed_payment_gateways = get_option( 'wmfo_white_listed_payment_gateways', array() );
+	 			$wmfo_white_listed_customers        = get_option( 'wmfo_white_listed_customers', "" );
 
-			$wmfo_white_listed_payment_gateways = get_option( 'wmfo_white_listed_payment_gateways', array() );
-			$wmfo_white_listed_customers        = get_option( 'wmfo_white_listed_customers', array() );
+	 			$current_user = wp_get_current_user();
 
-			if ( in_array( $customer_details['payment_method'], $wmfo_white_listed_payment_gateways, true ) ) {
-				return true;
-			} elseif ( in_array( (string) get_current_user_id(), $wmfo_white_listed_customers, true ) ) {
-				return true;
-			}
+	 			if ( in_array( $customer_details['payment_method'], $wmfo_white_listed_payment_gateways, true ) ) {
+	 				return true;
+	 			} elseif (
+	 				 in_array(
+	 					 (string) get_current_user_id(),
+	 						array_map( 'strtolower',
+	 							array_map(
+	 								'trim',
+	 								explode( PHP_EOL, $wmfo_white_listed_customers )
+	 							)
+	 						),
+	 				 true
+	 				 ) ) {
+	 				return true;
+	 			}elseif(
+	 				$current_user &&
+	 				in_array(
+	 					$current_user->user_email,
+	 					array_map( 'strtolower',
+	 						array_map(
+	 							'trim',
+	 							explode( PHP_EOL, $wmfo_white_listed_customers )
+	 						)
+	 					),
+	 					)
+	 			){
+	 				return true;
+	 			}
 
-			return false;
-		}
+	 			return false;
+	 		}
 
 		/**
 		 * The main function in the plugin: checks is the customer details blacklisted against the saved settings.

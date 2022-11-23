@@ -91,6 +91,7 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
 			add_action( 'plugins_loaded', array( $this, 'load_text_domain' ) );
 			add_action( 'init', array( $this, 'may_be_create_log_dir_db_table' ) );
 			add_action( 'admin_menu', array( $this, 'init_sub_menu' ), 9999 );
+			add_action( 'plugins_loaded', array($this, 'fix_old_values'), 9999 );
 		}
 
 		/**
@@ -242,6 +243,16 @@ if ( ! class_exists( 'Woo_Manage_Fraud_Orders' ) ) {
                 </form>
             </div>
 			<?php
+		}
+
+		public function fix_old_values(){
+			$wmfo_white_listed_customers = get_option('wmfo_white_listed_customers');
+
+			if(is_array($wmfo_white_listed_customers)){
+				$new_wmfo_white_listed_customers = implode(PHP_EOL, $wmfo_white_listed_customers);
+
+				update_option('wmfo_white_listed_customers', $new_wmfo_white_listed_customers);
+			}
 		}
 	}
 }
