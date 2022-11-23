@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woo Manage Fraud Orders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-28 14:07+0000\n"
+"POT-Creation-Date: 2022-11-23 05:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,11 +13,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.6; wp-5.9.2\n"
+"X-Loco-Version: 2.6.0; wp-6.1.1\n"
 "X-Domain: woo-manage-fraud-orders"
 
 #. a number of orders.
-#: includes/admin/class-wmfo-bulk-blacklist.php:120
+#: includes/admin/class-wmfo-bulk-blacklist.php:124
 #, php-format
 msgid "%d order has been affected by bulk blacklisting."
 msgid_plural "%d orders have been affected by bulk blacklisting."
@@ -37,25 +37,25 @@ msgstr ""
 msgid "Billing Address"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:343
+#: includes/class-wmfo-blacklist-handler.php:363
 msgid "Billing Email"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:357
+#: includes/class-wmfo-blacklist-handler.php:413
 msgid "Billing Email Wildcard match"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:382
+#: includes/class-wmfo-blacklist-handler.php:389
 msgid "Billing Phone"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:456
-#: includes/class-wmfo-blacklist-handler.php:464
-#: includes/class-wmfo-blacklist-handler.php:480
+#: includes/class-wmfo-blacklist-handler.php:486
+#: includes/class-wmfo-blacklist-handler.php:495
+#: includes/class-wmfo-blacklist-handler.php:512
 msgid "Billing/Shipping Address"
 msgstr ""
 
-#: includes/admin/class-wmfo-bulk-blacklist.php:36
+#: includes/admin/class-wmfo-bulk-blacklist.php:37
 msgid "Blacklist Customer"
 msgstr ""
 
@@ -83,7 +83,7 @@ msgstr ""
 msgid "Blacklisted IP Addresses"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:220
+#: includes/class-woo-manage-fraud-orders.php:221
 msgid "Blacklisted Log records."
 msgstr ""
 
@@ -111,7 +111,7 @@ msgstr ""
 msgid "Blacklists Notice Message"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:202
+#: includes/class-woo-manage-fraud-orders.php:203
 msgid "Blocked Logs"
 msgstr ""
 
@@ -162,7 +162,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:370
+#: includes/class-wmfo-blacklist-handler.php:377
 msgid "Email Domain"
 msgstr ""
 
@@ -220,21 +220,21 @@ msgid ""
 "counts increases only if order status changes to failed on order placement."
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:240
+#: includes/class-woo-manage-fraud-orders.php:241
 msgid ""
 "Every time there is failed order creation, the customer details will be "
 "recorded here."
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:205
+#: includes/class-woo-manage-fraud-orders.php:206
 msgid "Fraud Attempt Logs"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:239
+#: includes/class-woo-manage-fraud-orders.php:240
 msgid "Fraud Order Attempts Log Records."
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:317
+#: includes/class-wmfo-blacklist-handler.php:337
 #: includes/admin/class-wmfo-fraud-attempts-table.php:186
 #: includes/admin/class-wmfo-logs-table.php:186
 msgid "Full Name"
@@ -261,11 +261,11 @@ msgstr ""
 msgid "IP"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:330
+#: includes/class-wmfo-blacklist-handler.php:350
 msgid "IP Address"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:159
+#: includes/class-woo-manage-fraud-orders.php:160
 msgid "Logs"
 msgstr ""
 
@@ -285,11 +285,11 @@ msgstr ""
 msgid "Number of allowed Fraud Attempts"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:184
+#: includes/class-wmfo-blacklist-handler.php:182
 msgid "Order details blacklisted for future checkout."
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:179
+#: includes/class-wmfo-blacklist-handler.php:178
 msgid "Order details removed from blacklist."
 msgstr ""
 
@@ -314,7 +314,7 @@ msgstr ""
 msgid "Remove from Blacklist"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:158
+#: includes/class-woo-manage-fraud-orders.php:159
 msgid "Settings"
 msgstr ""
 
@@ -324,12 +324,12 @@ msgid "Shipping Address"
 msgstr ""
 
 #: includes/class-wmfo-blacklist-handler.php:138
-#: includes/class-wmfo-blacklist-handler.php:205
+#: includes/class-wmfo-blacklist-handler.php:201
 #: includes/admin/class-wmfo-settings-tab.php:124
 msgid "Sorry, You are being restricted from placing orders."
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:221
+#: includes/class-woo-manage-fraud-orders.php:222
 msgid ""
 "This is not the blacklisted customer details. Rather,  It is the list of "
 "customers who could not manage to place an order due to blacklisting."
@@ -353,7 +353,7 @@ msgstr ""
 msgid "Whitelisted Payment Gateways"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:200
+#: includes/class-woo-manage-fraud-orders.php:201
 #: includes/admin/class-wmfo-settings-tab.php:41
 #: includes/admin/class-wmfo-order-metabox.php:48
 msgid "WMFO"
@@ -363,12 +363,12 @@ msgstr ""
 msgid "Woo Manage Fraud Orders"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:123
+#: includes/class-woo-manage-fraud-orders.php:124
 #, php-format
 msgid "Woo Manage Fraud Orders depends on %s to work!"
 msgstr ""
 
-#: includes/class-woo-manage-fraud-orders.php:123
+#: includes/class-woo-manage-fraud-orders.php:124
 msgid "WooCommerce"
 msgstr ""
 
@@ -380,7 +380,8 @@ msgstr ""
 
 #: includes/admin/class-wmfo-settings-tab.php:157
 msgid ""
-"You can select multiple customers. Whitelist more priority than blacklists."
+"You can select multiple customers (by User ID or by User Email). New entry "
+"should be in new line. Whitelist has more priority than blacklists."
 msgstr ""
 
 #: includes/admin/class-wmfo-settings-tab.php:167
