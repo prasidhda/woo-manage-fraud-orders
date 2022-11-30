@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woo Manage Fraud Orders\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-23 05:55+0000\n"
+"POT-Creation-Date: 2022-11-30 13:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.0; wp-6.1.1\n"
+"X-Loco-Version: 2.6.1; wp-6.1.1\n"
 "X-Domain: woo-manage-fraud-orders"
 
 #. a number of orders.
@@ -24,11 +24,15 @@ msgid_plural "%d orders have been affected by bulk blacklisting."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/class-wmfo-settings-tab.php:192
+#: includes/admin/class-wmfo-settings-tab.php:199
 msgid "Allow blacklist by Address ?"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:183
+#: includes/admin/class-wmfo-settings-tab.php:190
+msgid "Allow blacklist by Email wildcard ?"
+msgstr ""
+
+#: includes/admin/class-wmfo-settings-tab.php:181
 msgid "Allow blacklist by Name ?"
 msgstr ""
 
@@ -37,21 +41,21 @@ msgstr ""
 msgid "Billing Address"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:363
+#: includes/class-wmfo-blacklist-handler.php:364
 msgid "Billing Email"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:413
+#: includes/class-wmfo-blacklist-handler.php:415
 msgid "Billing Email Wildcard match"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:389
+#: includes/class-wmfo-blacklist-handler.php:390
 msgid "Billing Phone"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:486
-#: includes/class-wmfo-blacklist-handler.php:495
-#: includes/class-wmfo-blacklist-handler.php:512
+#: includes/class-wmfo-blacklist-handler.php:490
+#: includes/class-wmfo-blacklist-handler.php:499
+#: includes/class-wmfo-blacklist-handler.php:516
 msgid "Billing/Shipping Address"
 msgstr ""
 
@@ -63,7 +67,7 @@ msgstr ""
 msgid "Blacklist order"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:259
+#: includes/admin/class-wmfo-settings-tab.php:266
 msgid "Blacklisted Billing/Shipping Addresses"
 msgstr ""
 
@@ -71,15 +75,15 @@ msgstr ""
 msgid "Blacklisted Customers"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:243
+#: includes/admin/class-wmfo-settings-tab.php:250
 msgid "Blacklisted Email Domains."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:235
+#: includes/admin/class-wmfo-settings-tab.php:242
 msgid "Blacklisted Emails"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:251
+#: includes/admin/class-wmfo-settings-tab.php:258
 msgid "Blacklisted IP Addresses"
 msgstr ""
 
@@ -87,19 +91,19 @@ msgstr ""
 msgid "Blacklisted Log records."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:219
+#: includes/admin/class-wmfo-settings-tab.php:226
 msgid "Blacklisted Names"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:163
+#: includes/admin/class-wmfo-settings-tab.php:161
 msgid "Blacklisted Order Statuses"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:227
+#: includes/admin/class-wmfo-settings-tab.php:234
 msgid "Blacklisted Phones"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:173
+#: includes/admin/class-wmfo-settings-tab.php:171
 msgid "Blacklisted Product Types"
 msgstr ""
 
@@ -115,13 +119,17 @@ msgstr ""
 msgid "Blocked Logs"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:196
+#: includes/admin/class-wmfo-settings-tab.php:194
+msgid "Check this to blacklist customer by email wildcard."
+msgstr ""
+
+#: includes/admin/class-wmfo-settings-tab.php:203
 msgid ""
 "Check this to blacklist customer by their address. Only enabling this will "
 "auto fill the \"Blacklisted Address\" setting option below."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:187
+#: includes/admin/class-wmfo-settings-tab.php:185
 msgid ""
 "Check this to blacklist customer by their name. Only enabling this will auto "
 "fill the \"blacklisted Names\" setting option below."
@@ -131,14 +139,14 @@ msgstr ""
 msgid "Check this to bypass this order payment from blacklisting."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:214
+#: includes/admin/class-wmfo-settings-tab.php:221
 msgid ""
 "Check this to enable the DB log. On checking this, Everytime customer "
 "encounters the \"blocked\" message, It will log the details to the DB table. "
 "It can be viewed Woocommerce>WMFO Logs. "
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:205
+#: includes/admin/class-wmfo-settings-tab.php:212
 msgid ""
 "Check this to enable the debug log. On checking this, Everytime customer "
 "encounters the \"blocked\" message, It will dump details at path /wp-"
@@ -162,27 +170,27 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:377
+#: includes/class-wmfo-blacklist-handler.php:378
 msgid "Email Domain"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:210
+#: includes/admin/class-wmfo-settings-tab.php:217
 msgid "Enable DB log"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:201
+#: includes/admin/class-wmfo-settings-tab.php:208
 msgid "Enable debug log"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:222
+#: includes/admin/class-wmfo-settings-tab.php:229
 msgid "Enter combined first name and last name in new line. Eg. \"John Doe\""
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:246
+#: includes/admin/class-wmfo-settings-tab.php:253
 msgid "Enter email domain in new line. Example \"mailnator.com\""
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:238
+#: includes/admin/class-wmfo-settings-tab.php:245
 msgid ""
 "Enter Emails in new line. You can enter the wildcard entry without an "
 "asterisk (*). Eg. If you put \"john\", It will block orders from every email "
@@ -190,11 +198,11 @@ msgid ""
 "johndoe@anyhting.com, avfjohndev@anything.com and so on."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:254
+#: includes/admin/class-wmfo-settings-tab.php:261
 msgid "Enter IPs in new line"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:262
+#: includes/admin/class-wmfo-settings-tab.php:269
 msgid ""
 "Enter one address per line, with each line of the address itself separated "
 "by a comma. Partial addresses can be used, e.g. \"Springfield, US\" will "
@@ -206,7 +214,7 @@ msgid ""
 "address(Street address, address line 2, city etc.)."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:230
+#: includes/admin/class-wmfo-settings-tab.php:237
 msgid "Enter Phones in new line"
 msgstr ""
 
@@ -234,7 +242,7 @@ msgstr ""
 msgid "Fraud Order Attempts Log Records."
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:337
+#: includes/class-wmfo-blacklist-handler.php:338
 #: includes/admin/class-wmfo-fraud-attempts-table.php:186
 #: includes/admin/class-wmfo-logs-table.php:186
 msgid "Full Name"
@@ -250,7 +258,7 @@ msgid ""
 "woocommerce/"
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:180
+#: includes/admin/class-wmfo-settings-tab.php:178
 msgid ""
 "If selected, customer will be blocked only if they have product of at least "
 "one selected product types in the cart."
@@ -261,7 +269,7 @@ msgstr ""
 msgid "IP"
 msgstr ""
 
-#: includes/class-wmfo-blacklist-handler.php:350
+#: includes/class-wmfo-blacklist-handler.php:351
 msgid "IP Address"
 msgstr ""
 
@@ -378,13 +386,13 @@ msgid ""
 "details."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:157
+#: includes/admin/class-wmfo-settings-tab.php:156
 msgid ""
 "You can select multiple customers (by User ID or by User Email). New entry "
 "should be in new line. Whitelist has more priority than blacklists."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:167
+#: includes/admin/class-wmfo-settings-tab.php:165
 msgid ""
 "You can select multiple order statuses.If customer has previous order in one "
 "of above selected order items, He/She will not be able to place order."
@@ -396,6 +404,6 @@ msgid ""
 "blacklists."
 msgstr ""
 
-#: includes/admin/class-wmfo-settings-tab.php:177
+#: includes/admin/class-wmfo-settings-tab.php:175
 msgid "You can select multiple product types."
 msgstr ""
