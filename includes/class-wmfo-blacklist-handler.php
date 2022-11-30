@@ -282,7 +282,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 	 				 ) ) {
 	 				return true;
 	 			}elseif(
-	 				$current_user &&
+	 				$current_user->ID &&
 	 				in_array(
 	 					$current_user->user_email,
 	 					array_map( 'strtolower',
