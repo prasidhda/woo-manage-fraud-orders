@@ -282,7 +282,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 	 				 ) ) {
 	 				return true;
 	 			}elseif(
-	 				$current_user &&
+	 				$current_user->ID &&
 	 				in_array(
 	 					$current_user->user_email,
 	 					array_map( 'strtolower',
@@ -311,6 +311,7 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 		public static function is_blacklisted( $customer_details ) {
 			// Check for ony by one, return TRUE as soon as first matching.
 			$allow_blacklist_by_name         = get_option( 'wmfo_allow_blacklist_by_name', 'no' );
+			$wmfo_allow_blacklist_by_email_wildcard         = get_option( 'wmfo_allow_blacklist_by_email_wildcard', 'no' );
 			$wmfo_allow_blacklist_by_address = get_option( 'wmfo_allow_blacklist_by_address', 'yes' );
 			$blacklisted_customer_names      = get_option( 'wmfo_black_list_names' );
 			$blacklisted_ips                 = get_option( 'wmfo_black_list_ips' );
@@ -392,28 +393,31 @@ if ( ! class_exists( 'WMFO_Blacklist_Handler' ) ) {
 			}
 
 			//check for email wildcard
-			$is_wildcard_email_caught = false;
-			if ( ! empty( $blacklisted_emails ) ) {
-				foreach (
-					array_map( 'strtolower',
-						array_map( 'trim',
-							explode( PHP_EOL, $blacklisted_emails )
-						)
-					) as $email_wild_card
-				) {
-					if ( strpos( strtolower( $customer_details['billing_email'] ), $email_wild_card ) !== false ) {
-						$is_wildcard_email_caught = true;
-						break;
+			if($wmfo_allow_blacklist_by_email_wildcard === "yes"){
+				$is_wildcard_email_caught = false;
+				if ( ! empty( $blacklisted_emails ) ) {
+					foreach (
+						array_map( 'strtolower',
+							array_map( 'trim',
+								explode( PHP_EOL, $blacklisted_emails )
+							)
+						) as $email_wild_card
+					) {
+						if ( strpos( strtolower( $customer_details['billing_email'] ), $email_wild_card ) !== false ) {
+							$is_wildcard_email_caught = true;
+							break;
+						}
 					}
 				}
+
+
+				if ( $is_wildcard_email_caught ) {
+					$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Email Wildcard match', 'woo-manage-fraud-orders' );
+
+					return true;
+				}
 			}
-
-
-			if ( $is_wildcard_email_caught ) {
-				$GLOBALS['first_caught_blacklisted_reason'] = __( 'Billing Email Wildcard match', 'woo-manage-fraud-orders' );
-
-				return true;
-			}
+			
 
 			if ( 'no' == $wmfo_allow_blacklist_by_address ) {
 

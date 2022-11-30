@@ -186,6 +186,15 @@ if ( ! class_exists( 'WMFO_Settings_Tab' ) ) {
 					'id'       => 'wmfo_allow_blacklist_by_name',
 					'desc_tip' => false,
 				),
+				'allow_blacklist_by_wildcard_email'           => array(
+					'name'     => esc_html__( 'Allow blacklist by Email wildcard ?', 'woo-manage-fraud-orders' ),
+					'css'      => 'width:600px;height:200px',
+					'type'     => 'checkbox',
+					'default'  => 'no',
+					'desc'     => esc_html__( 'Check this to blacklist customer by email wildcard.', 'woo-manage-fraud-orders' ),
+					'id'       => 'wmfo_allow_blacklist_by_email_wildcard',
+					'desc_tip' => false,
+				),
 				'allow_blacklist_by_address'        => array(
 					'name'     => esc_html__( 'Allow blacklist by Address ?', 'woo-manage-fraud-orders' ),
 					'css'      => 'width:600px;height:200px',
